@@ -1,3 +1,5 @@
+/* Funciones auxiliares para manejar usuarios */
+
 import axios from "axios";
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 

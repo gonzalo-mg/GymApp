@@ -1,18 +1,20 @@
+/* VISTA de detalle de exercise recupeardo por :id */
+
 import "./index.css";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
-import {TextBanner} from "../../components/TextBanner"
+import { TextBanner } from "../../components/TextBanner";
 
 import { getExerciseById } from "../../services/exercises";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useExerciseNavigation } from "../../hooks/useNavigation";
 import { useParams } from "react-router-dom";
 
 export const ExerciseDetail = () => {
-  // recuperar del param el id de exercise
+  // recuperar del param el id del exercise
   const { idExercise: id } = useParams();
 
-  // f estado de "exercise"
+  // f estado de "exercise"; para setear que exercise se muestra
   const [exercise, setExercise] = useState([]);
 
   // efecto obtener "exercise" del servidor
@@ -26,16 +28,16 @@ export const ExerciseDetail = () => {
     getData();
   }, []);
 
-  // nombrar hook
-  const navigate = useNavigate();
-  // f navegar a /exercises
-  const toExerciseList = () => {
-    return navigate(`/exercises`);
-  };
+  // invocar hook de navegacion entre ejercicios
+  const { toExercises } = useExerciseNavigation();
+
+  // devolver banner, tarjeta del ejercicio y boton de volver; si no existe el ejercicio lanzar alerta y volver a lista de ejercicios
 
   return (
     <article className="ExerciseDetail">
       <TextBanner text={"Vista de Detalles"}></TextBanner>
+
+      {!exercise ? toExercises() : undefined}
 
       <ExerciseCard
         name={exercise.name}
@@ -50,12 +52,8 @@ export const ExerciseDetail = () => {
       <ButtonGeneric
         type="button"
         text="Volver"
-        onClickFunction={() => toExerciseList()}
+        onClickFunction={() => toExercises()}
       ></ButtonGeneric>
     </article>
   );
 };
-
-/*  */
-
-/*  */

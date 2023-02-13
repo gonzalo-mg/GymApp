@@ -8,7 +8,7 @@ import "./styleVariables.css";
 import { AnonUser } from "./views/AnonUser";
 import { Exercises } from "./views/Exercises";
 import { ExerciseDetail } from "./views/ExerciseDetail";
-import { AdminExercise } from "./views/AdminExercise";
+import { NewExerciseAdmin } from "./views/NewExerciseAdmin";
 
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -29,7 +29,7 @@ export function App() {
     },
     {
       path: "/newExercise",
-      element: <AdminExercise buttonText={"Crear"}></AdminExercise>,
+      element: <NewExerciseAdmin></NewExerciseAdmin>,
     },
   ]);
 

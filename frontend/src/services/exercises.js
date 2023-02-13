@@ -1,25 +1,29 @@
+/* Funciones auxiliares para manejar los ejercicios */
+
+
 import axios from "axios";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
+/* f para recuperar todos los ejercicios del server */
+
 export const getExercises = async () => {
+  try {
+    console.log(`calling getExercises`);
+    const response = await axios.get(`${serverRoot}/exercises`);
 
-    try {
-      console.log(`calling getExercises`)
-      const response = await axios.get(`${serverRoot}/exercises`);
+    // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
+    const { data } = response;
+    const { data: serverData } = data;
+    const { exercises } = serverData;
 
-      // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
-      const { data } = response;
-      const { data: serverData } = data;
-      const { exercises } = serverData;
-
-      console.log("getExercises response:");
-      console.log(exercises);
-      // devolver array de objetos tipo ejercicio
-      return exercises;
-    } catch (error) {
-      console.error(error);
-    }
+    // devolver array de objetos tipo ejercicio
+    return exercises;
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(`${e.response.data.status}: ${e.response.data.message}`)
+  }
 };
 
 // version con fetch
@@ -38,6 +42,8 @@ export const getExercises = async () => {
     }
   }; */
 
+/* f para recuperar un ejercicio particular del server mediante path param */
+
 export const getExerciseById = async (id) => {
   try {
     const response = await axios.get(`${serverRoot}/exercises/${id}`);
@@ -51,7 +57,39 @@ export const getExerciseById = async (id) => {
 
     // devolver objeto tipo ejercicio
     return exercise;
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    alert(`${e.response.data.status}: ${e.response.data.message}`)
+    //return 
+  }
+};
+
+/* f para grabar nuevo ejercicio al server */
+
+export const postNewExercise = async ({
+  name,
+  typology,
+  description,
+  muscles,
+  picture,
+}) => {
+  try {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("typology", typology);
+    formData.append("description", description);
+    formData.append("muscles", muscles);
+    formData.append("picture", picture);
+
+    await axios.post(`${serverRoot}/newExercise`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  } catch (e) {
+    console.error(e.message);
+    console.log(e.response.data);
+    return alert(`${e.response.data.status}: ${e.response.data.message}`)
   }
 };

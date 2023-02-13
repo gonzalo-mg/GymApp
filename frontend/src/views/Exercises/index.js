@@ -1,8 +1,9 @@
+/* VISTA de listado completo de ejercicios */
+
 import "./index.css";
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
-//import { createSearchParams } from "react-router-dom";
+import { useExerciseNavigation } from "../../hooks/useNavigation";
 
 import { getExercises } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
@@ -10,60 +11,46 @@ import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
 
 export const Exercises = () => {
-  // f estado de "exercises"
+  // f estado de "exercises"; para setear los exercises recuperados y a mostrar
   const [exercises, setExercises] = useState([]);
 
+  // f estado de "exercises"; para setear los filtros a usar para mostrar exercises
   const [filter, setFilter] = useState("");
-/*   const [nameFilter, setNameFilter] = useState("");
-  const [typologyFilter, setTypologyFilter] = useState("");
-  const [musclesFilter, setMusclesFilter] = useState(""); */
 
   // efecto obtener "exercises" del servidor
-  // // funcion: getData; llamar al fetch y actualizar estado de "exercises"
+  // // funcion: getData; llamar al server y actualizar estado de "exercises"; al estar dentro de useEffect hay q hacerlo con un callback por sen asincrono
   // // variables de escucha: []; cada vez q se arrance el elemento
   useEffect(() => {
     const getData = async () => {
-      console.log(`running useEffect`);
-
+      // recuperar exercises del server
       const recoveredExercises = await getExercises();
 
-function myFiltering(ex, filter) {
-  
-  if (ex.name.toLowerCase().includes(filter)) {
-    return ex
-  }
-  if (ex.typology.toLowerCase().includes(filter)) {
-    return ex
-  }
-  if (ex.muscles.toLowerCase().includes(filter)) {
-    return ex
-  }
- 
-}
+      // f para filtrar exercises; devolver cq exercise q contenga (en su nombre/tipologia/musculo) lo escrito por el usuario en el formulario
+      function myFiltering(ex, filter) {
+        if (ex.name.toLowerCase().includes(filter)) {
+          return ex;
+        }
+        if (ex.typology.toLowerCase().includes(filter)) {
+          return ex;
+        }
+        if (ex.muscles.toLowerCase().includes(filter)) {
+          return ex;
+        }
+      }
 
-      const filteredExercises = recoveredExercises.filter(ex => myFiltering(ex, filter))
-
-      setExercises(filteredExercises);
-      console.log(
-        `useEffect after call to server sets currentExercises to: ${filteredExercises}`
+      // aplicar filtrado
+      const filteredExercises = recoveredExercises.filter((ex) =>
+        myFiltering(ex, filter)
       );
+
+      // setear exercises al resultado del filtro
+      setExercises(filteredExercises);
     };
     getData();
   }, [filter]);
 
-  // nombrar hook
-  const navigate = useNavigate();
-
-  // f navegar a detalle del exercise
-  const toExercises = () => {
-    setFilter("");
-    return navigate(`/exercises`);
-  };
-
-  // f navegar a detalle del exercise
-  const toExerciseDetail = (id) => {
-    return navigate(`/exercises/${id}`);
-  };
+  // invocar hook de navegacion entre ejercicios
+  const { toExercises, toExerciseDetail } = useExerciseNavigation();
 
   // devolver una card por cada exercise del server
   return (

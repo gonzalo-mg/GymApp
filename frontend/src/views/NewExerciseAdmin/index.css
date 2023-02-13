@@ -2,7 +2,7 @@
     border: 0;
 }
 
-#AdminExercise ul {
+#NewExerciseAdminForm ul {
     display: flex;
     flex-direction: column;
     
@@ -10,15 +10,15 @@
     align-items: flex-start;
 }
 
-#AdminExercise li {
+#NewExerciseAdminForm li {
     padding: .25rem;
 }
 
-#AdminExercise input {
+#NewExerciseAdminForm input {
     width: 15rem;
 }
 
-#AdminExercise textarea {
+#NewExerciseAdminForm textarea {
     background-color: aqua;
     
 }
