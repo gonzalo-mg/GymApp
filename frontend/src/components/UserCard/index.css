@@ -1,0 +1,30 @@
+.UserCard {
+    border: 2px solid var(--color2);
+
+    background-color: var(--Background2);
+
+    padding: 0.1rem;
+
+    max-height: 95%;
+    min-height: 75%;
+    
+    min-width: 100%;
+
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.UserCard .user {
+    margin: auto 0;
+    text-align: center;
+}
+
+.UserCard .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

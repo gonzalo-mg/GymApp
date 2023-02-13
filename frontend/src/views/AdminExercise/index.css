@@ -1,0 +1,24 @@
+.fieldset {
+    border: 0;
+}
+
+#AdminExercise ul {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#AdminExercise li {
+    padding: .25rem;
+}
+
+#AdminExercise input {
+    width: 15rem;
+}
+
+#AdminExercise textarea {
+    background-color: aqua;
+    
+}

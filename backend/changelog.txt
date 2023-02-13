@@ -1,0 +1,81 @@
+>> 01.10 gonzalo
+
++ instalado CORS e implementado su middleware
+
++ modificado README, inclusion de la plantilla para el .env
+
+>> 01.08 gonzalo
+
++ creado endpoint: GET /favorites/:idUser
+    ++ creado controller: getUserFavs
+    ++ creado shema: idUserSchema
+    ++ creado repositorio: selectUserFavs
+
+>> 01.07 - gonzalo
+
++ creado endpoint: DELETE /exercises/:idExercise
+    ++ creado controller: deleteExercise
+    ++ creado repositorio: deleteExerciseById
+
++ creado endpoint: GET /exercises/:idExercise
+    ++ creado controller: getExerciseDetails
+    ++ creado shema: idExerciseSchema
+    ++ creado repositorio: selectExerciseById
+
+>> 01.05 - gonzalo
+
++ creado endpoint: GET /exercises
+    ++ creado controller: getExercises
+    ++ creado schema: filtersExercisesSchema
+    ++ creado repositorio: selectExercises; permite filtrado    
+
++ actualizada bbdd
+    ++ añadido campo "created DATETIME DEFAULT CURRENT_TIMESTAMP" a todas las tablas
+        +++ actualizado repositorio "insertExercise" en consecuencia
+    
+    ++ añadidos al script "populateDb" algunos casos mas 
+
++ actualizado endpoint: POST /newExercise
+    ++ incluida funcionalidad de subir una imagen
+        +++ actualizado repositorio "insertExercise" en consecuencia
+        +++ actualizado controller "postNewExercise" en consecuencia
+
+>> 01.03 - gonzalo
+
++ creado changelog.txt
+
++ creado proyecto npm
+    ++ instalados modulos node varios
+
+    ++ creado script para generar la bbdd: doc/bd/bd-original-script.sql
+
+    ++ creados scripts para refrescar la bbdd:
+        +++ src/database/initDb; borra las tablas y las vuelve a crear.
+        +++ src/database/pupulateDb; inserta algunos datos para pruebas
+
+    ++ creada funcion para conexiones con la bbdd: src/database/getPoolS
+
+    ++ creadas capetas y archivos index para la estructura de directorios y exportar/importar
+
+    ++ creada carpeta "postman" para guardar las peticiones
+
++ creada funcion utility: createError
+
++ creado endpoint: de error de no encontrado
+    ++ creado middleware: errorNotFound
+
++ creado endpoint: de errores
+    ++ creado middleware: errorHandler
+
++ creado endpoint: GET /login
+    ++ credo controller: loginUser
+    ++ creado schema: userLoginSchema
+    ++ creado repositorio: selectUserByEmail
+
++ creado endpoint: POST /newExercise
+    ++ creado controller: postNewExercise
+    ++ creado schema: exerciseSchema
+    ++ creado repositorio: insertExercise
+    ++ creado repositorio: selectExerciseByName
+
++ creado middleware: checkAdmin
