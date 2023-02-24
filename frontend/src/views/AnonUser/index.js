@@ -19,6 +19,7 @@ export const AnonUser = () => {
             id="email"
             name="email"
             placeholder="Introduzca su correo"
+            required
           ></input>
         </div>
 
@@ -29,6 +30,7 @@ export const AnonUser = () => {
             id="pass"
             name="password"
             placeholder="Introduzca su contraseña"
+            required
           ></input>
         </div>
         <ButtonGeneric

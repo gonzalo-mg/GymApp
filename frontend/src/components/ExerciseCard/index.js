@@ -1,8 +1,12 @@
+/* COMPONENETE ExerciseCard: tarjeta de cada ejercicio */
+
 import { ButtonGeneric } from "../ButtonGeneric";
 import { ButtonMini } from "../ButtonMini";
 import "./index.css";
 
 import axios from "axios";
+
+import PropTypes from 'prop-types'
 
 //const imagesExDir = REACT_APP_BACKEND_IMAGES_EXERCISES_DIR
 
@@ -14,9 +18,6 @@ const getPic = async (name) => {
   console.log(`getPic calls to url: ${url}`);
 
   let response = await axios.get(url);
-  console.log("response:");
-  console.log(response);
-
   return response.data;
 };
 
@@ -77,3 +78,14 @@ export const ExerciseCard = ({
     </article>
   );
 };
+
+ExerciseCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  typology: PropTypes.string.isRequired,
+  muscles: PropTypes.string.isRequired,
+  //picture: PropTypes.string.isRequired,
+  //likeCounter,
+  //admin,
+  //onClickCard: PropTypes.func.isRequired
+}

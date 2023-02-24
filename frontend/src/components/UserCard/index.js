@@ -1,4 +1,7 @@
+/* COMPONENTE UserCard: tarjeta de usuario para renderizar cuando esta logeado */
+
 import "./index.css";
+import PropTypes from 'prop-types'
 
 import { ButtonGeneric } from "../ButtonGeneric";
 
@@ -21,3 +24,7 @@ export const UserCard = ({ user }) => {
       </article>
     );
 };
+
+UserCard.propTypes = {
+  user: PropTypes.object.isRequired
+}
