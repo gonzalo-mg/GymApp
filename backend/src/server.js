@@ -14,7 +14,10 @@ app.use(fileUpload());
 
 /* CARGAR CONTROLLERS */
 // de users
-const { loginUser } = require("./controllers/users");
+const { 
+  loginUser,
+  registerUser,
+} = require("./controllers/users");
 
 // de exercices
 const {
@@ -23,10 +26,21 @@ const {
   getExerciseDetails,
   deleteExercise,
   getUserFavs,
+  putEditExercise
 } = require("./controllers/exercises");
 
+// de likes
+const {
+  toggleExerciseLike
+} = require("./controllers/likes")
+
+// de favs
+const {
+  toggleExerciseFav
+} = require("./controllers/favs")
+
 /* CARGAR MIDDLEWARES (desde su index.js) */
-const { errorNotFound, errorHandler, checkAdmin } = require("./middlewares");
+const { errorNotFound, errorHandler, validateAuth, checkAdmin } = require("./middlewares");
 
 /* RECOGER VARIABLES PRIVADAS del .env */
 const { PORT } = process.env;
@@ -40,32 +54,28 @@ app.listen(PORT, () => {
 
 app.get("/login", loginUser);
 
-//app.get("/register", registerUser);
+app.post("/register", registerUser);
 
 /* ENDPOINTS exercises - worker */
 
-//app.get("/exercises", validateAuth, getExercises);
-app.get("/exercises", getExercises); // para testear pendiente de juntar validateAuth
+app.get("/exercises", validateAuth, getExercises);
 
-//app.get("/exercises:idExercise", validateAuth, getExerciseDetails);
-app.get("/exercises/:idExercise", getExerciseDetails); // para testear pendiente de juntar validateAuth
+app.get("/exercises/:idExercise", validateAuth, getExerciseDetails);
 
-//app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
+app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
 
-//app.post("/exercises/:idExercise/fav", validateAuth, toggleExerciseFav);
+app.post("/exercises/:idExercise/fav", validateAuth, toggleExerciseFav);
 
-//app.get("/favorites/:idUser", validateAuth, getUserFavs);
-app.get("/favorites/:idUser", getUserFavs); // para testear pendiente de juntar validateAuth
+app.get("/favorites/:idUser", validateAuth, getUserFavs);
 
 /* ENDPOINTS exercises admin */
 
-//app.post("/newExercise", validateAuth, checkAdmin, postNewExercise);
-app.post("/newExercise", postNewExercise); // para testear pendiente de juntar validateAuth y checkAdmin
+app.post("/newExercise", validateAuth, checkAdmin, postNewExercise);
+//el postman necesita recargar la imagen a veces
 
-//app.put("/exercises/:idExercise", validateAuth, checkAdmin, putEditExercise);
+app.put("/exercises/:idExercise", validateAuth, checkAdmin, putEditExercise);
 
-//app.delete("/exercises/:idExercise", validateAuth, checkAdmin, deleteExercise);
-app.delete("/exercises/:idExercise", deleteExercise); // para testear pendiente de juntar validateAuth y checkAdmin
+app.delete("/exercises/:idExercise", validateAuth, checkAdmin, deleteExercise);
 
 /* MIDDLEWARES ERRORES */
 

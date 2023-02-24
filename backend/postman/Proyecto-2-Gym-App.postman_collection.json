@@ -7,6 +7,68 @@
 	},
 	"item": [
 		{
+			"name": "get login - no-registrado",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"random@mail.com\",\n    \"password\": \"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get login - worker1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"worker2@mail.com\",\n    \"password\": \"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "get login - worker2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -38,7 +100,38 @@
 			"response": []
 		},
 		{
-			"name": "get exercises - sin filtros - sin login Pendiente validAuth",
+			"name": "get login - admin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"administrator@mail.com\",\n    \"password\": \"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get exercises - sin filtros - sin login",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -69,13 +162,19 @@
 			"response": []
 		},
 		{
-			"name": "get exercise details - sin login Pendiente validAuth",
+			"name": "get exercises - sin filtros - login worker2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjMsImlhdCI6MTY3MzM4ODkyMCwiZXhwIjoxNjczNDc1MzIwfQ.sjUvg2JZVr4q9qUoWNQknSrqaAqqCVNiZUrF_fD5BLY",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -85,6 +184,31 @@
 						}
 					}
 				},
+				"url": {
+					"raw": "http://localhost:8080/exercises",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exercises"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get exercise (1) details - login worker2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjMsImlhdCI6MTY3MzM4ODkyMCwiZXhwIjoxNjczNDc1MzIwfQ.sjUvg2JZVr4q9qUoWNQknSrqaAqqCVNiZUrF_fD5BLY",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/exercises/1",
 					"protocol": "http",
@@ -101,13 +225,19 @@
 			"response": []
 		},
 		{
-			"name": "get exercise - con filtros (1) - sin login Pendiente validAuth",
+			"name": "get exercise - con filtros (1) -  login worker2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjMsImlhdCI6MTY3MzM4ODkyMCwiZXhwIjoxNjczNDc1MzIwfQ.sjUvg2JZVr4q9qUoWNQknSrqaAqqCVNiZUrF_fD5BLY",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -138,13 +268,19 @@
 			"response": []
 		},
 		{
-			"name": "get exercise - con filtros (2) - sin login Pendiente validAuth",
+			"name": "get exercise - con filtros (2) - login worker2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjMsImlhdCI6MTY3MzM4ODkyMCwiZXhwIjoxNjczNDc1MzIwfQ.sjUvg2JZVr4q9qUoWNQknSrqaAqqCVNiZUrF_fD5BLY",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -155,7 +291,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/exercises?muscles=biceps&typology=peso propio",
+					"raw": "http://localhost:8080/exercises?muscles=biceps&typology=peso auxiliar",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -171,7 +307,7 @@
 						},
 						{
 							"key": "typology",
-							"value": "peso propio"
+							"value": "peso auxiliar"
 						}
 					]
 				}
@@ -217,7 +353,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjMsImlhdCI6MTY3MzM4ODkyMCwiZXhwIjoxNjczNDc1MzIwfQ.sjUvg2JZVr4q9qUoWNQknSrqaAqqCVNiZUrF_fD5BLY",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -275,7 +417,7 @@
 			"response": []
 		},
 		{
-			"name": "post newExercise - sin login Pendiente validAuth y checkAdmin",
+			"name": "post newExercise - correr",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -283,10 +425,9 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "auth.id",
-						"value": "0",
-						"type": "text",
-						"disabled": true
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTY3MzM4OTcxNSwiZXhwIjoxNjczNDc2MTE1fQ.TjE7Iy4o9lQ6i_nNs9Lpu0m-g1yG9LkzsbnglAl6Yx4",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -334,10 +475,134 @@
 			"response": []
 		},
 		{
-			"name": "delete exercise  - sin login Pendiente validAuth Copy",
+			"name": "put editExercise - correr => trotar",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTY3MzM4OTcxNSwiZXhwIjoxNjczNDc2MTE1fQ.TjE7Iy4o9lQ6i_nNs9Lpu0m-g1yG9LkzsbnglAl6Yx4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "trotar",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "correr lento",
+							"type": "text"
+						},
+						{
+							"key": "typology",
+							"value": "cardio",
+							"type": "text"
+						},
+						{
+							"key": "muscles",
+							"value": "piernas",
+							"type": "text"
+						},
+						{
+							"key": "picture",
+							"type": "file",
+							"src": "/home/gonzalo/estudios/HAB-bootcamp/proyectos/proyecto-02/gym-app/ProyectoGym/postman/correr.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/newExercise",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"newExercise"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post like/dislike worker2 exercise1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjMsImlhdCI6MTY3MzM4ODkyMCwiZXhwIjoxNjczNDc1MzIwfQ.sjUvg2JZVr4q9qUoWNQknSrqaAqqCVNiZUrF_fD5BLY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/exercises/1/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exercises",
+						"1",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post fav/unfav worker2 exercise1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjMsImlhdCI6MTY3MzM4ODkyMCwiZXhwIjoxNjczNDc1MzIwfQ.sjUvg2JZVr4q9qUoWNQknSrqaAqqCVNiZUrF_fD5BLY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/exercises/4/fav",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exercises",
+						"4",
+						"fav"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete exercise (1)",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTY3MzM4OTcxNSwiZXhwIjoxNjczNDc2MTE1fQ.TjE7Iy4o9lQ6i_nNs9Lpu0m-g1yG9LkzsbnglAl6Yx4",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",

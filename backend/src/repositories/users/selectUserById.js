@@ -9,7 +9,6 @@ async function selectUserById(idUser) {
         SELECT * FROM users WHERE idUser = ?
     `, [idUser]
     );
-
   // devolver objeto user con: idUser, email, password (encriptada), role
   return user;
 }

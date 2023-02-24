@@ -5,12 +5,11 @@ const { createError } = require("../utilities");
 async function checkAdmin(req, res, next) {
   try {
     // recoger id del usuario del header de la peticion (creada por validateAuth)
-    const idUser = req.auth.id;
-
+    const {idUser} = req.auth;
     // comprobar su role en bbdd
     // // seleccionar usuario de la bbdd (user contiene id, email, password (encriptada) y role)
     const user = await selectUserById(idUser);
-
+    console.log(user)
     // si no es admin lanzar error
     if (user.role !== "admin") {
       createError(

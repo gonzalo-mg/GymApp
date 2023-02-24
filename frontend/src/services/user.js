@@ -1,15 +1,34 @@
 /* Funciones auxiliares para manejar usuarios */
 
 import axios from "axios";
+import { useExerciseNavigation } from "../hooks/useNavigation";
+
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
-export const login = async ({ email, password }) => {
+
+
+/* f de loging de usuario a traves de formulario q reciba email y password*/
+export const logUser = async (e) => {
   try {
-    console.log(`login ejecutandose con: ${email} y ${password}`);
+    e.preventDefault();
+// recibir datos del evento del formulario
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    // llamar a server con datos del login y recibir token so va ok
+    const userToken = await postLogin({ email, password });
+    console.log(`userToken: ${userToken}`);
+    // meter token en localstorage
+        localStorage.setItem('userToken', JSON.stringify(userToken))
+    // WIP enviar a vista de exercises si login ok
 
-    console.log("login call to:");
-    console.log(`${serverRoot}/login`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
+/* f de llamada post de login */
+export const postLogin = async ({ email, password }) => {
+  try {
     const data = await axios.post(
       `${serverRoot}/login`,
       {
@@ -20,37 +39,11 @@ export const login = async ({ email, password }) => {
         headers: { "Content-Type": "application/json" },
       }
     );
-    console.log("login return:");
-    console.log(data);
 
-    return data;
-  } catch (error) {
-    console.error(error);
+    // devovler token como string
+    return data.data.data.userToken;
+  } catch (e) {
+    console.error(e);
+    alert(`catch-${e.response.data.status}: ${e.response.data.message}`);
   }
 };
-
-/* export const login = async ({ email, password }) => {
-  try {
-    console.log(`login ejecutandose con: ${email} y ${password}`);
-
-    console.log("login call to:");
-    console.log(`${serverRoot}/login`);
-
-    const response = await fetch(
-      `${serverRoot}/login`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email, password: password }),
-      },
-      {}
-    );
-    
-    console.log("login return:");
-    console.log(response);
-
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-}; */

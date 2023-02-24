@@ -10,7 +10,6 @@ async function selectExerciseById(idExercise) {
     "SELECT * FROM exercises WHERE idExercise = ?",
     [idExercise]
   );
-
   // devolver objeto exercise con todos sus campos
   return exercise;
 }

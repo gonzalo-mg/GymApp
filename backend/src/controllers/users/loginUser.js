@@ -21,7 +21,7 @@ async function loginUser(req, res, next) {
     // comprobar si el usuario existe: si en la bbdd ya hay ese email
     // // seleccionar usuario de la bbdd (user contiene id, email, password (encriptada) y role)
     const user = await selectUserByEmail(email);
-
+    console.log(user);
     // // // si no existe el email lanzar error
     if (!user) {
       createError(
@@ -50,7 +50,7 @@ async function loginUser(req, res, next) {
     });
 
     // enviar respuesta
-    res.status(400).send({
+    res.status(200).send({
       status: "ok - logged in succesfully",
       data: { userToken: token },
     });

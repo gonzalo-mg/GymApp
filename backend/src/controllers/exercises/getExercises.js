@@ -20,6 +20,7 @@ async function getExercises(req, res, next) {
 
     // recuper exercises de la bbdd con los criterios de los filtros
     const exercises = await selectExercises(filters);
+    console.log(exercises)
 
     // enviar respuesta
     res.status(200).send({ status: "ok", data: { filters, exercises } });

@@ -1,4 +1,12 @@
+>>21.02 gonzalo
++ correccion controller/users/loginUser: respuesta enviaba codigo 400; cambiado a 200,
+
 >> 01.10 gonzalo
+
++ creado endpoint: put
++ creados endpoints: like/fav
+
++ creado middleware: validateAuth
 
 + instalado CORS e implementado su middleware
 

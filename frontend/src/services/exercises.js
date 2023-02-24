@@ -1,6 +1,5 @@
 /* Funciones auxiliares para manejar los ejercicios */
 
-
 import axios from "axios";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
@@ -48,9 +47,6 @@ export const getExerciseById = async (id) => {
   try {
     const response = await axios.get(`${serverRoot}/exercises/${id}`);
 
-    //console.log("getExerciseById response");
-    //console.log(response);
-
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
     const { data } = response;
     const { data: exercise } = data;
@@ -61,12 +57,10 @@ export const getExerciseById = async (id) => {
     console.error(e);
     console.log(e.response.data);
     alert(`${e.response.data.status}: ${e.response.data.message}`)
-    //return 
   }
 };
 
-/* f para grabar nuevo ejercicio al server */
-
+/* f para grabar nuevo ejercicio en server */
 export const postNewExercise = async ({
   name,
   typology,

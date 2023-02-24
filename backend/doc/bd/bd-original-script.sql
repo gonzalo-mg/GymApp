@@ -1,4 +1,4 @@
-CREATE DATABASE gym_app;
+CREATE DATABASE IF NOT EXISTS gym_app;
 
 USE gym_app;
 

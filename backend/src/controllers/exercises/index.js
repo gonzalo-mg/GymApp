@@ -4,6 +4,7 @@ const getExercises = require("./getExercises");
 const getExerciseDetails = require("./getExerciseDetails");
 const deleteExercise = require("./deleteExercise");
 const getUserFavs = require("./getUserFavs");
+const putEditExercise = require("./putEditExercise");
 
 module.exports = {
   postNewExercise,
@@ -11,4 +12,5 @@ module.exports = {
   getExerciseDetails,
   deleteExercise,
   getUserFavs,
+  putEditExercise,
 };

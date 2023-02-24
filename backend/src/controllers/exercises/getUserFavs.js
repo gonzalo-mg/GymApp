@@ -20,6 +20,7 @@ async function getUserFavs(req, res, next) {
 
     // lanzar error si no existe el usuario
     const user = await selectUserById(idUser);
+    console.log(user)
     if (!user) {
       createError("There is no user with that idUser", 404);
     }

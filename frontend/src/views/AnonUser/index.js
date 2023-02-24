@@ -1,38 +1,12 @@
+/* VISTA raiz y de login */
+
 import "./index.css";
 
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 
-import { login }from "../../services/user.js";
-
-import { useNavigate } from "react-router";
+import { logUser } from "../../services/user.js";
 
 export const AnonUser = () => {
-
-  // nombrar hook
-  const navigate = useNavigate();
-
-   // f navegar a detalle del exercise
- const toExercises = () => {
-  return navigate(`/exercises`);
-};
-
-  const logUser = async (e) => {
-    try {
-      e.preventDefault();
-
-      
-
-      const email = e.target.email.value;
-      const password = e.target.password.value;
-
-      console.log("llamando a login con:")
-      console.log(`con email: ${email}`)
-      console.log(`con password: ${password}`)
-
-      await login({ email, password });
-      //toExercises();
-    } catch (error) {}
-  };
 
   return (
     <fieldset>
