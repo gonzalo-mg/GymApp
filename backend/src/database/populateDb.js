@@ -23,14 +23,14 @@ async function populateDb() {
 
     console.log("Inserting mock data into: exercises");
     await pool.query(`
-        INSERT INTO exercises (name, description, typology, muscles) VALUES
-            ("Press de banca", "Tumbado, levantar con los brazos barra con peso.", "Peso auxiliar", "Pectorales"),
-            ("Aperturas", "Tumbado, levantar pesas lateralmente.", "Peso auxiliar", "Pectorales"),
-            ("Flexiones", "Tumbado, levantar el cuerpo.", "Peso propio", "Pectorales"),
-            ("Dominadas", "Colgarse de una barra, subir y levantar el cuerpo.", "Peso propio", "Dorsales"),
-            ("Press militar", "Sentao, levantar con los brazos barra con peso", "Peso auxiliar", "Hombros"),
-            ("Curls con barra", "De pie, levantar barra desde la cadero al pecho.", "Peso auxiliar", "Biceps"),
-            ("Curls concentrado", "Sentado levantar pesas.", "Peso auxiliar", "Biceps")
+        INSERT INTO exercises (name, description, typology, muscles, picture) VALUES
+            ("Press de banca", "Tumbado, levantar con los brazos barra con peso.", "Peso auxiliar", "Pectorales", "meme2.jpeg"),
+            ("Aperturas", "Tumbado, levantar pesas lateralmente.", "Peso auxiliar", "Pectorales", "meme2.jpeg"),
+            ("Flexiones", "Tumbado, levantar el cuerpo.", "Peso propio", "Pectorales", "meme1.jpeg"),
+            ("Dominadas", "Colgarse de una barra, subir y levantar el cuerpo.", "Peso propio", "Dorsales", "meme1.jpeg"),
+            ("Press militar", "Sentao, levantar con los brazos barra con peso", "Peso auxiliar", "Hombros", "meme2.jpeg"),
+            ("Curls con barra", "De pie, levantar barra desde la cadero al pecho.", "Peso auxiliar", "Biceps", "meme1.jpeg"),
+            ("Curls concentrado", "Sentado levantar pesas.", "Peso auxiliar", "Biceps", "meme2.jpeg")
         `);
 
     console.log("Inserting mock data into: likes");

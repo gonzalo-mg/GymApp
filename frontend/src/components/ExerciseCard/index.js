@@ -6,7 +6,7 @@ import "./index.css";
 
 import PropTypes from 'prop-types'
 
-const serverRoot = process.env.REACT_APP_BACKEND_URL;
+//const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 export const ExerciseCard = ({
   name,

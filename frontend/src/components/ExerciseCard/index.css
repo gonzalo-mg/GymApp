@@ -23,8 +23,8 @@
 }
 
 .ExerciseCard > img {
-    max-width: 75%;
-    max-height: 75%;
+    width: 25%;
+    height: 25%;
 
     display: block;
     margin: 2% auto 2% auto;
