@@ -45,11 +45,9 @@ const { errorNotFound, errorHandler, validateAuth, checkAdmin } = require("./mid
 /* RECOGER VARIABLES PRIVADAS del .env */
 const { PORT } = process.env;
 
-/* ABRIR SERVIDOR */
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
-
+/* middleware estatico para imagenes de los exercices*/
+app.use('/pics', express.static(__dirname + '/uploads/images/exercises'));
+console.log(`${__dirname} + '/uploads/images/exercises`)
 /* ENDPOINTS users - not logged */
 
 app.get("/login", loginUser);
@@ -92,3 +90,8 @@ app.use(errorNotFound);
 
 // errores generico
 app.use(errorHandler);
+
+/* ABRIR SERVIDOR */
+app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
+});

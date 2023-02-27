@@ -4,22 +4,9 @@ import { ButtonGeneric } from "../ButtonGeneric";
 import { ButtonMini } from "../ButtonMini";
 import "./index.css";
 
-import axios from "axios";
-
 import PropTypes from 'prop-types'
 
-//const imagesExDir = REACT_APP_BACKEND_IMAGES_EXERCISES_DIR
-
-const getPic = async (name) => {
-  // wip- construir ruta; token
-  console.log(`executing getPic with name: ${name}`);
-
-  let url = `http://localhost:8080/uploads/images/exercises/${name}`;
-  console.log(`getPic calls to url: ${url}`);
-
-  let response = await axios.get(url);
-  return response.data;
-};
+const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 export const ExerciseCard = ({
   name,
@@ -46,7 +33,7 @@ export const ExerciseCard = ({
         </ul>
       </section>
 
-      <img src={"getPic(picture)"} alt="exercise"></img>
+      <img src={`http://localhost:8080/pics/${picture}`} alt={name}></img>
 
       {description ? (
         <section className="description">
