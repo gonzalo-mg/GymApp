@@ -75,7 +75,7 @@
 + creado endpoint: de errores
     ++ creado middleware: errorHandler
 
-+ creado endpoint: GET /login
++ creado endpoint: POST /login
     ++ credo controller: loginUser
     ++ creado schema: userLoginSchema
     ++ creado repositorio: selectUserByEmail

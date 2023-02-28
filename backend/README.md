@@ -58,7 +58,7 @@ Se incluye el archivo "envPlantilla" a modo de plantilla para rellenar el .env c
 
 + ENDPOINTS
 
-- .get("/login", loginUser);
+- .post("/login", loginUser);
 
 Permite el login del usuario; requiere email y contraseña y devuleve token de sesión.
 

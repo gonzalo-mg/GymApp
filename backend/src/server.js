@@ -50,7 +50,7 @@ app.use('/pics', express.static(__dirname + '/uploads/images/exercises'));
 console.log(`${__dirname} + '/uploads/images/exercises`)
 /* ENDPOINTS users - not logged */
 
-app.get("/login", loginUser);
+app.post("/login", loginUser);
 
 app.post("/register", registerUser);
 
