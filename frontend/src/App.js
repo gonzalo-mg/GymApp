@@ -13,6 +13,8 @@ import { NewExercisePage } from "./views/NewExercisePage";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
+import { AuthContextProvider } from "./contexts/AuthContext.js";
+
 export function App() {
   const router = createBrowserRouter([
     {
@@ -35,11 +37,13 @@ export function App() {
 
   return (
     <>
-      <Header user={"WIP-login-state/context"}></Header>
-      <main>
-        <RouterProvider router={router} />
-      </main>
-      <Footer></Footer>
+      <AuthContextProvider>
+        <Header user={"WIP-login-state/context"}></Header>
+        <main>
+          <RouterProvider router={router} />
+        </main>
+        <Footer></Footer>
+      </AuthContextProvider>
     </>
   );
 }

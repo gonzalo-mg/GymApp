@@ -5,11 +5,16 @@ import PropTypes from 'prop-types'
 
 import { ButtonGeneric } from "../ButtonGeneric";
 
-export const UserCard = ({ user }) => {
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+
+export const UserCard = () => {
+  // recuperar usuario activo del contexto
+  const {currentUser} = useContext(AuthContext);
     return (
       <article className="UserCard">
-        <p className="user">{user || "usuario@test.com"}</p>
-        <div className="buttons">
+        <p className="user">{`Logeado como: ${currentUser}` || "Sesión no iniciada"}</p>
+        {currentUser ? <div className="buttons">
           <ButtonGeneric
             className="ButtonGenericFav"
             text="Ver Favoritos"
@@ -20,11 +25,11 @@ export const UserCard = ({ user }) => {
             text="Cerrar sesión"
             onClickFunction={"WIP-cerrar sesion"}
           ></ButtonGeneric>
-        </div>
+        </div> : <></>}
       </article>
     );
 };
 
 UserCard.propTypes = {
-  user: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired
 }

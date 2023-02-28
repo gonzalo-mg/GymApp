@@ -8,7 +8,6 @@ const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 export const getExercises = async () => {
   try {
-    console.log(`calling getExercises`);
     const response = await axios.get(`${serverRoot}/exercises`);
 
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
@@ -24,22 +23,6 @@ export const getExercises = async () => {
     return alert(`${e.response.data.status}: ${e.response.data.message}`)
   }
 };
-
-// version con fetch
-/*   export const getExercises= async () => {
-    try {
-      const response = await fetch(`${serverRoot}/exercises`);
-
-      const parsedResponse = await response.json()
-
-      console.log(parsedResponse.data.exercises)
-
-      return parsedResponse.data.exercises;
-    }
-    catch (error) {
-      console.error(error);
-    }
-  }; */
 
 /* f para recuperar un ejercicio particular del server mediante path param */
 

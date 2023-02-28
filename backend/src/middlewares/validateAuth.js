@@ -19,10 +19,16 @@ const validateAuth = (req, res, next) => {
     }
 
     // verificar token del usuario
-    const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
-
+    let tokenPayload;
+    try {
+      tokenPayload = jwt.verify(token, process.env.JWT_SECRET);  
+    } catch (error) {
+      createError("Invalid token", 400);
+    }
+    
     // crear propiedad de autenticacion en el objeto de peticion para el resto de middlewares y endpoints; darle los datos del token
     req.auth = tokenPayload;
+    console.log(`tokenPayload.idUser: ${tokenPayload.idUser}`)
 
     next();
   } catch (error) {

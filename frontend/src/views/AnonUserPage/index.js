@@ -4,36 +4,41 @@ import "./index.css";
 
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 
-import {postLoginService} from "../../services/user";
+import { postLoginService } from "../../services/user";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { useExerciseNavigation } from "../../hooks/useNavigation";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const AnonUserPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // def estado para recuperar del formulario y enviar al contexto de auth
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-const {toExercisesPage} = useExerciseNavigation();
+  // recuperar f de estado del contexto
+  const {setToken, setCurrentUser} = useContext(AuthContext)
 
-/* f de gestion formulario login q recibe email y password */
-const handleLogingForm = async (e) => {
-  try {
-    e.preventDefault();
+  const { toExercisesPage } = useExerciseNavigation();
 
-    // llamar a server con datos del login y recibir token
-    const userToken = await postLoginService({ email, password });
-    console.log(`userToken: ${userToken}`);
+  /* f de gestion formulario login q recibe email y password */
+  const handleLogingForm = async (e) => {
+    try {
+      e.preventDefault();
 
-    // meter token en localstorage
-        localStorage.setItem('userToken', JSON.stringify(userToken))
-    // WIP enviar a vista de exercises si login ok
-    toExercisesPage()
+      // llamar a server con datos del login y recibir token
+      const newToken = await postLoginService({ email, password });
 
-  } catch (error) {
-    console.error(error);
-  }
-};
+      //modificar estados
+      setToken(newToken);
+      setCurrentUser(email);
+
+      // enviar a vista de exercises si login ok
+      toExercisesPage();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <fieldset>

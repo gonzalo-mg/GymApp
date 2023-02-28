@@ -2,12 +2,12 @@
 import "./index.css";
 import {UserCard} from "../UserCard"
 
-export const Header = ({user}) => {
+export const Header = () => {
 
   return (
     <header>
       <h2>Gym App: exercises library</h2>
-      {user ? <UserCard></UserCard> : <></>}
+      <UserCard></UserCard>
     </header>
   );
 };

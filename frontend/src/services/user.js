@@ -1,4 +1,4 @@
-/* Funciones auxiliares para manejar usuarios */
+/* Funciones auxiliares para manejar gestiones sobre usuarios con la bbdd*/
 
 import axios from "axios";
 //import { useExerciseNavigation } from "../hooks/useNavigation";
@@ -19,13 +19,16 @@ export const postLoginService = async ({ email, password }) => {
       }
     );
 
-
     // devolver token como string
     return data.data.data.userToken;
   } catch (e) {
-    alert(`catch-${e.response.data.status}: ${e.response.data.message}`);
+    // en caso de error emitir alerta con los mensajes q devuleva el servidor
     console.error(e);
-    console.error(e.response.data.message);
-    throw new Error(`catch-${e.response.data.status}: ${e.response.data.message}`)
+    alert(`Login fallido - ${e.response.data.status}: ${e.response.data.message}`);
+  
+    // y lanzar el error para recoger en la f handleLogingForm
+    throw new Error(
+      `Login fallido - ${e.response.data.status}: ${e.response.data.message}`
+    );
   }
 };

@@ -17,6 +17,7 @@ app.use(fileUpload());
 const { 
   loginUser,
   registerUser,
+  getUserData
 } = require("./controllers/users");
 
 // de exercices
@@ -47,12 +48,14 @@ const { PORT } = process.env;
 
 /* middleware estatico para imagenes de los exercices*/
 app.use('/pics', express.static(__dirname + '/uploads/images/exercises'));
-console.log(`${__dirname} + '/uploads/images/exercises`)
-/* ENDPOINTS users - not logged */
+
+/* ENDPOINTS users */
 
 app.post("/login", loginUser);
 
 app.post("/register", registerUser);
+
+app.get("/currentUser", validateAuth, getUserData)
 
 /* ENDPOINTS exercises - worker */
 // validateAuth y checkAdmin deshabilitados temporalmente mientras se trabaja en el frontend

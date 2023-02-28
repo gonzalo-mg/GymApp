@@ -14,7 +14,6 @@ const fs = require("fs").promises;
 // f
 async function processImage(buffer, folder, size) {
 //async function processImage(buffer) {
-    console.log(buffer);
   // generar ruta de carpeta almacen
   const folderPath = path.join(
     __dirname,
