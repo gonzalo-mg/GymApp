@@ -10,15 +10,15 @@ export const useExerciseNavigation = () => {
   const [filter, setFilter] = useState("");
 
   // f navegar a lista de exercises
-  const toExercises = () => {
+  const toExercisesPage = () => {
     setFilter("");
     return navigate(`/exercises`);
   };
 
   // f navegar a detalle del exercise
-  const toExerciseDetail = (id) => {
+  const toExerciseDetailPage = (id) => {
     return navigate(`/exercises/${id}`);
   };
 
-  return {toExercises, toExerciseDetail}
+  return {toExercisesPage, toExerciseDetailPage}
 };

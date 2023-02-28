@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import "./styleVariables.css";
 
-import { AnonUser } from "./views/AnonUser";
-import { Exercises } from "./views/Exercises";
-import { ExerciseDetail } from "./views/ExerciseDetail";
-import { NewExerciseAdmin } from "./views/NewExerciseAdmin";
+import { AnonUserPage } from "./views/AnonUserPage";
+import { ExercisesPage } from "./views/ExercisesPage";
+import { ExerciseDetailPage } from "./views/ExerciseDetailPage";
+import { NewExercisePage } from "./views/NewExercisePage";
 
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -17,19 +17,19 @@ export function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <AnonUser></AnonUser>,
+      element: <AnonUserPage></AnonUserPage>,
     },
     {
       path: "/exercises",
-      element: <Exercises></Exercises>,
+      element: <ExercisesPage></ExercisesPage>,
     },
     {
       path: "/exercises/:idExercise",
-      element: <ExerciseDetail></ExerciseDetail>,
+      element: <ExerciseDetailPage></ExerciseDetailPage>,
     },
     {
       path: "/newExercise",
-      element: <NewExerciseAdmin></NewExerciseAdmin>,
+      element: <NewExercisePage></NewExercisePage>,
     },
   ]);
 

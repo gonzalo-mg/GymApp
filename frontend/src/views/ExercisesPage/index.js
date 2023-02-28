@@ -10,7 +10,7 @@ import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
 
-export const Exercises = () => {
+export const ExercisesPage = () => {
   // f estado de "exercises"; para setear los exercises recuperados y a mostrar
   const [exercises, setExercises] = useState([]);
 
@@ -50,7 +50,7 @@ export const Exercises = () => {
   }, [filter]);
 
   // invocar hook de navegacion entre ejercicios
-  const { toExercises, toExerciseDetail } = useExerciseNavigation();
+  const { toExercisesPage, toExerciseDetailPage } = useExerciseNavigation();
 
   // devolver una card por cada exercise del server
   return (
@@ -81,7 +81,7 @@ export const Exercises = () => {
         <ButtonGeneric
           type="button"
           text="Volver"
-          onClickFunction={() => toExercises()}
+          onClickFunction={() => toExercisesPage()}
         ></ButtonGeneric>
       </form>
 
@@ -99,7 +99,7 @@ export const Exercises = () => {
             picture={ex.picture}
             typology={ex.typology}
             muscles={ex.muscles}
-            onClickCard={() => toExerciseDetail(ex.idExercise)}
+            onClickCard={() => toExerciseDetailPage(ex.idExercise)}
           ></ExerciseCard>
         );
       })}

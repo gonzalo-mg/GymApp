@@ -7,7 +7,7 @@ import { postNewExercise } from "../../services/exercises";
 
 /* devolver formulario con todos los campos, y en submit enviar los valores introducidos como variables a la f postNewExercise, q ejexuta la peticion post al server */
 
-export const NewExerciseAdmin = () => {
+export const NewExercisePage = () => {
   return (
     <fieldset className="fieldset">
       <legend>Complete el formulario para CREAR la ficha del ejercicio</legend>

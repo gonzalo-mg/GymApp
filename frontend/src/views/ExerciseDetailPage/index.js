@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import { useExerciseNavigation } from "../../hooks/useNavigation";
 import { useParams } from "react-router-dom";
 
-export const ExerciseDetail = () => {
+export const ExerciseDetailPage = () => {
   // recuperar del param el id del exercise
   const { idExercise: id } = useParams();
 
