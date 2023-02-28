@@ -38,7 +38,7 @@ export function App() {
   return (
     <>
       <AuthContextProvider>
-        <Header user={"WIP-login-state/context"}></Header>
+        <Header></Header>
         <main>
           <RouterProvider router={router} />
         </main>

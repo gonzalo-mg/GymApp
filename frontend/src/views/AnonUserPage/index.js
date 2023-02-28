@@ -16,12 +16,12 @@ export const AnonUserPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // recuperar f de estado del contexto
-  const {setToken, setCurrentUser} = useContext(AuthContext)
+  // recuperar f de login del contexto para cambiar estado del token
+  const { login } = useContext(AuthContext);
 
   const { toExercisesPage } = useExerciseNavigation();
 
-  /* f de gestion formulario login q recibe email y password */
+  /* f de gestion formulario de login q recibe email y password */
   const handleLogingForm = async (e) => {
     try {
       e.preventDefault();
@@ -29,9 +29,8 @@ export const AnonUserPage = () => {
       // llamar a server con datos del login y recibir token
       const newToken = await postLoginService({ email, password });
 
-      //modificar estados
-      setToken(newToken);
-      setCurrentUser(email);
+      //modificar estado
+      login(newToken);
 
       // enviar a vista de exercises si login ok
       toExercisesPage();

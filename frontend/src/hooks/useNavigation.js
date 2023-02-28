@@ -20,5 +20,10 @@ export const useExerciseNavigation = () => {
     return navigate(`/exercises/${id}`);
   };
 
-  return {toExercisesPage, toExerciseDetailPage}
+  // f navegar a AnonUserPage
+  const toAnonUserPage = () => {
+    return navigate('/login')
+  }
+
+  return {toExercisesPage, toExerciseDetailPage, toAnonUserPage}
 };

@@ -10,10 +10,10 @@ import { useContext } from "react";
 
 export const UserCard = () => {
   // recuperar usuario activo del contexto
-  const {currentUser} = useContext(AuthContext);
-    return (
+  const {currentUser, logout} = useContext(AuthContext);
+  return (
       <article className="UserCard">
-        <p className="user">{`Logeado como: ${currentUser}` || "Sesión no iniciada"}</p>
+        <p className="user">{currentUser ? `Logeado como: ${currentUser?.email}` : "Sesión no iniciada"}</p>
         {currentUser ? <div className="buttons">
           <ButtonGeneric
             className="ButtonGenericFav"
@@ -23,7 +23,7 @@ export const UserCard = () => {
           <ButtonGeneric
             className="ButtonGenericFav"
             text="Cerrar sesión"
-            onClickFunction={"WIP-cerrar sesion"}
+            onClickFunction={() => logout()}
           ></ButtonGeneric>
         </div> : <></>}
       </article>
@@ -31,5 +31,5 @@ export const UserCard = () => {
 };
 
 UserCard.propTypes = {
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object
 }

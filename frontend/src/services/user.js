@@ -1,7 +1,6 @@
 /* Funciones auxiliares para manejar gestiones sobre usuarios con la bbdd*/
 
 import axios from "axios";
-//import { useExerciseNavigation } from "../hooks/useNavigation";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
@@ -32,3 +31,17 @@ export const postLoginService = async ({ email, password }) => {
     );
   }
 };
+
+/* f llamada a get a /currentUser con el token almacenado para recuperar/validar datos/token del usuario */
+export const getCurrentUserDataService = async ({token}) => {
+  // formatear header a enviar
+  const formatedToken = `Bearer ${token}`;
+  const response = await axios.get(
+    `${serverRoot}/currentUser`,
+      {
+        headers: { Authorization: formatedToken },
+      }
+    );
+
+    return response.data
+}

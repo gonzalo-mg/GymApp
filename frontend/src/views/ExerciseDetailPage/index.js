@@ -6,9 +6,11 @@ import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
 
 import { getExerciseById } from "../../services/exercises";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useExerciseNavigation } from "../../hooks/useNavigation";
 import { useParams } from "react-router-dom";
+
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const ExerciseDetailPage = () => {
   // recuperar del param el id del exercise
@@ -29,15 +31,18 @@ export const ExerciseDetailPage = () => {
   }, []);
 
   // invocar hook de navegacion entre ejercicios
-  const { toExercises } = useExerciseNavigation();
+  const { toExercisesPage, toAnonUserPage } = useExerciseNavigation();
+
+  const {currentUser} = useContext(AuthContext);
 
   // devolver banner, tarjeta del ejercicio y boton de volver; si no existe el ejercicio lanzar alerta y volver a lista de ejercicios
 
   return (
+
     <article className="ExerciseDetail">
       <TextBanner text={"Vista de Detalles"}></TextBanner>
 
-      {!exercise ? toExercises() : undefined}
+      {!exercise ? toExercisesPage() : undefined}
 
       <ExerciseCard
         name={exercise.name}
@@ -52,7 +57,7 @@ export const ExerciseDetailPage = () => {
       <ButtonGeneric
         type="button"
         text="Volver"
-        onClickFunction={() => toExercises()}
+        onClickFunction={() => toExercisesPage()}
       ></ButtonGeneric>
     </article>
   );
