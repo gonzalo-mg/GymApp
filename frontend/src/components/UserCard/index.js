@@ -8,13 +8,13 @@ import { ButtonGeneric } from "../ButtonGeneric";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 
-import { useExerciseNavigation } from "../../hooks/useNavigation";
+import { useViewNavigation } from "../../hooks/useViewNavigation";
 
 export const UserCard = () => {
   // recuperar usuario activo del contexto
   const {currentUser, logout} = useContext(AuthContext);
 
-  const { toNewExercisePage } = useExerciseNavigation();
+  const { toNewExercisePage } = useViewNavigation();
 
   return (
       <article className="UserCard">

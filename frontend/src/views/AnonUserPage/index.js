@@ -8,7 +8,7 @@ import { postLoginService } from "../../services/user";
 
 import { useState, useContext } from "react";
 
-import { useExerciseNavigation } from "../../hooks/useNavigation";
+import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import { useLocation } from "react-router-dom";
@@ -21,7 +21,7 @@ export const AnonUserPage = () => {
   // recuperar f de login del contexto para cambiar estado del token
   const { token, currentUser, login } = useContext(AuthContext);
 
-  const { toExercisesPage } = useExerciseNavigation();
+  const { toExercisesPage } = useViewNavigation();
 
   //const location = useLocation();
 

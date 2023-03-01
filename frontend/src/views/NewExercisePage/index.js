@@ -8,14 +8,17 @@ import { postNewExerciseService } from "../../services/exercises";
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useViewNavigation } from "../../hooks/useViewNavigation";
 
 /* devolver formulario con todos los campos, y en submit enviar los valores introducidos como variables a la f postNewExercise, q ejexuta la peticion post al server */
 
 export const NewExercisePage = () => {
   // recuperar contexto autenticacion
-  const { token } = useContext(AuthContext);
+  const { token, currentUser } = useContext(AuthContext);
+  // invocar hook de navegacion entre vistas
+  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } = useViewNavigation();
 
-  return (
+  return !currentUser ? toAnonUserPage() :(
     <>
       <UserCard></UserCard>
       <fieldset className="fieldset">

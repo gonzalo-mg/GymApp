@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const useExerciseNavigation = () => {
+export const useViewNavigation = () => {
   // nombrar hook por defecto
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export const useExerciseNavigation = () => {
 
   // f navegar a AnonUserPage
   const toAnonUserPage = () => {
-    return navigate('/login')
+    return navigate('/')
   }
 
   // f navegar a NewExercisePage

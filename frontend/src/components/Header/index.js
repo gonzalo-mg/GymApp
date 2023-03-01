@@ -1,6 +1,5 @@
 
 import "./index.css";
-import {UserCard} from "../UserCard"
 
 export const Header = () => {
 //const location = useLocation();

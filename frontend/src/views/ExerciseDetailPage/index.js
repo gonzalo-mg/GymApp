@@ -8,14 +8,14 @@ import {UserCard} from "../../components/UserCard"
 
 import { getExerciseByIdService } from "../../services/exercises";
 import { useState, useEffect, useContext } from "react";
-import { useExerciseNavigation } from "../../hooks/useNavigation";
+import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { useParams } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext";
 
 export const ExerciseDetailPage = () => {
   // recuperar contexto autenticacion
-  const { token } = useContext(AuthContext);
+  const { token, currentUser } = useContext(AuthContext);
 
   // recuperar del param el id del exercise
   const { idExercise: id } = useParams();
@@ -35,11 +35,11 @@ export const ExerciseDetailPage = () => {
   }, []);
 
   // invocar hook de navegacion entre ejercicios
-  const { toExercisesPage, toAnonUserPage } = useExerciseNavigation();
+  const { toExercisesPage, toAnonUserPage } = useViewNavigation();
 
   // devolver banner, tarjeta del ejercicio y boton de volver; si no existe el ejercicio lanzar alerta y volver a lista de ejercicios
 
-  return (
+  return !currentUser ? toAnonUserPage() :(
     <>
     <UserCard></UserCard>
     <article className="ExerciseDetail">

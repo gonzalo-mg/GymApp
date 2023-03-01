@@ -3,7 +3,7 @@
 import "./index.css";
 
 import { useState, useEffect, useContext } from "react";
-import { useExerciseNavigation } from "../../hooks/useNavigation";
+import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import { getExercisesService } from "../../services/exercises";
@@ -14,7 +14,7 @@ import {UserCard} from "../../components/UserCard"
 
 export const ExercisesPage = () => {
   // cargar contexto autenticacion
-  const {token} = useContext(AuthContext);
+  const {token, currentUser} = useContext(AuthContext);
 
   // f estado de "exercises"; para setear los exercises recuperados y a mostrar
   const [exercises, setExercises] = useState([]);
@@ -54,11 +54,11 @@ export const ExercisesPage = () => {
     getData();
   }, [filter]);
 
-  // invocar hook de navegacion entre ejercicios
-  const { toExercisesPage, toExerciseDetailPage } = useExerciseNavigation();
+  // invocar hook de navegacion entre vistas
+  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } = useViewNavigation();
 
   // devolver una card por cada exercise del server
-  return (
+  return  !currentUser ? toAnonUserPage() :(
     <>
     <UserCard></UserCard>
     <article className="exercisesList">
