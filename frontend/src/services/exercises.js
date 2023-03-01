@@ -6,10 +6,10 @@ const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 /* f para recuperar todos los ejercicios del server */
 export const getExercisesService = async (token) => {
-  console.log(`getExercisesService - token: ${token}`)
+  //console.log(`getExercisesService - token: ${token}`)
   try {
     const response = await axios.get(`${serverRoot}/exercises`, {
-      headers: { "Authorization": token },
+      headers: { Authorization: token },
     });
 
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
@@ -30,7 +30,7 @@ export const getExercisesService = async (token) => {
 export const getExerciseByIdService = async ({ id, token }) => {
   try {
     const response = await axios.get(`${serverRoot}/exercises/${id}`, {
-      headers: { "Authorization": token },
+      headers: { Authorization: token },
     });
 
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
@@ -43,6 +43,27 @@ export const getExerciseByIdService = async ({ id, token }) => {
     console.error(e);
     console.log(e.response.data);
     alert(`${e.response.data.status}: ${e.response.data.message}`);
+  }
+};
+
+/* f para recuperar los ejercicios favs de un usuario del server */
+export const getFavExercisesService = async (token) => {
+  //console.log(`getFavExercisesService - token: ${token}`)
+  try {
+    const response = await axios.get(`${serverRoot}/favorites`, {
+      headers: { Authorization: token },
+    });
+    //console.log(`getFavExercisesService - response: ${response}`);
+    //console.log(response);
+    const { data } = response;
+    const { data: favs } = data;
+
+    // devolver array de objetos tipo ejercicio
+    return favs;
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(`${e.response.data.status}: ${e.response.data.message}`);
   }
 };
 
@@ -66,7 +87,7 @@ export const postNewExerciseService = async ({
     await axios.post(`${serverRoot}/newExercise`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        "Authorization": token,
+        Authorization: token,
       },
     });
   } catch (e) {

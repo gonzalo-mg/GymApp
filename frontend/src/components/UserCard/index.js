@@ -14,7 +14,7 @@ export const UserCard = () => {
   // recuperar usuario activo del contexto
   const {currentUser, logout} = useContext(AuthContext);
 
-  const { toNewExercisePage } = useViewNavigation();
+  const { toNewExercisePage, toFavExercisesPage } = useViewNavigation();
 
   return (
       <article className="UserCard">
@@ -28,7 +28,7 @@ export const UserCard = () => {
           <ButtonGeneric
             className="ButtonGenericFav"
             text="Ver Favoritos"
-            onClickFunction={"WIP-abrir favs usuario"}
+            onClickFunction={()=>toFavExercisesPage()}
           ></ButtonGeneric>
           <ButtonGeneric
             className="ButtonGenericFav"

@@ -1,0 +1,17 @@
+.exercisesList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    align-items:center;
+    justify-content: space-between;
+}
+
+.ExerciseCard {
+    transition-duration: 0.4s;
+}
+
+.exercisesList .ExerciseCard:hover{
+    background-color: var(--color2);
+}
+

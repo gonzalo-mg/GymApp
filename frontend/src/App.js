@@ -9,6 +9,7 @@ import { AnonUserPage } from "./views/AnonUserPage";
 import { ExercisesPage } from "./views/ExercisesPage";
 import { ExerciseDetailPage } from "./views/ExerciseDetailPage";
 import { NewExercisePage } from "./views/NewExercisePage";
+import { FavExercisesPage } from "./views/FavExercisesPage";
 
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -28,6 +29,10 @@ export function App() {
     {
       path: "/exercises/:idExercise",
       element: <ExerciseDetailPage></ExerciseDetailPage>,
+    },
+    {
+      path: "/favorites",
+      element: <FavExercisesPage></FavExercisesPage>,
     },
     {
       path: "/newExercise",

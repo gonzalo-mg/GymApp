@@ -3,7 +3,8 @@
 const Joi = require("joi");
 
 const idExerciseSchema = Joi.object({
-  idExercise: Joi.number().integer().positive().required(),
+  //idExercise: Joi.number().integer().positive().required(),
+  idExercise: Joi.required(),
 });
 
 module.exports = idExerciseSchema;

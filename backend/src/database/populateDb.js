@@ -46,8 +46,8 @@ async function populateDb() {
     await pool.query(`
         INSERT INTO favs (idUser, idExercise, stateFav) VALUES
             ("2","2", true),
-            ("2","4", true),
-            ("2","6", true),
+            ("3","1", true),
+            ("3","2", true),
             ("3","3", true)
     `);
 

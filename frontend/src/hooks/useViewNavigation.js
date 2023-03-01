@@ -30,5 +30,11 @@ export const useViewNavigation = () => {
     return navigate('/newExercise')
   }
 
-  return {toExercisesPage, toExerciseDetailPage, toAnonUserPage, toNewExercisePage}
+  // f navegar a toFavExercisesPage
+  const toFavExercisesPage = () => {
+    return navigate('/favorites')
+  }
+  
+
+  return {toExercisesPage, toExerciseDetailPage, toAnonUserPage, toNewExercisePage, toFavExercisesPage}
 };

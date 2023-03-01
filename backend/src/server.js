@@ -71,7 +71,7 @@ app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
 app.post("/exercises/:idExercise/fav", validateAuth, toggleExerciseFav);
 //app.post("/exercises/:idExercise/fav", toggleExerciseFav);
 
-app.get("/favorites/:idUser", validateAuth, getUserFavs);
+app.get("/favorites", validateAuth, getUserFavs);
 //app.get("/favorites/:idUser", getUserFavs);
 
 /* ENDPOINTS exercises admin */

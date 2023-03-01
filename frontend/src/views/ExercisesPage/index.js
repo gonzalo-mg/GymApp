@@ -62,13 +62,13 @@ export const ExercisesPage = () => {
     <>
     <UserCard></UserCard>
     <article className="exercisesList">
-      <TextBanner text={"Vista Lista Ejercicios Disponibles"}></TextBanner>
+      <TextBanner text={filter === "" ? "Estás viendo todos los ejercicios disponibles" : "Estás viendo los resultados del filtrado"}></TextBanner>
 
       <form
         id="filters"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(`form submit sets filtersURL to: ${filter}`);
+          //console.log(`form submit sets filtersURL to: ${filter}`);
         }}
       >
         <ul>
@@ -83,20 +83,14 @@ export const ExercisesPage = () => {
           </li>
         </ul>
 
-        <ButtonGeneric type="submit" text="Filtrar"></ButtonGeneric>
-
+        {filter === "" ? null : 
         <ButtonGeneric
           type="button"
-          text="Volver"
-          onClickFunction={() => toExercisesPage()}
+          text="Borrar filtro"
+          onClickFunction={() => setFilter("")}
         ></ButtonGeneric>
+      }
       </form>
-
-      {filter !== "" ? (
-        <TextBanner text="Resultados del filtrado"></TextBanner>
-      ) : (
-        ""
-      )}
 
       {exercises.map((ex) => {
         return (
