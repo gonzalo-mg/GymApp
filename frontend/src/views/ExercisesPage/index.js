@@ -2,15 +2,20 @@
 
 import "./index.css";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useExerciseNavigation } from "../../hooks/useNavigation";
+import { AuthContext } from "../../contexts/AuthContext";
 
-import { getExercises } from "../../services/exercises";
+import { getExercisesService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
+import {UserCard} from "../../components/UserCard"
 
 export const ExercisesPage = () => {
+  // cargar contexto autenticacion
+  const {token} = useContext(AuthContext);
+
   // f estado de "exercises"; para setear los exercises recuperados y a mostrar
   const [exercises, setExercises] = useState([]);
 
@@ -23,7 +28,7 @@ export const ExercisesPage = () => {
   useEffect(() => {
     const getData = async () => {
       // recuperar exercises del server
-      const recoveredExercises = await getExercises();
+      const recoveredExercises = await getExercisesService(token);
 
       // f para filtrar exercises; devolver cq exercise q contenga (en su nombre/tipologia/musculo) lo escrito por el usuario en el formulario
       function myFiltering(ex, filter) {
@@ -54,6 +59,8 @@ export const ExercisesPage = () => {
 
   // devolver una card por cada exercise del server
   return (
+    <>
+    <UserCard></UserCard>
     <article className="exercisesList">
       <TextBanner text={"Vista Lista Ejercicios Disponibles"}></TextBanner>
 
@@ -104,5 +111,6 @@ export const ExercisesPage = () => {
         );
       })}
     </article>
+    </>
   );
 };

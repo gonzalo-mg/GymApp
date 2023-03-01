@@ -3,7 +3,7 @@
 import "./index.css";
 
 import { ButtonGeneric } from "../../components/ButtonGeneric";
-
+import {UserCard} from "../../components/UserCard"
 import { postLoginService } from "../../services/user";
 
 import { useState, useContext } from "react";
@@ -11,15 +11,19 @@ import { useState, useContext } from "react";
 import { useExerciseNavigation } from "../../hooks/useNavigation";
 import { AuthContext } from "../../contexts/AuthContext";
 
+import { useLocation } from "react-router-dom";
+
 export const AnonUserPage = () => {
   // def estado para recuperar del formulario y enviar al contexto de auth
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // recuperar f de login del contexto para cambiar estado del token
-  const { login } = useContext(AuthContext);
+  const { token, currentUser, login } = useContext(AuthContext);
 
   const { toExercisesPage } = useExerciseNavigation();
+
+  //const location = useLocation();
 
   /* f de gestion formulario de login q recibe email y password */
   const handleLogingForm = async (e) => {
@@ -28,18 +32,19 @@ export const AnonUserPage = () => {
 
       // llamar a server con datos del login y recibir token
       const newToken = await postLoginService({ email, password });
-
+      console.log(`handleLogingForm -  newToken ${newToken}`)
       //modificar estado
       login(newToken);
 
-      // enviar a vista de exercises si login ok
-      toExercisesPage();
     } catch (error) {
       console.error(error);
     }
   };
 
-  return (
+  // si existe usuario conectado enviar a pag principal de exercises; si no permanecer en pag de login
+  return currentUser ? toExercisesPage() :(
+    <>
+    <UserCard></UserCard>
     <fieldset>
       <legend>Introduzca sus credenciales</legend>
       <form onSubmit={(e) => handleLogingForm(e)}>
@@ -73,5 +78,6 @@ export const AnonUserPage = () => {
         ></ButtonGeneric>
       </form>
     </fieldset>
+    </>
   );
 };

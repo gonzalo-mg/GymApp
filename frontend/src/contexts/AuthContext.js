@@ -24,6 +24,7 @@ export const AuthContextProvider = ({ children }) => {
 
   // efecto sincronizar token con localStorage; refrescar con cambios de estado de token;
   useEffect(() => {
+    // formateo el token con "Bearer" por requerimietno backend
     localStorage.setItem("token", token);
   }, [token]);
 
@@ -32,12 +33,12 @@ export const AuthContextProvider = ({ children }) => {
     const getUserData = async () => {
       try {
         // llamar al servicio de recuperar datos del currentUser con el token actual
-        const data = await getCurrentUserDataService({token});
+        const data = await getCurrentUserDataService(token);
         // actualizar usuario con los datos obtenidos
         setCurrentUser(data.data);
       } catch (error) {
         // si el token no es valido deslogear
-        logout();
+        //logout();
       }
     };
     // si hay token hacer peticion para recuperar datos usuario

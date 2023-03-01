@@ -52,7 +52,7 @@ async function loginUser(req, res, next) {
     // enviar respuesta
     res.status(200).send({
       status: "ok - logged in succesfully",
-      data: { userToken: token },
+      data: { userToken: `Bearer ${token}` },
     });
   } catch (error) {
     next(error);

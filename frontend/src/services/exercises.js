@@ -5,10 +5,12 @@ import axios from "axios";
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 /* f para recuperar todos los ejercicios del server */
-
-export const getExercises = async () => {
+export const getExercisesService = async (token) => {
+  console.log(`getExercisesService - token: ${token}`)
   try {
-    const response = await axios.get(`${serverRoot}/exercises`);
+    const response = await axios.get(`${serverRoot}/exercises`, {
+      headers: { "Authorization": token },
+    });
 
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
     const { data } = response;
@@ -20,15 +22,16 @@ export const getExercises = async () => {
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
-    return alert(`${e.response.data.status}: ${e.response.data.message}`)
+    return alert(`${e.response.data.status}: ${e.response.data.message}`);
   }
 };
 
 /* f para recuperar un ejercicio particular del server mediante path param */
-
-export const getExerciseById = async (id) => {
+export const getExerciseByIdService = async ({ id, token }) => {
   try {
-    const response = await axios.get(`${serverRoot}/exercises/${id}`);
+    const response = await axios.get(`${serverRoot}/exercises/${id}`, {
+      headers: { "Authorization": token },
+    });
 
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
     const { data } = response;
@@ -39,12 +42,13 @@ export const getExerciseById = async (id) => {
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
-    alert(`${e.response.data.status}: ${e.response.data.message}`)
+    alert(`${e.response.data.status}: ${e.response.data.message}`);
   }
 };
 
 /* f para grabar nuevo ejercicio en server */
-export const postNewExercise = async ({
+export const postNewExerciseService = async ({
+  token,
   name,
   typology,
   description,
@@ -62,11 +66,12 @@ export const postNewExercise = async ({
     await axios.post(`${serverRoot}/newExercise`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        "Authorization": token,
       },
     });
   } catch (e) {
     console.error(e.message);
     console.log(e.response.data);
-    return alert(`${e.response.data.status}: ${e.response.data.message}`)
+    return alert(`${e.response.data.status}: ${e.response.data.message}`);
   }
 };

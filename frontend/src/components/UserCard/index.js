@@ -8,13 +8,23 @@ import { ButtonGeneric } from "../ButtonGeneric";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 
+import { useExerciseNavigation } from "../../hooks/useNavigation";
+
 export const UserCard = () => {
   // recuperar usuario activo del contexto
   const {currentUser, logout} = useContext(AuthContext);
+
+  const { toNewExercisePage } = useExerciseNavigation();
+
   return (
       <article className="UserCard">
         <p className="user">{currentUser ? `Logeado como: ${currentUser?.email}` : "Sesión no iniciada"}</p>
         {currentUser ? <div className="buttons">
+        {currentUser.role === "admin" ? <ButtonGeneric
+            className="ButtonGenericFav"
+            text="Crear ejercicio"
+            onClickFunction={()=>toNewExercisePage()}
+          ></ButtonGeneric> : <></>}
           <ButtonGeneric
             className="ButtonGenericFav"
             text="Ver Favoritos"

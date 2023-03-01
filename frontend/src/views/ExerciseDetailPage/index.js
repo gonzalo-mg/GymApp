@@ -4,8 +4,9 @@ import "./index.css";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
+import {UserCard} from "../../components/UserCard"
 
-import { getExerciseById } from "../../services/exercises";
+import { getExerciseByIdService } from "../../services/exercises";
 import { useState, useEffect, useContext } from "react";
 import { useExerciseNavigation } from "../../hooks/useNavigation";
 import { useParams } from "react-router-dom";
@@ -13,6 +14,9 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export const ExerciseDetailPage = () => {
+  // recuperar contexto autenticacion
+  const { token } = useContext(AuthContext);
+
   // recuperar del param el id del exercise
   const { idExercise: id } = useParams();
 
@@ -24,7 +28,7 @@ export const ExerciseDetailPage = () => {
   // // variables de escucha: [id]; cada vez q cambie el exercise
   useEffect(() => {
     const getData = async () => {
-      const currentExercise = await getExerciseById(id);
+      const currentExercise = await getExerciseByIdService({ id, token });
       setExercise(currentExercise);
     };
     getData();
@@ -33,12 +37,11 @@ export const ExerciseDetailPage = () => {
   // invocar hook de navegacion entre ejercicios
   const { toExercisesPage, toAnonUserPage } = useExerciseNavigation();
 
-  const {currentUser} = useContext(AuthContext);
-
   // devolver banner, tarjeta del ejercicio y boton de volver; si no existe el ejercicio lanzar alerta y volver a lista de ejercicios
 
   return (
-
+    <>
+    <UserCard></UserCard>
     <article className="ExerciseDetail">
       <TextBanner text={"Vista de Detalles"}></TextBanner>
 
@@ -59,6 +62,6 @@ export const ExerciseDetailPage = () => {
         text="Volver"
         onClickFunction={() => toExercisesPage()}
       ></ButtonGeneric>
-    </article>
+    </article></>
   );
 };
