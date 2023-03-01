@@ -58,32 +58,31 @@ app.post("/register", registerUser);
 app.get("/currentUser", validateAuth, getUserData)
 
 /* ENDPOINTS exercises - worker */
-// validateAuth y checkAdmin deshabilitados temporalmente mientras se trabaja en el frontend
+
 app.get("/exercises", validateAuth, getExercises);
-//app.get("/exercises", getExercises);
+
 
 app.get("/exercises/:idExercise", validateAuth, getExerciseDetails);
-//app.get("/exercises/:idExercise", getExerciseDetails);
+
 
 app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
-//app.post("/exercises/:idExercise/like", toggleExerciseLike);
+
 
 app.post("/exercises/:idExercise/fav", validateAuth, toggleExerciseFav);
-//app.post("/exercises/:idExercise/fav", toggleExerciseFav);
+
 
 app.get("/favorites", validateAuth, getUserFavs);
-//app.get("/favorites/:idUser", getUserFavs);
+
 
 /* ENDPOINTS exercises admin */
 
 app.post("/newExercise", validateAuth, checkAdmin, postNewExercise);
-//app.post("/newExercise", postNewExercise);
+
 
 app.put("/exercises/:idExercise", validateAuth, checkAdmin, putEditExercise);
-//app.put("/exercises/:idExercise", putEditExercise);
+
 
 app.delete("/exercises/:idExercise", validateAuth, checkAdmin, deleteExercise);
-//app.delete("/exercises/:idExercise", deleteExercise);
 
 /* MIDDLEWARES ERRORES */
 

@@ -6,7 +6,7 @@ const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 /* f para recuperar todos los ejercicios del server */
 export const getExercisesService = async (token) => {
-  //console.log(`getExercisesService - token: ${token}`)
+
   try {
     const response = await axios.get(`${serverRoot}/exercises`, {
       headers: { Authorization: token },
@@ -48,13 +48,10 @@ export const getExerciseByIdService = async ({ id, token }) => {
 
 /* f para recuperar los ejercicios favs de un usuario del server */
 export const getFavExercisesService = async (token) => {
-  //console.log(`getFavExercisesService - token: ${token}`)
   try {
     const response = await axios.get(`${serverRoot}/favorites`, {
       headers: { Authorization: token },
     });
-    //console.log(`getFavExercisesService - response: ${response}`);
-    //console.log(response);
     const { data } = response;
     const { data: favs } = data;
 
