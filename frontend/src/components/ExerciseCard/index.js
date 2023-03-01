@@ -4,9 +4,9 @@ import { ButtonGeneric } from "../ButtonGeneric";
 import { ButtonMini } from "../ButtonMini";
 import "./index.css";
 
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
-//const serverRoot = process.env.REACT_APP_BACKEND_URL;
+const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 export const ExerciseCard = ({
   name,
@@ -33,7 +33,7 @@ export const ExerciseCard = ({
         </ul>
       </section>
 
-      <img src={`http://localhost:8080/pics/${picture}`} alt={name}></img>
+      <img src={`${serverRoot}/pics/${picture}`} alt={name}></img>
 
       {description ? (
         <section className="description">
@@ -75,4 +75,4 @@ ExerciseCard.propTypes = {
   //likeCounter,
   //admin,
   //onClickCard: PropTypes.func.isRequired
-}
+};
