@@ -6,6 +6,9 @@ import "./index.css";
 
 import PropTypes from "prop-types";
 
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 export const ExerciseCard = ({
@@ -18,6 +21,10 @@ export const ExerciseCard = ({
   admin,
   onClickCard,
 }) => {
+
+// recuperar usuario activo del contexto
+const { currentUser} = useContext(AuthContext);
+
   return (
     <article className="ExerciseCard" onClick={onClickCard}>
       <h2 className="name">{name}</h2>
@@ -44,7 +51,7 @@ export const ExerciseCard = ({
         <></>
       )}
 
-      {!admin ? (
+      {currentUser.role === "worker" ? (
         <div className="workerButtons">
           <ButtonMini className2={"fav"} onClickFunction={"WIP"}></ButtonMini>
           <ButtonMini

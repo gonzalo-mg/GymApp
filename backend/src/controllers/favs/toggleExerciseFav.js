@@ -36,7 +36,7 @@ const toggleExerciseFav = async (req, res, next) => {
       await newFav(idExercise, idUser);
       statusCode = 201;
       // reseleccionar fav de la bbdd
-    const updatedFav = await selectFavByExerciseAndUser(idExercise, idUser);
+      const updatedFav = await selectFavByExerciseAndUser(idExercise, idUser);
       res.status(statusCode).send({ status: "ok", updatedfav });
     }
 
