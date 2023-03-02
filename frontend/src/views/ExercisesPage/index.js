@@ -36,19 +36,10 @@ export const ExercisesPage = () => {
     <>
       <UserCard></UserCard>
       <article className="exercisesList">
-        <TextBanner
-          text={
-            filter === ""
-              ? "Estás viendo todos los ejercicios disponibles"
-              : "Estás viendo los resultados del filtrado"
-          }
-        ></TextBanner>
-
         <form
           id="filters"
           onSubmit={(e) => {
             e.preventDefault();
-            //console.log(`form submit sets filtersURL to: ${filter}`);
           }}
         >
           <ul>

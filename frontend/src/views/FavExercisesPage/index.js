@@ -55,11 +55,6 @@ export const FavExercisesPage = () => {
             ></ExerciseCard>
           );
         })}
-        <ButtonGeneric
-          type="button"
-          text="Volver"
-          onClickFunction={() => toExercisesPage()}
-        ></ButtonGeneric>
       </article>
     </>
   );

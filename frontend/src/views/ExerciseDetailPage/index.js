@@ -59,12 +59,6 @@ export const ExerciseDetailPage = () => {
           picture={exercise.picture}
           likeCounter={"WIP"}
         ></ExerciseCard>
-
-        <ButtonGeneric
-          type="button"
-          text="Volver"
-          onClickFunction={() => toExercisesPage()}
-        ></ButtonGeneric>
       </article>
     </>
   );

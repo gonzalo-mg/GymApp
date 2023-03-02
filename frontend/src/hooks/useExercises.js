@@ -28,15 +28,15 @@ export const useExercises = () => {
         if (favs) {
           recoveredExercises = await getFavExercisesService(token);
           setExercises(recoveredExercises);
-          // si se pide uno en concreto devolver solo ese
+          // si se pide un ejercicio en concreto devolver solo ese
         } else if (idExercise) {
           recoveredExercises = await getExerciseByIdService({
             idExercise,
             token,
           });
           setExercises(recoveredExercises);
+        // si no se piden favs ni uno concreto recuperar todos los exercises
         } else {
-          // si no se piden favs ni uno concreto recuperar todos los exercises
           recoveredExercises = await getExercisesService(token);
           setExercises(recoveredExercises);
         }
