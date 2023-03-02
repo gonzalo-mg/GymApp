@@ -6,7 +6,6 @@ const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
 /* f para recuperar todos los ejercicios del server */
 export const getExercisesService = async (token) => {
-
   try {
     const response = await axios.get(`${serverRoot}/exercises`, {
       headers: { Authorization: token },
@@ -89,6 +88,19 @@ export const postNewExerciseService = async ({
     });
   } catch (e) {
     console.error(e.message);
+    console.log(e.response.data);
+    return alert(`${e.response.data.status}: ${e.response.data.message}`);
+  }
+};
+
+/* f para borrar ejercicio de la bbdd */
+export const deleteExerciseService = async ({token, idExercise}) => {
+  try {
+    await axios.delete(`${serverRoot}/exercises/${idExercise}`, {
+      headers: { Authorization: token },
+    });
+  } catch (e) {
+    console.error(e);
     console.log(e.response.data);
     return alert(`${e.response.data.status}: ${e.response.data.message}`);
   }

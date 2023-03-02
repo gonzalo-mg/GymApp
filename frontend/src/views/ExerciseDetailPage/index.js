@@ -4,7 +4,7 @@ import "./index.css";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
-import {UserCard} from "../../components/UserCard"
+import { UserCard } from "../../components/UserCard";
 
 import { getExerciseByIdService } from "../../services/exercises";
 import { useState, useEffect, useContext } from "react";
@@ -39,29 +39,34 @@ export const ExerciseDetailPage = () => {
 
   // devolver banner, tarjeta del ejercicio y boton de volver; si no existe el ejercicio lanzar alerta y volver a lista de ejercicios
 
-  return !currentUser ? toAnonUserPage() :(
+  return !currentUser ? (
+    toAnonUserPage()
+  ) : (
     <>
-    <UserCard></UserCard>
-    <article className="ExerciseDetail">
-      <TextBanner text={"Vista de Detalles"}></TextBanner>
+      <UserCard></UserCard>
+      <article className="ExerciseDetail">
+        <TextBanner text={"Vista de Detalles"}></TextBanner>
 
-      {!exercise ? toExercisesPage() : undefined}
+        {!exercise ? toExercisesPage() : undefined}
 
-      <ExerciseCard
-        name={exercise.name}
-        description={exercise.description}
-        typology={exercise.typology}
-        muscles={exercise.muscles}
-        picture={exercise.picture}
-        admin={false}
-        likeCounter={"WIP"}
-      ></ExerciseCard>
+        <ExerciseCard
+          key={exercise.idExercise}
+          idExercise={exercise.idExercise}
+          name={exercise.name}
+          description={exercise.description}
+          typology={exercise.typology}
+          muscles={exercise.muscles}
+          picture={exercise.picture}
+          admin={false}
+          likeCounter={"WIP"}
+        ></ExerciseCard>
 
-      <ButtonGeneric
-        type="button"
-        text="Volver"
-        onClickFunction={() => toExercisesPage()}
-      ></ButtonGeneric>
-    </article></>
+        <ButtonGeneric
+          type="button"
+          text="Volver"
+          onClickFunction={() => toExercisesPage()}
+        ></ButtonGeneric>
+      </article>
+    </>
   );
 };

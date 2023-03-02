@@ -3,7 +3,7 @@
 import "./index.css";
 import PropTypes from "prop-types";
 
-import { ButtonGeneric } from "../ButtonGeneric";
+import { ButtonGeneric } from "../ButtonGeneric/index";
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";

@@ -10,11 +10,11 @@ import { getExercisesService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
-import {UserCard} from "../../components/UserCard"
+import { UserCard } from "../../components/UserCard";
 
 export const ExercisesPage = () => {
   // cargar contexto autenticacion
-  const {token, currentUser} = useContext(AuthContext);
+  const { token, currentUser } = useContext(AuthContext);
 
   // f estado de "exercises"; para setear los exercises recuperados y a mostrar
   const [exercises, setExercises] = useState([]);
@@ -55,56 +55,66 @@ export const ExercisesPage = () => {
   }, [filter]);
 
   // invocar hook de navegacion entre vistas
-  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } = useViewNavigation();
+  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
+    useViewNavigation();
 
   // devolver una card por cada exercise del server
-  return  !currentUser ? toAnonUserPage() :(
+  return !currentUser ? (
+    toAnonUserPage()
+  ) : (
     <>
-    <UserCard></UserCard>
-    <article className="exercisesList">
-      <TextBanner text={filter === "" ? "Estás viendo todos los ejercicios disponibles" : "Estás viendo los resultados del filtrado"}></TextBanner>
+      <UserCard></UserCard>
+      <article className="exercisesList">
+        <TextBanner
+          text={
+            filter === ""
+              ? "Estás viendo todos los ejercicios disponibles"
+              : "Estás viendo los resultados del filtrado"
+          }
+        ></TextBanner>
 
-      <form
-        id="filters"
-        onSubmit={(e) => {
-          e.preventDefault();
-          //console.log(`form submit sets filtersURL to: ${filter}`);
-        }}
-      >
-        <ul>
-          <li>
-            <input
-              id="filterName"
-              name="name"
-              placeholder="Busca por nombre, tipología o músculo"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value.toLowerCase())}
-            ></input>
-          </li>
-        </ul>
+        <form
+          id="filters"
+          onSubmit={(e) => {
+            e.preventDefault();
+            //console.log(`form submit sets filtersURL to: ${filter}`);
+          }}
+        >
+          <ul>
+            <li>
+              <input
+                id="filterName"
+                name="name"
+                placeholder="Busca por nombre, tipología o músculo"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value.toLowerCase())}
+              ></input>
+            </li>
+          </ul>
 
-        {filter === "" ? null : 
-        <ButtonGeneric
-          type="button"
-          text="Borrar filtro"
-          onClickFunction={() => setFilter("")}
-        ></ButtonGeneric>
-      }
-      </form>
+          {filter === "" ? null : (
+            <ButtonGeneric
+              type="button"
+              text="Borrar filtro"
+              onClickFunction={() => setFilter("")}
+            ></ButtonGeneric>
+          )}
+        </form>
 
-      {exercises.map((ex) => {
-        return (
-          <ExerciseCard
-            key={ex.idExercise}
-            name={ex.name}
-            picture={ex.picture}
-            typology={ex.typology}
-            muscles={ex.muscles}
-            onClickCard={() => toExerciseDetailPage(ex.idExercise)}
-          ></ExerciseCard>
-        );
-      })}
-    </article>
+        {exercises.map((ex) => {
+          return (
+            <ExerciseCard
+              key={ex.idExercise}
+              idExercise={ex.idExercise}
+              name={ex.name}
+              picture={ex.picture}
+              typology={ex.typology}
+              muscles={ex.muscles}
+              onClickCard={() => toExerciseDetailPage(ex.idExercise)}
+            ></ExerciseCard>
+          );
+        })}
+      </article>
     </>
   );
 };
