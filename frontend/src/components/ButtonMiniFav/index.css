@@ -19,7 +19,7 @@
     transition-duration: 0.4s;
 }
 
-.ButtonMiniFav .isFav {
+.ButtonMiniFav.isFav {
     background-color: yellow;
 }
 

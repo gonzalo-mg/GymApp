@@ -8,6 +8,7 @@ import {
 } from "../services/exercises";
 
 export const useExercises = () => {
+  // RECUPERAR ejercicios
   const useGetExercises = ({
     token,
     filter = null,
@@ -35,7 +36,7 @@ export const useExercises = () => {
             token,
           });
           setExercises(recoveredExercises);
-        // si no se piden favs ni uno concreto recuperar todos los exercises
+          // si no se piden favs ni uno concreto recuperar todos los exercises
         } else {
           recoveredExercises = await getExercisesService(token);
           setExercises(recoveredExercises);
@@ -70,5 +71,22 @@ export const useExercises = () => {
     return exercises;
   };
 
-  return { useGetExercises };
+  // COMPROBAR si un ejercicio es fav del usuario
+  const useCheckFav = ({idExercise, token}) => {
+    let favs = true;
+    // recueprar los favs del usuario
+    const userFavs = useGetExercises({ token, favs });
+    // comprobar si el array contiene un idExercise coincidente
+    let idFavs = userFavs.filter((ex) => {
+      return ex.idExercise === idExercise;
+    });
+    if (idFavs.length !== 0) {
+      // si coincide devolver string "isFav" para usar como clase css
+      return "isFav";
+    } else {
+      return undefined;
+    }
+  };
+
+  return { useGetExercises, useCheckFav };
 };

@@ -8,17 +8,20 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toggleFavService } from "../../services/exercises";
+import { useExercises } from "../../hooks/useExercises";
 
-export const ButtonMiniFav = ({ idExercise, classFav }) => {
+export const ButtonMiniFav = ({ idExercise, isFav = undefined }) => {
   // recuperar usuario activo del contexto
   const { token } = useContext(AuthContext);
+
+  const { useGetExercises, useCheckFav } = useExercises();
+
   return (
     <button
-      className={`ButtonMiniFav ${classFav}`}
+      className={`ButtonMiniFav ${useCheckFav({ idExercise, token })}`}
       type="button"
       onClick={(e) => {
-        e.stopPropagation()
-        //console.log(`ButtonMiniFav - idExercise: ${idExercise}; token: ${token}`);
+        e.stopPropagation();
         toggleFavService({ token, idExercise });
       }}
     ></button>
@@ -26,5 +29,5 @@ export const ButtonMiniFav = ({ idExercise, classFav }) => {
 };
 
 ButtonMiniFav.propTypes = {
-  className2: PropTypes.string,
+  isFav: PropTypes.string,
 };
