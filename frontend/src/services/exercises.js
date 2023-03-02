@@ -21,7 +21,9 @@ export const getExercisesService = async (token) => {
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
-    return alert(`${e.response.data.status}: ${e.response.data.message}`);
+    return alert(
+      `getExercisesService - ${e.response.data.status}: ${e.response.data.message}`
+    );
   }
 };
 
@@ -41,7 +43,9 @@ export const getExerciseByIdService = async ({ id, token }) => {
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
-    alert(`${e.response.data.status}: ${e.response.data.message}`);
+    alert(
+      `getExerciseByIdService - ${e.response.data.status}: ${e.response.data.message}`
+    );
   }
 };
 
@@ -59,7 +63,9 @@ export const getFavExercisesService = async (token) => {
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
-    return alert(`${e.response.data.status}: ${e.response.data.message}`);
+    return alert(
+      `getFavExercisesService - ${e.response.data.status}: ${e.response.data.message}`
+    );
   }
 };
 
@@ -86,16 +92,18 @@ export const postNewExerciseService = async ({
         Authorization: token,
       },
     });
-    return alert(`Creado ejercicio: ${name}.`)
+    return alert(`Creado ejercicio: ${name}.`);
   } catch (e) {
     console.error(e.message);
     console.log(e.response.data);
-    return alert(`${e.response.data.status}: ${e.response.data.message}`);
+    return alert(
+      `postNewExerciseService - ${e.response.data.status}: ${e.response.data.message}`
+    );
   }
 };
 
 /* f para borrar ejercicio de la bbdd */
-export const deleteExerciseService = async ({token, idExercise}) => {
+export const deleteExerciseService = async ({ token, idExercise }) => {
   try {
     await axios.delete(`${serverRoot}/exercises/${idExercise}`, {
       headers: { Authorization: token },
@@ -103,6 +111,53 @@ export const deleteExerciseService = async ({token, idExercise}) => {
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
-    return alert(`${e.response.data.status}: ${e.response.data.message}`);
+    return alert(
+      `deleteExerciseService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+};
+
+/* f para cambiar fav */
+/* export const toggleFavService = async ({ token, idExercise }) => {
+  try {
+    await axios.post(`${serverRoot}/exercises/${idExercise}/fav`, {
+      headers: { Authorization: token },
+    });
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(
+      `toggleFavService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+}; */
+
+export const toggleFavService = async ({ token, idExercise, data = null }) => {
+  try {
+    const response = await axios.post(
+      `${serverRoot}/exercises/${idExercise}/fav`,
+      data,
+      {
+        headers: { Authorization: token },
+      }
+    );
+    //devolver objeto updatedfav, tipo:
+    /* "updatedfav": {
+        "idUser": 3,
+        "idExercise": 2,
+        "stateFav": 0,
+        "created": "2023-03-02T09:43:15.000Z"
+    } */
+    if (response.data.fav.stateFav === 0) {
+      return alert(`toggleFavService - Ejercicio eliminado de favoritos`);
+    } else {
+      return alert(`toggleFavService - Ejercicio añadido a favoritos`);
+    }
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(
+      `toggleFavService - ${e.response.data.status}: ${e.response.data.message}`
+    );
   }
 };

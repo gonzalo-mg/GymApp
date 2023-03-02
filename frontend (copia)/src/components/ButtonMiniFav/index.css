@@ -1,0 +1,28 @@
+.ButtonMiniFav {
+    height: 2rem;
+    width: 2rem;
+
+    background-image: url(/public/fav-icon.png);
+    
+    border-radius: 100px;
+
+    border-color: var(--ButtonMiniBorderColor);
+    background-color: var(--ButtonMiniBackground);
+
+    background-size: cover;
+
+    font-weight: bolder;
+    color: var(--ButtonMiniColor);
+
+    cursor: pointer;
+
+    transition-duration: 0.4s;
+}
+
+.ButtonMiniFav .isFav {
+    background-color: yellow;
+}
+
+.ButtonMiniFav:hover{
+    background-color: var(--color1)
+}

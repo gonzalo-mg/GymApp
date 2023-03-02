@@ -1,0 +1,18 @@
+:root{
+    --color1: mediumpurple;
+    --color2: purple;
+    --color3: indigo;
+
+    --Background1: ivory;
+    --Background2: lightgrey;
+
+    --CardBackground: lavender;
+
+    --ButtonGenericBackground: mediumpurple;
+    --ButtonGenericBorderColor: indigo;
+    --ButtonGenericColor: indigo;
+
+    --ButtonMiniBackground: ivory;
+    --ButtonMiniBorderColor: indigo;
+    --ButtonMiniColor: indigo;
+}

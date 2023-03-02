@@ -10,11 +10,11 @@ import { getFavExercisesService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
-import {UserCard} from "../../components/UserCard"
+import { UserCard } from "../../components/UserCard";
 
 export const FavExercisesPage = () => {
   // cargar contexto autenticacion
-  const {token, currentUser} = useContext(AuthContext);
+  const { token, currentUser } = useContext(AuthContext);
 
   // f estado de "exercises"; para setear los exercises recuperados y a mostrar
   const [exercises, setExercises] = useState([]);
@@ -32,33 +32,43 @@ export const FavExercisesPage = () => {
   }, []);
 
   // invocar hook de navegacion entre vistas
-  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } = useViewNavigation();
+  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
+    useViewNavigation();
 
   // devolver una card por cada exercise del server
-  return  !currentUser ? toAnonUserPage() : (
+  return !currentUser ? (
+    toAnonUserPage()
+  ) : (
     <>
-    <UserCard></UserCard>
-    <article className="exercisesList">
-      <TextBanner text={exercises.length===0 ? "No tienes favoritos" : "Estos son tus favoritos"}></TextBanner>
+      <UserCard></UserCard>
+      <article className="exercisesList">
+        <TextBanner
+          text={
+            exercises.length === 0
+              ? "No tienes favoritos"
+              : "Estos son tus favoritos"
+          }
+        ></TextBanner>
 
-      {exercises.map((ex) => {
-        return (
-          <ExerciseCard
-            key={ex.idExercise}
-            name={ex.name}
-            picture={ex.picture}
-            typology={ex.typology}
-            muscles={ex.muscles}
-            onClickCard={() => toExerciseDetailPage(ex.idExercise)}
-          ></ExerciseCard>
-        );
-      })}
-      <ButtonGeneric
-        type="button"
-        text="Volver"
-        onClickFunction={() => toExercisesPage()}
-      ></ButtonGeneric>
-    </article>
+        {exercises.map((ex) => {
+          return (
+            <ExerciseCard
+              key={ex.idExercise}
+              idExercise={ex.idExercise}
+              name={ex.name}
+              picture={ex.picture}
+              typology={ex.typology}
+              muscles={ex.muscles}
+              onClickCard={() => toExerciseDetailPage(ex.idExercise)}
+            ></ExerciseCard>
+          );
+        })}
+        <ButtonGeneric
+          type="button"
+          text="Volver"
+          onClickFunction={() => toExercisesPage()}
+        ></ButtonGeneric>
+      </article>
     </>
   );
 };

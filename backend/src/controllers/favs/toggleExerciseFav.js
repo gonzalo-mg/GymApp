@@ -15,6 +15,11 @@ const toggleExerciseFav = async (req, res, next) => {
 
     // recoger parametro (path param - :idExercise) (req.params devuelve objeto- desestrucutrar para obtener solo numero)
     const { idExercise } = req.params;
+    console.log(`backend toggleExerciseFav - idExercise: ${idExercise}`)
+
+    // recoger idUser de la autenticacion
+    const { idUser } = req.auth;
+    console.log(`backend toggleExerciseFav - idUser: ${idUser}`)
 
     // recuperar exercise de la bbdd con su idExercise
     const exercise = await selectExerciseById(idExercise);
@@ -24,19 +29,17 @@ const toggleExerciseFav = async (req, res, next) => {
       createError("There is no exercise with that idExercise", 404);
     }
 
-    // recoger idUser de la autenticacion
-    const { idUser } = req.auth;
-
     // seleccionar fav de la bbdd
-    const fav = await selectFavByExerciseAndUser(idExercise, idUser);
+    let fav = await selectFavByExerciseAndUser(idExercise, idUser);
 
     let statusCode;
+    //let updatedFav;
     //si es la primera vez q el usuario le da crearlo
     if (fav === undefined) {
       await newFav(idExercise, idUser);
       statusCode = 201;
       // reseleccionar fav de la bbdd
-      const updatedFav = await selectFavByExerciseAndUser(idExercise, idUser);
+      fav = await selectFavByExerciseAndUser(idExercise, idUser);
       res.status(statusCode).send({ status: "ok", updatedfav });
     }
 
@@ -51,9 +54,9 @@ const toggleExerciseFav = async (req, res, next) => {
     }
 
     // reseleccionar fav de la bbdd
-    const updatedfav = await selectFavByExerciseAndUser(idExercise, idUser);
+    fav = await selectFavByExerciseAndUser(idExercise, idUser);
 
-    res.status(statusCode).send({ status: "ok", updatedfav });
+    res.status(statusCode).send({ status: "ok", fav });
   } catch (error) {
     next(error);
   }

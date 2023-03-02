@@ -2,6 +2,7 @@
 
 import { ButtonGeneric } from "../ButtonGeneric";
 import { ButtonDelete } from "../ButtonDelete";
+import { ButtonMiniFav } from "../ButtonMiniFav";
 import { ButtonMini } from "../ButtonMini";
 import "./index.css";
 
@@ -61,7 +62,7 @@ export const ExerciseCard = ({
 
       {currentUser.role === "worker" ? (
         <div className="workerButtons">
-          <ButtonMini className2={"fav"} onClickFunction={"WIP"}></ButtonMini>
+          <ButtonMiniFav idExercise={idExercise}></ButtonMiniFav>
           <ButtonMini
             className2={"like"}
             onClickFunction={"WIP"}
@@ -88,9 +89,12 @@ export const ExerciseCard = ({
           ) : (
             <ButtonGeneric
               text={"Editar o Borrar"}
-              onClickFunction={()=>{
-                alert(`Recuerde que dichas acciones no se pueden deshacer. Proceda con cautela.`);
-                toExerciseDetailPage(idExercise)}}
+              onClickFunction={() => {
+                alert(
+                  `Recuerde que dichas acciones no se pueden deshacer. Proceda con cautela.`
+                );
+                toExerciseDetailPage(idExercise);
+              }}
             ></ButtonGeneric>
           )}
         </div>

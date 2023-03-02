@@ -1,0 +1,24 @@
+.fieldset {
+    border: 0;
+}
+
+#NewExerciseAdminForm ul {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#NewExerciseAdminForm li {
+    padding: .25rem;
+}
+
+#NewExerciseAdminForm input {
+    width: 15rem;
+}
+
+#NewExerciseAdminForm textarea {
+    background-color: aqua;
+    
+}

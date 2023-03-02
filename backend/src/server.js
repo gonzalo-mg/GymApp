@@ -70,7 +70,6 @@ app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
 
 app.post("/exercises/:idExercise/fav", validateAuth, toggleExerciseFav);
 
-
 app.get("/favorites", validateAuth, getUserFavs);
 
 
