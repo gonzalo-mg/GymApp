@@ -28,7 +28,7 @@ export const ExerciseCard = ({
   // recuperar usuario activo del contexto
   const { token, currentUser } = useContext(AuthContext);
   // invocar hook de navegacion entre vistas
-  const { toExercisesPage } = useViewNavigation();
+  const { toExercisesPage, toExerciseDetailPage } = useViewNavigation();
 
   // localizar ruta
   const location = useLocation();
@@ -88,7 +88,9 @@ export const ExerciseCard = ({
           ) : (
             <ButtonGeneric
               text={"Editar o Borrar"}
-              onClickFunction={"WIP"}
+              onClickFunction={()=>{
+                alert(`Recuerde que dichas acciones no se pueden deshacer. Proceda con cautela.`);
+                toExerciseDetailPage(idExercise)}}
             ></ButtonGeneric>
           )}
         </div>

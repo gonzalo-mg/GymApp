@@ -16,9 +16,12 @@ export const NewExercisePage = () => {
   // recuperar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
   // invocar hook de navegacion entre vistas
-  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } = useViewNavigation();
+  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
+    useViewNavigation();
 
-  return !currentUser ? toAnonUserPage() :(
+  return !currentUser ? (
+    toAnonUserPage()
+  ) : (
     <>
       <UserCard></UserCard>
       <fieldset className="fieldset">
@@ -37,6 +40,7 @@ export const NewExercisePage = () => {
               description: e.target.desc.value,
               picture: e.target.pic.files[0],
             });
+            e.reset();
           }}
         >
           <ul>
@@ -92,6 +96,11 @@ export const NewExercisePage = () => {
           </ul>
 
           <ButtonGeneric type="submit" text="Crear"></ButtonGeneric>
+          <ButtonGeneric type="reset" text="Limpiar datos"></ButtonGeneric>
+          <ButtonGeneric
+            text="Volver"
+            onClickFunction={() => toExercisesPage()}
+          ></ButtonGeneric>
         </form>
       </fieldset>
     </>

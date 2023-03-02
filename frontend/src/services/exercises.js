@@ -86,6 +86,7 @@ export const postNewExerciseService = async ({
         Authorization: token,
       },
     });
+    return alert(`Creado ejercicio: ${name}.`)
   } catch (e) {
     console.error(e.message);
     console.log(e.response.data);
