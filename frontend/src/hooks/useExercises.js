@@ -4,10 +4,16 @@ import { useState, useEffect } from "react";
 import {
   getExercisesService,
   getFavExercisesService,
+  getExerciseByIdService,
 } from "../services/exercises";
 
 export const useExercises = () => {
-  const useGetExercises = ({ token, filter = null, favs = false }) => {
+  const useGetExercises = ({
+    token,
+    filter = null,
+    favs = false,
+    idExercise = undefined,
+  }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
     const [exercises, setExercises] = useState([]);
 
@@ -22,13 +28,20 @@ export const useExercises = () => {
         if (favs) {
           recoveredExercises = await getFavExercisesService(token);
           setExercises(recoveredExercises);
+          // si se pide uno en concreto devolver solo ese
+        } else if (idExercise) {
+          recoveredExercises = await getExerciseByIdService({
+            idExercise,
+            token,
+          });
+          setExercises(recoveredExercises);
         } else {
-          // si no se piden favs recuperar todos los exercises
+          // si no se piden favs ni uno concreto recuperar todos los exercises
           recoveredExercises = await getExercisesService(token);
           setExercises(recoveredExercises);
         }
 
-        // si existe filtro aplicarlo
+        // si existe filtro aplicarlo a los recuperados
         if (filter) {
           // f para filtrar exercises; devolver cq exercise q contenga (en su nombre/tipologia/musculo) lo escrito por el usuario en el formulario
           function myFiltering(ex, filter) {

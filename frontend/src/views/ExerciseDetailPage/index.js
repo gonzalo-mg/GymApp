@@ -18,8 +18,8 @@ export const ExerciseDetailPage = () => {
   const { token, currentUser } = useContext(AuthContext);
 
   // recuperar del param el id del exercise
-  const { idExercise: id } = useParams();
-
+  const { idExercise } = useParams();
+  console.log(`ExerciseDetailPage - id: ${idExercise}`)
   // f estado de "exercise"; para setear que exercise se muestra
   const [exercise, setExercise] = useState([]);
 
@@ -28,7 +28,7 @@ export const ExerciseDetailPage = () => {
   // // variables de escucha: [id]; cada vez q cambie el exercise
   useEffect(() => {
     const getData = async () => {
-      const currentExercise = await getExerciseByIdService({ id, token });
+      const currentExercise = await getExerciseByIdService({ idExercise, token });
       setExercise(currentExercise);
     };
     getData();

@@ -28,9 +28,9 @@ export const getExercisesService = async (token) => {
 };
 
 /* f para recuperar un ejercicio particular del server mediante path param */
-export const getExerciseByIdService = async ({ id, token }) => {
+export const getExerciseByIdService = async ({ idExercise, token }) => {
   try {
-    const response = await axios.get(`${serverRoot}/exercises/${id}`, {
+    const response = await axios.get(`${serverRoot}/exercises/${idExercise}`, {
       headers: { Authorization: token },
     });
 
