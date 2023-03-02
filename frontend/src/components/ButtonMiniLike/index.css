@@ -4,7 +4,6 @@
 
     background-image: url(/public/like-icon.svg);
     
-
     border-radius: 100px;
 
     border-color: var(--ButtonMiniBorderColor);
@@ -13,9 +12,18 @@
     background-size: cover;
 
     font-weight: bolder;
+    font-size: 1rem;
     color: var(--ButtonMiniColor);
 
     cursor: pointer;
 
     transition-duration: 0.4s;
+}
+
+.ButtonMiniLike.isLike {
+    background-color: pink;
+}
+
+.ButtonMiniLike:hover{
+    background-color: var(--color1)
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import {
   getExercisesService,
   getFavExercisesService,
+  getLikedExercisesService,
   getExerciseByIdService,
 } from "../services/exercises";
 
@@ -13,6 +14,7 @@ export const useExercises = () => {
     token,
     filter = null,
     favs = false,
+    likes = false,
     idExercise = undefined,
   }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
@@ -30,6 +32,9 @@ export const useExercises = () => {
           recoveredExercises = await getFavExercisesService(token);
           setExercises(recoveredExercises);
           // si se pide un ejercicio en concreto devolver solo ese
+        } else if (likes) {
+          recoveredExercises = await getLikedExercisesService(token);
+          setExercises(recoveredExercises);
         } else if (idExercise) {
           recoveredExercises = await getExerciseByIdService({
             idExercise,
@@ -72,7 +77,7 @@ export const useExercises = () => {
   };
 
   // COMPROBAR si un ejercicio es fav del usuario
-  const useCheckFav = ({idExercise, token}) => {
+  const useCheckFav = ({ idExercise, token }) => {
     let favs = true;
     // recueprar los favs del usuario
     const userFavs = useGetExercises({ token, favs });
@@ -88,5 +93,22 @@ export const useExercises = () => {
     }
   };
 
-  return { useGetExercises, useCheckFav };
+  // COMPROBAR si un ejercicio es like del usuario
+  const useCheckLike = ({ idExercise, token }) => {
+    let likes = true;
+    // recueprar los favs del usuario
+    const userLikes = useGetExercises({ token, likes });
+    // comprobar si el array contiene un idExercise coincidente
+    let idLikes = userLikes.filter((ex) => {
+      return ex.idExercise === idExercise;
+    });
+    if (idLikes.length !== 0) {
+      // si coincide devolver string "isFav" para usar como clase css
+      return "isLike";
+    } else {
+      return undefined;
+    }
+  };
+
+  return { useGetExercises, useCheckFav, useCheckLike };
 };

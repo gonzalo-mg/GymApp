@@ -5,6 +5,7 @@ const selectExercises = require("./selectExercises");
 const selectExerciseById = require("./selectExerciseById");
 const deleteExerciseById = require("./deleteExerciseById");
 const selectUserFavs = require("./selectUserFavs");
+const selectUserLikes = require("./selectUserLikes");
 const editExercise = require("./editExercise");
 
 module.exports = {
@@ -14,5 +15,6 @@ module.exports = {
   selectExerciseById,
   deleteExerciseById,
   selectUserFavs,
+  selectUserLikes,
   editExercise,
 };

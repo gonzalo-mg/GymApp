@@ -3,7 +3,7 @@
 import { ButtonGeneric } from "../ButtonGeneric";
 import { ButtonDelete } from "../ButtonDelete";
 import { ButtonMiniFav } from "../ButtonMiniFav";
-import { ButtonMini } from "../ButtonMini";
+import { ButtonMiniLike } from "../ButtonMiniLike";
 import "./index.css";
 
 import PropTypes from "prop-types";
@@ -63,11 +63,7 @@ export const ExerciseCard = ({
       {currentUser.role === "worker" ? (
         <div className="workerButtons">
           <ButtonMiniFav idExercise={idExercise}></ButtonMiniFav>
-          <ButtonMini
-            className2={"like"}
-            onClickFunction={"WIP"}
-            text={likeCounter}
-          ></ButtonMini>
+          <ButtonMiniLike idExercise={idExercise}></ButtonMiniLike>
         </div>
       ) : (
         <div className="adminButtons">

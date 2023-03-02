@@ -1,7 +1,4 @@
-/* ButtonMiniFav: boton peqeño para fav
-props:
-  classFav: clase extra css del Boton
-*/
+/* ButtonMiniFav: boton peqeño para fav*/
 
 import "./index.css";
 import PropTypes from "prop-types";
@@ -10,11 +7,12 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { toggleFavService } from "../../services/exercises";
 import { useExercises } from "../../hooks/useExercises";
 
-export const ButtonMiniFav = ({ idExercise, isFav = undefined }) => {
+export const ButtonMiniFav = ({ idExercise }) => {
   // recuperar usuario activo del contexto
   const { token } = useContext(AuthContext);
 
-  const { useGetExercises, useCheckFav } = useExercises();
+  // modificar clase css si el ejercicio es un fav del usuario
+  const { useCheckFav } = useExercises();
 
   return (
     <button

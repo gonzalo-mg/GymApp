@@ -69,6 +69,26 @@ export const getFavExercisesService = async (token) => {
   }
 };
 
+/* f para recuperar los ejercicios liked de un usuario del server */
+export const getLikedExercisesService = async (token) => {
+  try {
+    const response = await axios.get(`${serverRoot}/favorites`, {
+      headers: { Authorization: token },
+    });
+    const { data } = response;
+    const { data: liked } = data;
+
+    // devolver array de objetos tipo ejercicio
+    return liked;
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(
+      `getLikedExercisesService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+};
+
 /* f para grabar nuevo ejercicio en server */
 export const postNewExerciseService = async ({
   token,
@@ -117,21 +137,6 @@ export const deleteExerciseService = async ({ token, idExercise }) => {
   }
 };
 
-/* f para cambiar fav */
-/* export const toggleFavService = async ({ token, idExercise }) => {
-  try {
-    await axios.post(`${serverRoot}/exercises/${idExercise}/fav`, {
-      headers: { Authorization: token },
-    });
-  } catch (e) {
-    console.error(e);
-    console.log(e.response.data);
-    return alert(
-      `toggleFavService - ${e.response.data.status}: ${e.response.data.message}`
-    );
-  }
-}; */
-
 export const toggleFavService = async ({ token, idExercise, data = null }) => {
   try {
     const response = await axios.post(
@@ -158,6 +163,30 @@ export const toggleFavService = async ({ token, idExercise, data = null }) => {
     console.log(e.response.data);
     return alert(
       `toggleFavService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+};
+
+export const toggleLikeService = async ({ token, idExercise, data = null }) => {
+  try {
+    const response = await axios.post(
+      `${serverRoot}/exercises/${idExercise}/like`,
+      data,
+      {
+        headers: { Authorization: token },
+      }
+    );
+
+    if (response.data.like.stateLike === 0) {
+      return alert(`toggleLikeService - Like quitado`);
+    } else {
+      return alert(`toggleLikeService - Like dado`);
+    }
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(
+      `toggleLikeService - ${e.response.data.status}: ${e.response.data.message}`
     );
   }
 };

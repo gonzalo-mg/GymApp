@@ -27,6 +27,7 @@ const {
   getExerciseDetails,
   deleteExercise,
   getUserFavs,
+  getUserLikes,
   putEditExercise
 } = require("./controllers/exercises");
 
@@ -67,10 +68,11 @@ app.get("/exercises/:idExercise", validateAuth, getExerciseDetails);
 
 app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
 
-
 app.post("/exercises/:idExercise/fav", validateAuth, toggleExerciseFav);
 
 app.get("/favorites", validateAuth, getUserFavs);
+
+app.get("/likes", validateAuth, getUserLikes);
 
 
 /* ENDPOINTS exercises admin */
