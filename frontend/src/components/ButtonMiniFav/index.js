@@ -18,7 +18,7 @@ export const ButtonMiniFav = ({ idExercise, classFav }) => {
       type="button"
       onClick={(e) => {
         e.stopPropagation()
-        console.log(`ButtonMiniFav - idExercise: ${idExercise}; token: ${token}`);
+        //console.log(`ButtonMiniFav - idExercise: ${idExercise}; token: ${token}`);
         toggleFavService({ token, idExercise });
       }}
     ></button>

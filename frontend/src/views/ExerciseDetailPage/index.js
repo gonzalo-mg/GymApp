@@ -57,7 +57,6 @@ export const ExerciseDetailPage = () => {
           typology={exercise.typology}
           muscles={exercise.muscles}
           picture={exercise.picture}
-          admin={false}
           likeCounter={"WIP"}
         ></ExerciseCard>
 

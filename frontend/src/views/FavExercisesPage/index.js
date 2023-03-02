@@ -6,7 +6,9 @@ import { useState, useEffect, useContext } from "react";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { AuthContext } from "../../contexts/AuthContext";
 
-import { getFavExercisesService } from "../../services/exercises";
+import { useExercises } from "../../hooks/useExercises";
+
+//import { getFavExercisesService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
@@ -16,20 +18,10 @@ export const FavExercisesPage = () => {
   // cargar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
 
-  // f estado de "exercises"; para setear los exercises recuperados y a mostrar
-  const [exercises, setExercises] = useState([]);
-
-  // efecto obtener "exercises" del servidor
-  // // funcion: getData; llamar al server y actualizar estado de "exercises"; al estar dentro de useEffect hay q hacerlo con un callback por sen asincrono
-  // // variables de escucha: []; cada vez q se arrance el elemento
-  useEffect(() => {
-    const getData = async () => {
-      // recuperar exercises q sean fav del server
-      const favs = await getFavExercisesService(token);
-      setExercises(favs);
-    };
-    getData();
-  }, []);
+  //usar hook recuperar ejercicios para favs
+  let favs = true;
+  const {useGetExercises} = useExercises();
+  const exercises = useGetExercises({token, favs})
 
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const useViewNavigation = () => {
-  // nombrar hook por defecto
+  // renombrar hook useNavigate
   const navigate = useNavigate();
 // eslint-disable-next-line
   const [filter, setFilter] = useState("");
