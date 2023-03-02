@@ -70,17 +70,27 @@ export const ExerciseCard = ({
         </div>
       ) : (
         <div className="adminButtons">
-          <ButtonGeneric text={"Edit"} onClickFunction={"WIP"}></ButtonGeneric>
           {location.pathname !== "/exercises" ? (
-            <ButtonDelete
-              onClickFunction={(e) => {
-                e.stopPropagation();
-                deleteExerciseService({ token, idExercise });
-                alert(`Ejercicio ${name} borrado.`);
-                toExercisesPage();
-              }}
-            ></ButtonDelete>
-          ) : null}
+            <>
+              <ButtonGeneric
+                text={"Editar"}
+                onClickFunction={"WIP"}
+              ></ButtonGeneric>
+              <ButtonDelete
+                onClickFunction={(e) => {
+                  e.stopPropagation();
+                  deleteExerciseService({ token, idExercise });
+                  alert(`Ejercicio ${name} borrado.`);
+                  toExercisesPage();
+                }}
+              ></ButtonDelete>
+            </>
+          ) : (
+            <ButtonGeneric
+              text={"Editar o Borrar"}
+              onClickFunction={"WIP"}
+            ></ButtonGeneric>
+          )}
         </div>
       )}
     </article>
