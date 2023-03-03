@@ -58,7 +58,6 @@ export const useExercises = () => {
   const useFavExercises = ({
     token,
     filter = undefined,
-    favChange = undefined,
   }) => {
     
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
@@ -70,9 +69,7 @@ export const useExercises = () => {
     useEffect(() => {
       const getData = async () => {
         const recoveredExercises = await getFavExercisesService(token);
-        if (favChange) {
           setExercises(recoveredExercises);
-        }
         // si existe filtro aplicarlo a los recuperados
         if (filter) {
           // f para filtrar exercises; devolver cq exercise q contenga (en su nombre/tipologia/musculo) lo escrito por el usuario en el formulario
@@ -99,7 +96,7 @@ export const useExercises = () => {
         }
       };
       getData();
-    }, [filter, favChange]);
+    }, [filter]);
     return exercises;
   };
 

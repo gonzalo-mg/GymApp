@@ -73,7 +73,7 @@
 }
 
 .ButtonMiniFav.isFav {
-    background-color: yellow;
+    background-color: blue;
 }
 
 .ButtonMiniFav:hover{

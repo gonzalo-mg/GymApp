@@ -31,40 +31,46 @@ export const ExerciseDetailPage = () => {
 
   // GESTION FAVS
 
-  // f estado para trackear cambios de fav y re-renderizar ante clicks del usuario
-  const [favChange, setFavChange] = useState("favChange0");
-  // f estado para modificar css boton fav
-  const [favClass, setFavClass] = useState("favClass0");
-
   // f para comprobar si el ej es un fav
-  const checkFavStatus = async ( exercise ) => {
+  const checkFavStatus = async (exercise) => {
     const currentFavs = await getFavExercisesService(token);
-    console.log(`checkFavStatus - llamando con exercise: ${exercise}`)
-    console.log(exercise)
-    console.log(`checkFavStatus - recupera currentFavs: ${currentFavs}`)
-    console.log(currentFavs)
+    console.log(`checkFavStatus - llamando con exercise: ${exercise}`);
+    console.log(exercise);
+    console.log(`checkFavStatus - recupera currentFavs: ${currentFavs}`);
+    console.log(currentFavs);
     let filtered = currentFavs.filter(
       (f) => f.idExercise === exercise.idExercise
     );
-    console.log(`checkFavStatus - filtrado: ${filtered}`)
-    console.log(filtered)
-    console.log(`filtered length: ${filtered.length}`)
+    console.log(`checkFavStatus - filtrado: ${filtered}`);
+    console.log(filtered);
+    console.log(`filtered length: ${filtered.length}`);
     if (filtered.length === 1) {
       console.log(`checkFavStatus isFav`);
       setFavClass("isFav");
     } else {
       console.log(`checkFavStatus notFav`);
-      setFavClass(null);
+      setFavClass("notFav");
     }
   };
 
-  // efecto refrescar cuando clica boton de fav
+  // f estado para modificar css boton fav
+  const [favClass, setFavClass] = useState(() => checkFavStatus(exercise));
+
+  // f aux para gestionar click en fav
+  const handleClickFav = async (e) => {
+    e.stopPropagation();
+    // post a backend
+    const indicator = await toggleFavService({ token, idExercise });
+    //console.log(`indicator ${indicator}`)
+    // cambiar css segun accion
+    indicator ? setFavClass("isFav") : setFavClass("notFav");
+  };
+
+
+  // efecto para setear estado de favClass al montar componente o modificar favClass con clicado
   useEffect(() => {
-    const handleFavChange = async () => {
-      checkFavStatus(exercise);
-    };
-    handleFavChange();
-  }, [favChange, favClass, exercise]);
+    checkFavStatus(exercise);
+  }, [favClass]);
 
   // GESTION LIKES
 
@@ -137,12 +143,7 @@ export const ExerciseDetailPage = () => {
           typology={exercise.typology}
           muscles={exercise.muscles}
           picture={exercise.picture}
-          onClickFav={(e) => {
-            e.stopPropagation();
-            setFavChange(favChange+1);
-            toggleFavService({ token, idExercise });
-            
-          }}
+          onClickFav={(e) => handleClickFav(e)}
           classNameFav={`ButtonMiniFav ${favClass}`}
           onClickLike={(e) => {
             e.stopPropagation();
