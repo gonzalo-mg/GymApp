@@ -100,10 +100,10 @@ export const toggleFavService = async ({ token, idExercise, data = null }) => {
     );
     //devolver objeto stateFav (1 ó 0)
     if (response.data.fav.stateFav === 0) {
-      alert(`toggleFavService - Ejercicio eliminado de favoritos`);
+      //alert(`toggleFavService - Ejercicio eliminado de favoritos`);
       return response.data.fav.stateFav;
     } else {
-      alert(`toggleFavService - Ejercicio ${response.data.fav.idExercise} añadido a favoritos`);
+      //alert(`toggleFavService - Ejercicio ${response.data.fav.idExercise} añadido a favoritos`);
       return response.data.fav.stateFav;
     }
   } catch (e) {

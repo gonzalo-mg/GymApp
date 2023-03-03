@@ -30,21 +30,24 @@ export const ExerciseDetailPage = () => {
     useExercises();
   const exercise = useSingleExercises({ token, idExercise });
 
-   // GESTION FAVS
+  // GESTION FAVS
 
-  // f para comprobar si el ej es un fav
+  // f para comprobar si el ej es un fav y setear acorde
   const checkFavStatus = async (exercise) => {
+    // recuperar inicialmente de backend favs
     const currentFavs = await getFavExercisesService(token);
     console.log(`checkFavStatus - llamando con exercise: ${exercise}`);
     console.log(exercise);
     console.log(`checkFavStatus - recupera currentFavs: ${currentFavs}`);
     console.log(currentFavs);
+    // comprobar si el ejercicio renderizado esta entre los favs del usuario
     let filtered = currentFavs.filter(
       (f) => f.idExercise === exercise.idExercise
     );
     console.log(`checkFavStatus - filtrado: ${filtered}`);
     console.log(filtered);
     console.log(`filtered length: ${filtered.length}`);
+    // setear estado segun resultados de filtro
     if (filtered.length === 1) {
       console.log(`checkFavStatus isFav`);
       setFavClass("isFav");
@@ -63,7 +66,7 @@ export const ExerciseDetailPage = () => {
     // post a backend
     const indicator = await toggleFavService({ token, idExercise });
     //console.log(`indicator ${indicator}`)
-    // cambiar css segun accion
+    // cambiar css segun indica backend
     indicator ? setFavClass("isFav") : setFavClass("notFav");
   };
 
@@ -109,10 +112,29 @@ export const ExerciseDetailPage = () => {
     indicator ? setLikeClass("isLike") : setLikeClass("notLike");
   };
 
-  // efecto para setear estado de likeClass al montar componente y ante cambios
+  // f para recuperar num total de likes de un ejercicio y setear acorde
+  const checkLikeCount = async ({ token, idExercise }) => {
+    console.log(`checkLikeCount-llamada con id ${idExercise}`);
+    const recoveredLikeCount = await getExerciseLikesCountService({
+      token,
+      idExercise,
+    });
+    console.log(`checkLikeCount-recoveredLikeCount: ${recoveredLikeCount}`);
+    setLikeCount(recoveredLikeCount);
+    console.log(`checkLikeCount-likeCount setTo: ${likeCount}`);
+  };
+
+  // f estado para likeCount; iniciado a lo q devuelve backend
+  const [likeCount, setLikeCount] = useState(() => {
+    checkLikeCount({ token, idExercise });
+  });
+
+  // efecto para setear estado de likeClass y likeCount al montar componente y ante cambios
   useEffect(() => {
     checkLikedStatus(exercise);
+    checkLikeCount({ token, idExercise });
   }, [likeClass]);
+
 
   // invocar hook de navegacion entre ejercicios
   const { toExercisesPage, toAnonUserPage } = useViewNavigation();
@@ -143,17 +165,9 @@ export const ExerciseDetailPage = () => {
           classNameFav={`ButtonMiniFav ${favClass}`}
           onClickLike={(e) => handleClickLike(e)}
           classNameLike={`ButtonMiniLike ${likeClass}`}
-          likeCount={"likeCount"}
+          likeCount={likeCount}
         ></ExerciseCard>
       </article>
     </>
   );
 };
-/* 
-onClickFav={(e) => {
-            e.stopPropagation();
-            toggleFavService({ token, idExercise });
-            handleClickFav();
-          }}
-
-*/
