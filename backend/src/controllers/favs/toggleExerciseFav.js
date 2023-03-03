@@ -15,11 +15,9 @@ const toggleExerciseFav = async (req, res, next) => {
 
     // recoger parametro (path param - :idExercise) (req.params devuelve objeto- desestrucutrar para obtener solo numero)
     const { idExercise } = req.params;
-    console.log(`backend toggleExerciseFav - idExercise: ${idExercise}`)
 
     // recoger idUser de la autenticacion
     const { idUser } = req.auth;
-    console.log(`backend toggleExerciseFav - idUser: ${idUser}`)
 
     // recuperar exercise de la bbdd con su idExercise
     const exercise = await selectExerciseById(idExercise);

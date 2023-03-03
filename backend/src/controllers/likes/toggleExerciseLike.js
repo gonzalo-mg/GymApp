@@ -51,9 +51,9 @@ const toggleExerciseLike = async (req, res, next) => {
     }
 
     // reseleccionar like de la bbdd
-    const updatedlike = await selectLikeByExerciseAndUser(idExercise, idUser);
+    const updatedLike = await selectLikeByExerciseAndUser(idExercise, idUser);
 
-    res.status(statusCode).send({ status: "ok", updatedlike });
+    res.status(statusCode).send({ status: "ok", updatedLike });
   } catch (error) {
     next(error);
   }
