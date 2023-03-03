@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 import { useExercises } from "../../hooks/useExercises";
 
-//import { getExercisesService } from "../../services/exercises";
+import { toggleFavService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
@@ -18,8 +18,11 @@ export const ExercisesPage = () => {
   // cargar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
 
-  // f estado de "exercises"; para setear los filtros a usar para mostrar exercises
+  // f estado para setear los filtros a usar para mostrar exercises
   const [filter, setFilter] = useState();
+
+    // f estado para rastrear elminiaciones de favs
+    const [cacheFavs, setCacheFavs] = useState(0);
 
   //usar hook recuperar ejercicios
   const { useGetExercises } = useExercises();
@@ -53,14 +56,11 @@ export const ExercisesPage = () => {
               ></input>
             </li>
           </ul>
-
-          {filter === "" ? null : (
             <ButtonGeneric
               type="button"
               text="Borrar filtro"
               onClickFunction={() => setFilter("")}
             ></ButtonGeneric>
-          )}
         </form>
 
         {exercises.map((ex) => {
@@ -70,7 +70,11 @@ export const ExercisesPage = () => {
               idExercise={ex.idExercise}
               name={ex.name}
               picture={ex.picture}
-              onClickCard={() => toExerciseDetailPage(ex.idExercise)}
+              onClickCard={(e) => {
+                e.stopPropagation();
+                console.log(`ExercisesPage - onClickCard`)
+                toExerciseDetailPage(ex.idExercise);
+              }}
             ></ExerciseCard>
           );
         })}

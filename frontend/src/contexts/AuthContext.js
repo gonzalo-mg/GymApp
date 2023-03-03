@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { getCurrentUserDataService } from "../services/user";
+import { getFavExercisesService, getLikedExercisesService } from "../services/exercises";
 
 // definir objeto global de contexto
 export const AuthContext = createContext();
@@ -10,6 +11,7 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   // definir estado para usuario; inicialmente nadie
   const [currentUser, setCurrentUser] = useState(null);
+
 
   // f de logout
   const logout = () => {
@@ -36,6 +38,7 @@ export const AuthContextProvider = ({ children }) => {
         const data = await getCurrentUserDataService(token);
         // actualizar usuario con los datos obtenidos
         setCurrentUser(data.data);
+        
       } catch (error) {
         // si el token no es valido deslogear
         logout();

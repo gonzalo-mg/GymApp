@@ -6,11 +6,15 @@ import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
 
-import { getExerciseByIdService } from "../../services/exercises";
+import {
+  getExerciseByIdService,
+  toggleFavService,
+  getFavExercisesService,
+} from "../../services/exercises";
 import { useState, useEffect, useContext } from "react";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { useParams } from "react-router-dom";
-
+import { useExercises } from "../../hooks/useExercises";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export const ExerciseDetailPage = () => {
@@ -19,20 +23,47 @@ export const ExerciseDetailPage = () => {
 
   // recuperar del param el id del exercise
   const { idExercise } = useParams();
-  console.log(`ExerciseDetailPage - id: ${idExercise}`)
-  // f estado de "exercise"; para setear que exercise se muestra
-  const [exercise, setExercise] = useState([]);
 
-  // efecto obtener "exercise" del servidor
-  // // funcion: getData; llamar al fetch y actualizar estado de "exercise"
-  // // variables de escucha: [id]; cada vez q cambie el exercise
+  //usar hook recuperar ejercicios
+  const { useGetExercises } = useExercises();
+  const exercise = useGetExercises({ token, idExercise });
+  const [favChange, setFavChange] = useState(0);
+  const [favClass, setFavClass] = useState("favClass0");
+  let getFavs = true;
+  const favEx = useGetExercises({ token, getFavs, favChange });
+
+  const handleClickFav = () => {
+    setFavChange(favChange + 1);
+  };
+
+  const checkFavStatus = ({ favEx, exercise }) => {
+    console.log(`checkFavStatus llamada`);
+    console.log(`checkFavStatus favEx ${favEx}`);
+    console.log(favEx);
+    console.log(`checkFavStatus favEx ${exercise}`);
+    console.log(exercise);
+    //devolver "isFav" si sí
+    // sera fav si el filtrado devuelve q lo encontro
+    let filtered = favEx.filter((f) => f.idExercise === exercise.idExercise);
+    console.log(`checkFavStatus filtered ${filtered}`);
+    console.log(filtered);
+    if (filtered.length !== 0) {
+      console.log(`checkFavStatus isFav`);
+      setFavClass("isFav");
+    } else {
+      console.log(`checkFavStatus notFav`);
+      setFavClass(null);
+    }
+  };
+
+  // efecto refrescar css y listado de favs
   useEffect(() => {
-    const getData = async () => {
-      const currentExercise = await getExerciseByIdService({ idExercise, token });
-      setExercise(currentExercise);
+    const handleFavChange = async () => {
+      
+      checkFavStatus({ favEx, exercise });
     };
-    getData();
-  }, []);
+    handleFavChange();
+  }, [favChange, favClass]);
 
   // invocar hook de navegacion entre ejercicios
   const { toExercisesPage, toAnonUserPage } = useViewNavigation();
@@ -57,7 +88,12 @@ export const ExerciseDetailPage = () => {
           typology={exercise.typology}
           muscles={exercise.muscles}
           picture={exercise.picture}
-          likeCounter={"WIP"}
+          onClickFav={(e) => {
+            e.stopPropagation();
+            toggleFavService({ token, idExercise });
+            handleClickFav();
+          }}
+          classNameFav={`ButtonMiniFav ${favClass}`}
         ></ExerciseCard>
       </article>
     </>

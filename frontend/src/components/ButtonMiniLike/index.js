@@ -7,11 +7,11 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { toggleLikeService } from "../../services/exercises";
 import { useExercises } from "../../hooks/useExercises";
 
-export const ButtonMiniLike = ({ idExercise, likeCounter=99 }) => {
+export const ButtonMiniLike = ({ idExercise, likeCounter = 99 }) => {
   // recuperar usuario activo del contexto
   const { token } = useContext(AuthContext);
 
-  // modificar clase css si el ejercicio es un fav del usuario
+  // modificar clase css si el ejercicio es un like del usuario
   const { useCheckLike } = useExercises();
 
   return (
@@ -22,6 +22,8 @@ export const ButtonMiniLike = ({ idExercise, likeCounter=99 }) => {
         e.stopPropagation();
         toggleLikeService({ token, idExercise });
       }}
-    >{likeCounter}</button>
+    >
+      {likeCounter}
+    </button>
   );
 };

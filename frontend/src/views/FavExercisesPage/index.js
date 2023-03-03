@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 import { useExercises } from "../../hooks/useExercises";
 
-//import { getFavExercisesService } from "../../services/exercises";
+import { toggleFavService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
@@ -17,18 +17,19 @@ export const FavExercisesPage = () => {
   // cargar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
 
-  //usar hook recuperar ejercicios para favs
-  let favs = true;
-  const {useGetExercises} = useExercises();
-  const exercises = useGetExercises({token, favs})
+  // f estado para rastrear elminiaciones de favs
+  const [cacheFavs, setCacheFavs] = useState(0);
 
-  const [currentFavs, setCurrentFavs] = useState()
+  //usar hook recuperar ejercicios para favs
+  let getFavs = true;
+  const { useGetExercises } = useExercises();
+  const exercises = useGetExercises({ token, getFavs });
 
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
     useViewNavigation();
 
-  // devolver una card por cada exercise del server
+  // devolver una card por cada fav
   return !currentUser ? (
     toAnonUserPage()
   ) : (
@@ -50,7 +51,17 @@ export const FavExercisesPage = () => {
               idExercise={ex.idExercise}
               name={ex.name}
               picture={ex.picture}
-              onClickCard={() => toExerciseDetailPage(ex.idExercise)}
+              onClickCard={(e) => {
+                e.stopPropagation();
+                console.log(`FavExercisesPage - onClickCard`)
+                toExerciseDetailPage(ex.idExercise);
+              }}
+              onClickFav={(e) => {
+                e.stopPropagation();
+                console.log(`FavExercisesPage - onClickFav`);
+                toggleFavService(token, ex.idExercise);
+                setCacheFavs(cacheFavs + 1);
+              }}
             ></ExerciseCard>
           );
         })}

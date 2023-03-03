@@ -15,6 +15,7 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
 import { AuthContextProvider } from "./contexts/AuthContext.js";
+import { FavLikeContextProvider } from "./contexts/FavLikeContext";
 
 export function App() {
   const router = createBrowserRouter([
@@ -43,11 +44,13 @@ export function App() {
   return (
     <>
       <AuthContextProvider>
+        <FavLikeContextProvider>
           <Header></Header>
           <main>
             <RouterProvider router={router} />
           </main>
           <Footer></Footer>
+          </FavLikeContextProvider>
       </AuthContextProvider>
     </>
   );

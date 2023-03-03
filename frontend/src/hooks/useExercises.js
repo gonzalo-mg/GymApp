@@ -16,11 +16,10 @@ export const useExercises = () => {
   // RECUPERAR ejercicios
   const useGetExercises = ({
     token,
-    filter = null,
-    favs = false,
-    currentFavs,
-    likes = false,
-    currentLikes,
+    filter = undefined,
+    getFavs = undefined,
+    favChange = undefined,
+    getLikes = undefined,
     idExercise = undefined,
   }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
@@ -34,14 +33,18 @@ export const useExercises = () => {
         // inicializar array de ejercicios recuperados
         let recoveredExercises = [];
         // si se piden los favs devolver solo los favs
-        if (favs) {
+        if (getFavs && favChange) {
+          console.log(`useGetExercises - if favs`)
           recoveredExercises = await getFavExercisesService(token);
           setExercises(recoveredExercises);
           // si se pide un ejercicio en concreto devolver solo ese
-        } else if (likes) {
+        } else if (getLikes) {
+          console.log(`useGetExercises - if likes`)
           recoveredExercises = await getLikedExercisesService(token);
           setExercises(recoveredExercises);
+          // si se pide un ejercicio en concreto devolver solo ese
         } else if (idExercise) {
+          console.log(`useGetExercises - if idExercise`)
           recoveredExercises = await getExerciseByIdService({
             idExercise,
             token,
@@ -49,6 +52,7 @@ export const useExercises = () => {
           setExercises(recoveredExercises);
           // si no se piden favs ni uno concreto recuperar todos los exercises
         } else {
+          console.log(`useGetExercises - if general`)
           recoveredExercises = await getExercisesService(token);
           setExercises(recoveredExercises);
         }
@@ -74,19 +78,20 @@ export const useExercises = () => {
           );
 
           // setear exercises al resultado del filtro
+          console.log(`useGetExercises - if filter`)
           setExercises(filteredExercises);
         }
       };
       getData();
-    }, [filter, currentFavs, currentLikes]);
+    }, [filter, favChange]);
     return exercises;
   };
 
   // COMPROBAR si un ejercicio es fav del usuario
   const useCheckFav = ({ idExercise, token }) => {
-    let favs = true;
+    let getFavs = true;
     // recueprar los favs del usuario
-    const userFavs = useGetExercises({ token, favs });
+    const userFavs = useGetExercises({ token, getFavs });
     // comprobar si el array contiene un idExercise coincidente
     let idFavs = userFavs.filter((ex) => {
       return ex.idExercise === idExercise;
@@ -95,7 +100,7 @@ export const useExercises = () => {
       // si coincide devolver string "isFav" para usar como clase css
       return "isFav";
     } else {
-      return undefined;
+      return "";
     }
   };
 

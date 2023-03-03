@@ -72,7 +72,7 @@ export const getFavExercisesService = async (token) => {
 /* f para recuperar los ejercicios liked de un usuario del server */
 export const getLikedExercisesService = async (token) => {
   try {
-    const response = await axios.get(`${serverRoot}/favorites`, {
+    const response = await axios.get(`${serverRoot}/likes`, {
       headers: { Authorization: token },
     });
     const { data } = response;
@@ -146,17 +146,13 @@ export const toggleFavService = async ({ token, idExercise, data = null }) => {
         headers: { Authorization: token },
       }
     );
-    //devolver objeto updatedfav, tipo:
-    /* "updatedfav": {
-        "idUser": 3,
-        "idExercise": 2,
-        "stateFav": 0,
-        "created": "2023-03-02T09:43:15.000Z"
-    } */
+    //devolver objeto stateFav (1 ó 0)
     if (response.data.fav.stateFav === 0) {
-      return alert(`toggleFavService - Ejercicio eliminado de favoritos`);
+      alert(`toggleFavService - Ejercicio eliminado de favoritos`);
+      return response.data.fav.stateFav;
     } else {
-      return alert(`toggleFavService - Ejercicio añadido a favoritos`);
+      alert(`toggleFavService - Ejercicio ${response.data.fav.idExercise} añadido a favoritos`);
+      return response.data.fav.stateFav;
     }
   } catch (e) {
     console.error(e);
