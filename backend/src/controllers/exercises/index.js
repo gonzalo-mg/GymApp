@@ -6,6 +6,7 @@ const deleteExercise = require("./deleteExercise");
 const getUserFavs = require("./getUserFavs");
 const getUserLikes = require("./getUserLikes");
 const putEditExercise = require("./putEditExercise");
+const getExerciseLikesCount = require("./getExerciseLikesCount")
 
 module.exports = {
   postNewExercise,
@@ -15,4 +16,5 @@ module.exports = {
   getUserFavs,
   getUserLikes,
   putEditExercise,
+  getExerciseLikesCount,
 };

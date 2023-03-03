@@ -28,7 +28,8 @@ const {
   deleteExercise,
   getUserFavs,
   getUserLikes,
-  putEditExercise
+  putEditExercise,
+  getExerciseLikesCount
 } = require("./controllers/exercises");
 
 // de likes
@@ -68,11 +69,15 @@ app.get("/exercises/:idExercise", validateAuth, getExerciseDetails);
 
 app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
 
+app.get("/exercises/:idExercise/like/count", validateAuth, getExerciseLikesCount);
+
 app.post("/exercises/:idExercise/fav", validateAuth, toggleExerciseFav);
 
 app.get("/favorites", validateAuth, getUserFavs);
 
 app.get("/likes", validateAuth, getUserLikes);
+
+
 
 
 /* ENDPOINTS exercises admin */

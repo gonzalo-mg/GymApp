@@ -70,8 +70,6 @@ export const ExercisesPage = () => {
               idExercise={ex.idExercise}
               name={ex.name}
               picture={ex.picture}
-              typology={ex.typology}
-              muscles={ex.muscles}
               onClickCard={() => toExerciseDetailPage(ex.idExercise)}
             ></ExerciseCard>
           );

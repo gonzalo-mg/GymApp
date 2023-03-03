@@ -10,7 +10,6 @@ import { useExercises } from "../../hooks/useExercises";
 
 //import { getFavExercisesService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
-import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
 
@@ -22,6 +21,8 @@ export const FavExercisesPage = () => {
   let favs = true;
   const {useGetExercises} = useExercises();
   const exercises = useGetExercises({token, favs})
+
+  const [currentFavs, setCurrentFavs] = useState()
 
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
@@ -49,8 +50,6 @@ export const FavExercisesPage = () => {
               idExercise={ex.idExercise}
               name={ex.name}
               picture={ex.picture}
-              typology={ex.typology}
-              muscles={ex.muscles}
               onClickCard={() => toExerciseDetailPage(ex.idExercise)}
             ></ExerciseCard>
           );

@@ -2,7 +2,7 @@
 
 import "./index.css";
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toggleFavService } from "../../services/exercises";
 import { useExercises } from "../../hooks/useExercises";

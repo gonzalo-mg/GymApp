@@ -1,4 +1,4 @@
-/* archivo indice para exportar queries de exercices */
+/* archivo indice para exportar queries de exercises */
 const insertExercise = require("./insertExercise");
 const selectExerciseByName = require("./selectExerciseByName");
 const selectExercises = require("./selectExercises");
@@ -7,6 +7,7 @@ const deleteExerciseById = require("./deleteExerciseById");
 const selectUserFavs = require("./selectUserFavs");
 const selectUserLikes = require("./selectUserLikes");
 const editExercise = require("./editExercise");
+const selectExerciseLikesById = require("./selectExerciseLikesById");
 
 module.exports = {
   insertExercise,
@@ -17,4 +18,5 @@ module.exports = {
   selectUserFavs,
   selectUserLikes,
   editExercise,
+  selectExerciseLikesById,
 };

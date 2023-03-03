@@ -8,11 +8,7 @@ import {
   getExerciseByIdService,
 } from "../services/exercises";
 
-import { useViewNavigation } from "./useViewNavigation";
-import { ExerciseCard } from "../components/ExerciseCard";
-
 export const useExercises = () => {
-  const {toExerciseDetailPage} = useViewNavigation();
   // RECUPERAR ejercicios
   const useGetExercises = ({
     token,
@@ -116,5 +112,5 @@ export const useExercises = () => {
     }
   };
 
-  return { useGetExercises, useCheckFav, useCheckLike};
+  return { useGetExercises, useCheckFav, useCheckLike };
 };

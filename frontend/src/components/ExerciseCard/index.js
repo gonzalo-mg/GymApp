@@ -23,7 +23,6 @@ export const ExerciseCard = ({
   typology,
   muscles,
   picture,
-  likeCounter,
   onClickCard,
 }) => {
   // recuperar usuario activo del contexto
@@ -38,7 +37,11 @@ export const ExerciseCard = ({
     <article className="ExerciseCard" onClick={onClickCard}>
       <h2 className="name">{name}</h2>
 
-      <section className="list">
+      <img src={`${serverRoot}/pics/${picture}`} alt={name}></img>
+
+      {typology && muscles && description? (
+        <>
+        <section className="list">
         <ul>
           <li>
             <strong>Tipología:</strong> {typology}
@@ -48,14 +51,10 @@ export const ExerciseCard = ({
           </li>
         </ul>
       </section>
-
-      <img src={`${serverRoot}/pics/${picture}`} alt={name}></img>
-
-      {description ? (
         <section className="description">
           <strong>Descripción: </strong>
           {description}
-        </section>
+        </section></>
       ) : (
         <></>
       )}
@@ -101,7 +100,7 @@ export const ExerciseCard = ({
 
 ExerciseCard.propTypes = {
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   typology: PropTypes.string.isRequired,
   muscles: PropTypes.string.isRequired,
   //picture: PropTypes.string.isRequired,
