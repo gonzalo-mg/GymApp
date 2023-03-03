@@ -9,6 +9,7 @@ import {
   toggleFavService,
   toggleLikeService,
   getFavExercisesService,
+  getLikedExercisesService,
   getExerciseLikesCountService,
 } from "../../services/exercises";
 import { useState, useEffect, useContext } from "react";
@@ -29,7 +30,7 @@ export const ExerciseDetailPage = () => {
     useExercises();
   const exercise = useSingleExercises({ token, idExercise });
 
-  // GESTION FAVS
+   // GESTION FAVS
 
   // f para comprobar si el ej es un fav
   const checkFavStatus = async (exercise) => {
@@ -66,57 +67,52 @@ export const ExerciseDetailPage = () => {
     indicator ? setFavClass("isFav") : setFavClass("notFav");
   };
 
-
-  // efecto para setear estado de favClass al montar componente o modificar favClass con clicado
+  // efecto para setear estado de favClass al montar componente y ante cambios
   useEffect(() => {
     checkFavStatus(exercise);
   }, [favClass]);
 
   // GESTION LIKES
 
-  // f estado para trackear cambios de like y re-renderizar ante clicks del usuario
-  const [likeChange, setLikeChange] = useState("likeChange0");
-  // f estado para modificar css boton like
-  const [likeClass, setLikeClass] = useState("likeClass0");
-  // solicitar listado actualizado de liked del usuario
-  let getLiked = true;
-  const likedEx = useLikedExercises({ token, getLiked, likeChange });
-
-  // f estado likes totales del ejercicio
-  const [likeCount, setLikeCount] = useState("likeCount0");
-
-  // f aux para indicar cambio en like
-  const handleClickLike = () => {
-    setLikeChange(likeChange + 1);
-  };
-
   // f para comprobar si el ej tiene like
-  const checkLikedStatus = ({ likedEx, exercise }) => {
-    let filtered = likedEx.filter((l) => l.idExercise === exercise.idExercise);
-
-    if (filtered.length !== 0) {
-      console.log(`checkLikeStatus isLike`);
+  const checkLikedStatus = async (exercise) => {
+    const currentLiked = await getLikedExercisesService(token);
+    console.log(`checkLikedStatus - llamando con exercise: ${exercise}`);
+    console.log(exercise);
+    console.log(`checkLikedStatus - recupera currentLikes: ${currentLiked}`);
+    console.log(currentLiked);
+    let filtered = currentLiked.filter(
+      (l) => l.idExercise === exercise.idExercise
+    );
+    console.log(`checkLikedStatus - filtrado: ${filtered}`);
+    console.log(filtered);
+    console.log(`filtered length: ${filtered.length}`);
+    if (filtered.length === 1) {
+      console.log(`checkLikedStatus isLike`);
       setLikeClass("isLike");
     } else {
-      console.log(`checkLikeStatus notLiked`);
-      setLikeClass(null);
+      console.log(`checkLikedStatus notLike`);
+      setLikeClass("notLike");
     }
   };
 
-  // f para recuprar likeCount
-  const updateLikeCount = async ({ token, idExercise }) => {
-    const num = await getExerciseLikesCountService({ token, idExercise });
-    setLikeCount(num);
+  // f estado para modificar css boton like
+  const [likeClass, setLikeClass] = useState(() => checkLikedStatus(exercise));
+
+  // f aux para gestionar click en like
+  const handleClickLike = async (e) => {
+    e.stopPropagation();
+    // post a backend
+    const indicator = await toggleLikeService({ token, idExercise });
+    //console.log(`indicator ${indicator}`)
+    // cambiar css segun accion
+    indicator ? setLikeClass("isLike") : setLikeClass("notLike");
   };
 
-  // efecto refrescar cuando clica boton de like
+  // efecto para setear estado de likeClass al montar componente y ante cambios
   useEffect(() => {
-    const handleLikeChange = async () => {
-      checkLikedStatus({ likedEx, exercise });
-      updateLikeCount({ token, idExercise });
-    };
-    handleLikeChange();
-  }, [likeChange, likeClass]);
+    checkLikedStatus(exercise);
+  }, [likeClass]);
 
   // invocar hook de navegacion entre ejercicios
   const { toExercisesPage, toAnonUserPage } = useViewNavigation();
@@ -145,13 +141,9 @@ export const ExerciseDetailPage = () => {
           picture={exercise.picture}
           onClickFav={(e) => handleClickFav(e)}
           classNameFav={`ButtonMiniFav ${favClass}`}
-          onClickLike={(e) => {
-            e.stopPropagation();
-            toggleLikeService({ token, idExercise });
-            handleClickLike();
-          }}
+          onClickLike={(e) => handleClickLike(e)}
           classNameLike={`ButtonMiniLike ${likeClass}`}
-          likeCount={likeCount}
+          likeCount={"likeCount"}
         ></ExerciseCard>
       </article>
     </>
