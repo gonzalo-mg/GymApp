@@ -175,10 +175,14 @@ export const toggleLikeService = async ({ token, idExercise, data = null }) => {
   //devolver objeto stateLike (1 ó 0)
     if (response.data.like.stateLike === 0) {
       alert(`toggleLikeService - Like quitado`)
-      return response.data.fav.stateLike;
+      console.log(`toggleLikeService - dar - response.data.like.stateLike`)
+      console.log(`${response.data.updatedlike.stateLike}`)
+      return response.data.updatedlike.stateLike;
     } else {
       alert(`toggleLikeService - Like dado`)
-      return response.data.fav.stateLike;
+      console.log(`toggleLikeService -quit - response.data.like.stateLike`)
+      console.log(`${response.data.updatedlike.stateLike}`)
+      return response.data.updatedlike.stateLike;
     }
   } catch (e) {
     console.error(e);

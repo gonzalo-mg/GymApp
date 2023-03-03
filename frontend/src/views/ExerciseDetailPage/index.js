@@ -65,8 +65,7 @@ export const ExerciseDetailPage = () => {
     handleFavChange();
   }, [favChange, favClass]);
 
-
-// GESTION LIKES
+  // GESTION LIKES
 
   // f estado para trackear cambios de like y re-renderizar ante clicks del usuario
   const [likeChange, setLikeChange] = useState(0);
@@ -84,26 +83,26 @@ export const ExerciseDetailPage = () => {
   // f para comprobar si el ej tiene like
   const checkLikedStatus = ({ likedEx, exercise }) => {
     console.log(`checkLikeStatus llamada`);
-    console.log(`checkLikeStatus favEx ${favEx}`);
-    console.log(favEx);
-    console.log(`checkLikeStatus favEx ${exercise}`);
+    console.log(`checkLikeStatus likedEx ${likedEx}`);
+    console.log(likedEx);
+    console.log(`checkLikeStatus likedEx ${exercise}`);
     console.log(exercise);
-    let filtered = favEx.filter((f) => f.idExercise === exercise.idExercise);
+    let filtered = likedEx.filter((l) => l.idExercise === exercise.idExercise);
     console.log(`checkLikeStatus filtered ${filtered}`);
     console.log(filtered);
     if (filtered.length !== 0) {
       console.log(`checkLikeStatus isLike`);
-      setFavClass("isLike");
+      setLikeClass("isLike");
     } else {
       console.log(`checkLikeStatus notLiked`);
-      setFavClass(null);
+      setLikeClass(null);
     }
   };
 
   // efecto refrescar cuando clica boton de like
   useEffect(() => {
     const handleLikeChange = async () => {
-      checkFavStatus({ likedEx, exercise });
+      checkLikedStatus({ likedEx, exercise });
     };
     handleLikeChange();
   }, [likeChange, likeClass]);
@@ -150,3 +149,11 @@ export const ExerciseDetailPage = () => {
     </>
   );
 };
+/* 
+onClickFav={(e) => {
+            e.stopPropagation();
+            toggleFavService({ token, idExercise });
+            handleClickFav();
+          }}
+
+*/
