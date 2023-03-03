@@ -28,6 +28,7 @@ export const ExerciseCard = ({
   classNameFav,
   onClickLike,
   classNameLike,
+  likeCount,
 }) => {
   // recuperar usuario activo del contexto
   const { token, currentUser } = useContext(AuthContext);
@@ -76,7 +77,7 @@ export const ExerciseCard = ({
             className={classNameLike}
             type="button"
             onClickCapture={onClickLike}
-          ></button>
+          >{likeCount}</button>
         </div>
       ) : undefined}
 
@@ -116,7 +117,7 @@ export const ExerciseCard = ({
 };
 
 ExerciseCard.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   description: PropTypes.string,
   typology: PropTypes.string,
   muscles: PropTypes.string,

@@ -8,7 +8,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 import { useExercises } from "../../hooks/useExercises";
 
-import { toggleFavService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
@@ -21,12 +20,9 @@ export const ExercisesPage = () => {
   // f estado para setear los filtros a usar para mostrar exercises
   const [filter, setFilter] = useState();
 
-    // f estado para rastrear elminiaciones de favs
-    const [cacheFavs, setCacheFavs] = useState(0);
-
   //usar hook recuperar ejercicios
-  const { useGetExercises } = useExercises();
-  const exercises = useGetExercises({ token, filter });
+  const { useAllExercises } = useExercises();
+  const exercises = useAllExercises({ token, filter });
 
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
@@ -56,11 +52,11 @@ export const ExercisesPage = () => {
               ></input>
             </li>
           </ul>
-            <ButtonGeneric
-              type="button"
-              text="Borrar filtro"
-              onClickFunction={() => setFilter("")}
-            ></ButtonGeneric>
+          <ButtonGeneric
+            type="button"
+            text="Borrar filtro"
+            onClickFunction={() => setFilter("")}
+          ></ButtonGeneric>
         </form>
 
         {exercises.map((ex) => {
@@ -72,7 +68,7 @@ export const ExercisesPage = () => {
               picture={ex.picture}
               onClickCard={(e) => {
                 e.stopPropagation();
-                console.log(`ExercisesPage - onClickCard`)
+                console.log(`ExercisesPage - onClickCard`);
                 toExerciseDetailPage(ex.idExercise);
               }}
             ></ExerciseCard>

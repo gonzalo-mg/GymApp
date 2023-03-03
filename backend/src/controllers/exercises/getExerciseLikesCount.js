@@ -20,9 +20,6 @@ async function getExerciseLikesCount(req, res, next) {
     // recuperar likes de la bbdd con su idExercise
     const likes = await selectExerciseLikesById(idExercise);
 
-    console.log(`getExerciseLikesCount - likes: ${likes}`)
-    console.log(likes)
-
     // enviar respuesta
     res.status(200).send({ status: "ok - like count recovered", data: likes });
   } catch (error) {

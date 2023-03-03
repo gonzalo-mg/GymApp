@@ -8,23 +8,26 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 import { useExercises } from "../../hooks/useExercises";
 
-import { toggleFavService } from "../../services/exercises";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
 
 export const FavExercisesPage = () => {
+  console.log("En FavExercisesPage");
   // cargar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
 
-  // f estado para rastrear elminiaciones de favs
-  const [cacheFavs, setCacheFavs] = useState(0);
-
   //usar hook recuperar ejercicios para favs
-  let getFavs = true;
-  const { useGetExercises } = useExercises();
-  const exercises = useGetExercises({ token, getFavs });
+  //let getFavs = true;
+  let favChange = true;
+  const { useFavExercises } = useExercises();
 
+  const exercises = useFavExercises({ token, favChange });
+  console.log(
+    `FavExercisesPage llamando a useFavExercises con ${token} y ${favChange}`
+  );
+  console.log(`FavExercisesPage recupera de useFavExercises: ${exercises}`);
+  console.log(exercises);
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
     useViewNavigation();
@@ -53,14 +56,8 @@ export const FavExercisesPage = () => {
               picture={ex.picture}
               onClickCard={(e) => {
                 e.stopPropagation();
-                console.log(`FavExercisesPage - onClickCard`)
+                console.log(`ExercisesPage - onClickCard`);
                 toExerciseDetailPage(ex.idExercise);
-              }}
-              onClickFav={(e) => {
-                e.stopPropagation();
-                console.log(`FavExercisesPage - onClickFav`);
-                toggleFavService(token, ex.idExercise);
-                setCacheFavs(cacheFavs + 1);
               }}
             ></ExerciseCard>
           );

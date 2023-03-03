@@ -89,6 +89,78 @@ export const getLikedExercisesService = async (token) => {
   }
 };
 
+export const toggleFavService = async ({ token, idExercise, data = null }) => {
+  try {
+    const response = await axios.post(
+      `${serverRoot}/exercises/${idExercise}/fav`,
+      data,
+      {
+        headers: { Authorization: token },
+      }
+    );
+    //devolver objeto stateFav (1 ó 0)
+    if (response.data.fav.stateFav === 0) {
+      alert(`toggleFavService - Ejercicio eliminado de favoritos`);
+      return response.data.fav.stateFav;
+    } else {
+      alert(`toggleFavService - Ejercicio ${response.data.fav.idExercise} añadido a favoritos`);
+      return response.data.fav.stateFav;
+    }
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(
+      `toggleFavService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+};
+
+export const toggleLikeService = async ({ token, idExercise, data = null }) => {
+  try {
+    const response = await axios.post(
+      `${serverRoot}/exercises/${idExercise}/like`,
+      data,
+      {
+        headers: { Authorization: token },
+      }
+    );
+  //devolver objeto stateLike (1 ó 0)
+    if (response.data.updatedLike.stateLike === 0) {
+      //alert(`toggleLikeService - Like quitado`)
+      return response.data.updatedLike.stateLike;
+    } else {
+      //alert(`toggleLikeService - Like dado`)
+      return response.data.updatedLike.stateLike;
+    }
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(
+      `toggleLikeService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+};
+
+/* f para recuperar cuenta de likes de un ejercicio sabiendo su idExercise */
+export const getExerciseLikesCountService = async ({token, idExercise}) => {
+  try {
+    const response = await axios.get(`${serverRoot}/exercises/${idExercise}/like/count`, {
+      headers: { Authorization: token },
+    });
+    const { data } = response;
+    const { data: likeCount } = data;
+
+    // devolver num
+    return likeCount;
+  } catch (e) {
+    console.error(e);
+    console.log(e.response.data);
+    return alert(
+      `getExerciseLikesCountService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+};
+
 /* f para grabar nuevo ejercicio en server */
 export const postNewExerciseService = async ({
   token,
@@ -133,58 +205,6 @@ export const deleteExerciseService = async ({ token, idExercise }) => {
     console.log(e.response.data);
     return alert(
       `deleteExerciseService - ${e.response.data.status}: ${e.response.data.message}`
-    );
-  }
-};
-
-export const toggleFavService = async ({ token, idExercise, data = null }) => {
-  try {
-    const response = await axios.post(
-      `${serverRoot}/exercises/${idExercise}/fav`,
-      data,
-      {
-        headers: { Authorization: token },
-      }
-    );
-    //devolver objeto stateFav (1 ó 0)
-    if (response.data.fav.stateFav === 0) {
-      alert(`toggleFavService - Ejercicio eliminado de favoritos`);
-      return response.data.fav.stateFav;
-    } else {
-      alert(`toggleFavService - Ejercicio ${response.data.fav.idExercise} añadido a favoritos`);
-      return response.data.fav.stateFav;
-    }
-  } catch (e) {
-    console.error(e);
-    console.log(e.response.data);
-    return alert(
-      `toggleFavService - ${e.response.data.status}: ${e.response.data.message}`
-    );
-  }
-};
-
-export const toggleLikeService = async ({ token, idExercise, data = null }) => {
-  try {
-    const response = await axios.post(
-      `${serverRoot}/exercises/${idExercise}/like`,
-      data,
-      {
-        headers: { Authorization: token },
-      }
-    );
-  //devolver objeto stateLike (1 ó 0)
-    if (response.data.updatedLike.stateLike === 0) {
-      alert(`toggleLikeService - Like quitado`)
-      return response.data.updatedLike.stateLike;
-    } else {
-      alert(`toggleLikeService - Like dado`)
-      return response.data.updatedLike.stateLike;
-    }
-  } catch (e) {
-    console.error(e);
-    console.log(e.response.data);
-    return alert(
-      `toggleLikeService - ${e.response.data.status}: ${e.response.data.message}`
     );
   }
 };
