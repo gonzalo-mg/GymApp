@@ -8,18 +8,15 @@ import {
   getExerciseByIdService,
 } from "../services/exercises";
 
-import { useViewNavigation } from "./useViewNavigation";
-import { ExerciseCard } from "../components/ExerciseCard";
-
 export const useExercises = () => {
-  const {toExerciseDetailPage} = useViewNavigation();
   // RECUPERAR ejercicios
   const useGetExercises = ({
     token,
     filter = undefined,
     getFavs = undefined,
     favChange = undefined,
-    getLikes = undefined,
+    getLiked = undefined,
+    likeChange = undefined,
     idExercise = undefined,
   }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
@@ -34,17 +31,17 @@ export const useExercises = () => {
         let recoveredExercises = [];
         // si se piden los favs devolver solo los favs
         if (getFavs && favChange) {
-          console.log(`useGetExercises - if favs`)
+          console.log(`useGetExercises - if favs`);
           recoveredExercises = await getFavExercisesService(token);
           setExercises(recoveredExercises);
           // si se pide un ejercicio en concreto devolver solo ese
-        } else if (getLikes) {
-          console.log(`useGetExercises - if likes`)
+        } else if (getLiked && likeChange) {
+          console.log(`useGetExercises - if likes`);
           recoveredExercises = await getLikedExercisesService(token);
           setExercises(recoveredExercises);
           // si se pide un ejercicio en concreto devolver solo ese
         } else if (idExercise) {
-          console.log(`useGetExercises - if idExercise`)
+          console.log(`useGetExercises - if idExercise`);
           recoveredExercises = await getExerciseByIdService({
             idExercise,
             token,
@@ -52,7 +49,7 @@ export const useExercises = () => {
           setExercises(recoveredExercises);
           // si no se piden favs ni uno concreto recuperar todos los exercises
         } else {
-          console.log(`useGetExercises - if general`)
+          console.log(`useGetExercises - if general`);
           recoveredExercises = await getExercisesService(token);
           setExercises(recoveredExercises);
         }
@@ -78,12 +75,12 @@ export const useExercises = () => {
           );
 
           // setear exercises al resultado del filtro
-          console.log(`useGetExercises - if filter`)
+          console.log(`useGetExercises - if filter`);
           setExercises(filteredExercises);
         }
       };
       getData();
-    }, [filter, favChange]);
+    }, [filter, favChange, likeChange]);
     return exercises;
   };
 
@@ -106,20 +103,20 @@ export const useExercises = () => {
 
   // COMPROBAR si un ejercicio es like del usuario
   const useCheckLike = ({ idExercise, token }) => {
-    let likes = true;
+    let getLiked = true;
     // recueprar los favs del usuario
-    const userLikes = useGetExercises({ token, likes });
+    const userLiked = useGetExercises({ token, getLiked });
     // comprobar si el array contiene un idExercise coincidente
-    let idLikes = userLikes.filter((ex) => {
+    let idLiked = userLiked.filter((ex) => {
       return ex.idExercise === idExercise;
     });
-    if (idLikes.length !== 0) {
+    if (idLiked.length !== 0) {
       // si coincide devolver string "isFav" para usar como clase css
       return "isLike";
     } else {
-      return undefined;
+      return "";
     }
   };
 
-  return { useGetExercises, useCheckFav, useCheckLike};
+  return { useGetExercises, useCheckFav, useCheckLike };
 };

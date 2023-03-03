@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { getCurrentUserDataService } from "../services/user";
-import { getFavExercisesService, getLikedExercisesService } from "../services/exercises";
 
 // definir objeto global de contexto
 export const AuthContext = createContext();

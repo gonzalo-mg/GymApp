@@ -172,11 +172,13 @@ export const toggleLikeService = async ({ token, idExercise, data = null }) => {
         headers: { Authorization: token },
       }
     );
-
+  //devolver objeto stateLike (1 ó 0)
     if (response.data.like.stateLike === 0) {
-      return alert(`toggleLikeService - Like quitado`);
+      alert(`toggleLikeService - Like quitado`)
+      return response.data.fav.stateLike;
     } else {
-      return alert(`toggleLikeService - Like dado`);
+      alert(`toggleLikeService - Like dado`)
+      return response.data.fav.stateLike;
     }
   } catch (e) {
     console.error(e);

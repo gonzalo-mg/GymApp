@@ -2,23 +2,17 @@
 
 import { ButtonGeneric } from "../ButtonGeneric";
 import { ButtonDelete } from "../ButtonDelete";
-//import { ButtonMiniFav } from "../ButtonMiniFav";
-import { ButtonMiniLike } from "../ButtonMiniLike";
 import "./index.css";
 
 import PropTypes from "prop-types";
 
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
   deleteExerciseService,
-  toggleFavService,
-  getFavExercisesService,
 } from "../../services/exercises";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { useLocation } from "react-router-dom";
-import { FavLikeContext } from "../../contexts/FavLikeContext";
-import { useExercises } from "../../hooks/useExercises";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
@@ -32,24 +26,17 @@ export const ExerciseCard = ({
   onClickCard,
   onClickFav,
   classNameFav,
+  onClickLike,
+  classNameLike,
 }) => {
   // recuperar usuario activo del contexto
   const { token, currentUser } = useContext(AuthContext);
-
-  const { favCounter, setFavCounter } = useContext(FavLikeContext);
-
-  // modificar clase css si el ejercicio es un fav del usuario
-  const { useCheckFav } = useExercises();
 
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage } = useViewNavigation();
 
   // localizar ruta
   const location = useLocation();
-
- 
-
-
 
   return (
     <article className="ExerciseCard" onClickCapture={onClickCard}>
@@ -78,16 +65,18 @@ export const ExerciseCard = ({
         <></>
       )}
 
-      {currentUser.role === "worker" &&
-      location.pathname !== "/exercises" &&
-      location.pathname !== "/favorites" ? (
+      {currentUser.role === "worker" ? (
         <div className="workerButtons">
           <button
             className={classNameFav}
             type="button"
             onClickCapture={onClickFav}
           ></button>
-          <ButtonMiniLike idExercise={idExercise}></ButtonMiniLike>
+          <button
+            className={classNameLike}
+            type="button"
+            onClickCapture={onClickLike}
+          ></button>
         </div>
       ) : undefined}
 
@@ -132,7 +121,11 @@ ExerciseCard.propTypes = {
   typology: PropTypes.string,
   muscles: PropTypes.string,
   //picture: PropTypes.string.isRequired,
-  //likeCounter,
   //admin,
   //onClickCard: PropTypes.func.isRequired
 };
+/* 
+ &&
+      location.pathname !== "/exercises" &&
+      location.pathname !== "/favorites" 
+*/
