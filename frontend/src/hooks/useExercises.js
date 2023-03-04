@@ -1,4 +1,4 @@
-/* HOOK para representar cards de ejercicios */
+/* HOOK para recuperar ejercicios */
 
 import { useState, useEffect } from "react";
 import {
