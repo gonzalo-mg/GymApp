@@ -12,7 +12,7 @@ import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
-import { NavBar } from "../../components/NavBar/index";
+import { NavBar } from "../../components/NavBar";
 
 export const ExercisesPage = () => {
   // cargar contexto autenticacion
@@ -23,22 +23,31 @@ export const ExercisesPage = () => {
 
   //usar hook recuperar ejercicios
   const { useAllExercises, useFavExercises } = useExercises();
-  const exercises = useAllExercises({ token, filter });
+  const exercisesAll = useAllExercises({ token, filter });
+  const exercisesFav = useFavExercises({ token, filter });
 
-  let favChange = true;
+  // f estado para setaer "vista" lo q cambia entre mostrar ejercios todos o favs
+  const [view, setView] = useState("viewAll");
+
+  // efecto actualiza estado view
+  //useEffect();
 
   // invocar hook de navegacion entre vistas
-  const { toAnonUserPage, toExercisesPage, toExerciseDetailPage, toFavExercisesPage, toNewExercisePage } = useViewNavigation();
+  const { toExerciseDetailPage, toAnonUserPage } = useViewNavigation();
 
-  // devolver una card por cada exercise del server
+  /* 
+    - si se pierde sesion ir a vista de login
+    - devolver:
+    -- card d usuario
+    -- barra navegacion
+    -- una card por cada ejercicio del server; el estado de view cambia entre mostrar todos o solo los fav del usuario
+   */
   return !currentUser ? (
     toAnonUserPage()
   ) : (
     <>
       <UserCard></UserCard>
-
       <NavBar></NavBar>
-
       <article className="exercisesList">
         <form
           id="filters"
@@ -58,27 +67,38 @@ export const ExercisesPage = () => {
             </li>
           </ul>
 
-          {filter === "" ? null : (
-            <ButtonGeneric
-              type="button"
-              text="Borrar filtro"
-              onClickFunction={() => setFilter("")}
-            ></ButtonGeneric>
-          )}
+          <ButtonGeneric
+            type="button"
+            text="Borrar filtro"
+            onClickFunction={() => setFilter("")}
+          ></ButtonGeneric>
         </form>
 
-        {exercises.map((exercise) => {
-          return (
-            <ExerciseCard
-              key={exercise.idExercise}
-              exercise={exercise}
-              onClickPic={(e) => {
-                e.preventDefault();
-                toExerciseDetailPage(exercise.idExercise);
-              }}
-            ></ExerciseCard>
-          );
-        })}
+        <TextBanner text={
+          view==="viewFav"
+            ? (exercisesFav.length() === 0 ? "No tienes favoritos" : (filter ? "Viendo tus favoritos filtrados" : "Viendo tus favoritos"))
+            : (filter ? "Viendo ejericios filtrados" : "Viendo todos los ejercicios")
+        }></TextBanner>
+
+        {view === "viewFav"
+          ? exercisesFav.map((exercise) => {
+              return (
+                <ExerciseCard
+                  key={exercise.idExercise}
+                  exercise={exercise}
+                  onClickPic={() => toExerciseDetailPage(exercise.idExercise)}
+                ></ExerciseCard>
+              );
+            })
+          : exercisesAll.map((exercise) => {
+              return (
+                <ExerciseCard
+                  key={exercise.idExercise}
+                  exercise={exercise}
+                  onClickPic={() => toExerciseDetailPage(exercise.idExercise)}
+                ></ExerciseCard>
+              );
+            })}
       </article>
     </>
   );
