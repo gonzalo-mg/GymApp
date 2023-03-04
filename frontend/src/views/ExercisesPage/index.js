@@ -74,11 +74,19 @@ export const ExercisesPage = () => {
           ></ButtonGeneric>
         </form>
 
-        <TextBanner text={
-          view==="viewFav"
-            ? (exercisesFav.length() === 0 ? "No tienes favoritos" : (filter ? "Viendo tus favoritos filtrados" : "Viendo tus favoritos"))
-            : (filter ? "Viendo ejericios filtrados" : "Viendo todos los ejercicios")
-        }></TextBanner>
+        <TextBanner
+          text={
+            view === "viewFav"
+              ? exercisesFav.length() === 0
+                ? "No tienes favoritos"
+                : filter
+                ? "Viendo tus favoritos filtrados"
+                : "Viendo tus favoritos"
+              : filter
+              ? "Viendo ejericios filtrados"
+              : "Viendo todos los ejercicios"
+          }
+        ></TextBanner>
 
         {view === "viewFav"
           ? exercisesFav.map((exercise) => {

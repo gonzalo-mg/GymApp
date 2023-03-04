@@ -6,8 +6,11 @@ import { useNavigate } from "react-router-dom";
 export const useViewNavigation = () => {
   // renombrar hook useNavigate
   const navigate = useNavigate();
-// eslint-disable-next-line
+
+  // f estados para activar al llegar a la nueva pag
+  // eslint-disable-next-line
   const [filter, setFilter] = useState("");
+  const [view, setView]=useState("");
 
   // f navegar a lista de exercises
   const toExercisesPage = () => {
@@ -32,7 +35,8 @@ export const useViewNavigation = () => {
 
   // f navegar a toFavExercisesPage
   const toFavExercisesPage = () => {
-    return navigate('/favorites')
+    setView("viewFav")
+    return navigate('/exercises')
   }
   
   return {toExercisesPage, toExerciseDetailPage, toAnonUserPage, toNewExercisePage, toFavExercisesPage}

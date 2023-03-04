@@ -16,7 +16,7 @@ import { useLikes } from "../../hooks/useLikes";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
-export const ExerciseCard = ({ exercise, onClickPic }) => {
+export const ExerciseCard = ({ exercise, onClickPic, printDetails=false }) => {
   // desestructurar objeto exercise
   const { idExercise, name, description, typology, muscles, picture } =
     exercise;
@@ -80,7 +80,7 @@ export const ExerciseCard = ({ exercise, onClickPic }) => {
         onClickCapture={onClickPic}
       ></img>
 
-      {typology && muscles && description ? (
+      {printDetails ? (
         <>
           <section className="list">
             <ul>
@@ -156,16 +156,7 @@ export const ExerciseCard = ({ exercise, onClickPic }) => {
 };
 
 ExerciseCard.propTypes = {
-  name: PropTypes.string,
-  description: PropTypes.string,
-  typology: PropTypes.string,
-  muscles: PropTypes.string,
-  //picture: PropTypes.string.isRequired,
-  //admin,
-  //onClickCard: PropTypes.func.isRequired
+  exercise: PropTypes.object.isRequired,
+  onClickPic: PropTypes.func,
+  printDetails: PropTypes.bool,
 };
-/* 
- &&
-      location.pathname !== "/exercises" &&
-      location.pathname !== "/favorites" 
-*/

@@ -15,8 +15,7 @@ export const NavBar = () => {
   const { currentUser } = useContext(AuthContext);
 
   // hook navegacion
-  const { toExercisesPage, toNewExercisePage, toFavExercisesPage } =
-    useViewNavigation();
+  const { toExercisesPage, toFavExercisesPage, toNewExercisePage } = useViewNavigation();
 
   // devolver botones segun rol usuario
   return (
@@ -27,7 +26,13 @@ export const NavBar = () => {
         onClickFunction={() => toExercisesPage()}
       ></ButtonGeneric>
       {currentUser.role === "worker" ? (
-        <ButtonGeneric id="Favs" text="Favoritos"></ButtonGeneric>
+        <ButtonGeneric
+          type="button"
+          text="Favoritos"
+          onClickFunction={() => {
+            toFavExercisesPage();
+          }}
+        ></ButtonGeneric>
       ) : (
         <>
           <ButtonGeneric

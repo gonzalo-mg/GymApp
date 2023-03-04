@@ -44,6 +44,7 @@ export const ExerciseDetailPage = () => {
         <ExerciseCard
           key={exercise.idExercise}
           exercise={exercise}
+          printDetails={true}
         ></ExerciseCard>
       </article>
     </>
