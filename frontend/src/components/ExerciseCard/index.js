@@ -46,25 +46,19 @@ export const ExerciseCard = ({ exercise, onClickCard }) => {
   // f estado para likeCount; iniciado a lo q devuelve backend
   const [likeCount, setLikeCount] = useState("likeCount0");
 
-  // efecto para setear estado inicial de favClass y ante cambios de estado; con callback pq el seteo inicial depende de f asincrona
+  // efecto para setear estado inicial de likeClass y likeCount y ante cambios de estados; con callback pq el seteo inicial depende de f asincronas
   useEffect(() => {
     checkLikedStatus({ token, exercise }).then((data) => setLikeClass(data));
     checkLikeCount({ token, exercise, idExercise }).then((lc) => setLikeCount(lc));
   }, [token, likeClass, exercise]);
 
-  /*   // efecto para setear estado de likeClass y likeCount al montar componente y ante cambios
-  useEffect(() => {
-    checkLikedStatus({ token, exercise });
-    checkLikeCount({ token, idExercise, setLikeCount });
-  }, [likeClass]); */
-
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage } = useViewNavigation();
 
-  // localizar ruta
+  // identificar ruta actual
   const location = useLocation();
 
-  // funciones callback auxiliares por asincronia useState
+  // funciones callback auxiliares por asincronia useState, para q funcione con el primer click
   const clickFav = async (e) => {
     e.preventDefault();
     setFavClass(await handleClickFav({ e, token, idExercise }));
