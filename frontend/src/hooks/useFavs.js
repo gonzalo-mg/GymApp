@@ -7,7 +7,7 @@ import {
 
 export const useFavs = () => {
   // f para comprobar si el ej es un fav y setear acorde
-  const checkFavStatus = async ({ token, exercise, setFavClass }) => {
+  const checkFavStatus = async ({ token, exercise}) => {
     // recuperar inicialmente de backend favs
     const currentFavs = await getFavExercisesService(token);
     console.log(`checkFavStatus - llamando con exercise: ${exercise}`);

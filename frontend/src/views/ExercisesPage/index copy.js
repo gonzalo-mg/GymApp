@@ -21,7 +21,7 @@ export const ExercisesPage = () => {
   const [filter, setFilter] = useState();
 
   //usar hook recuperar ejercicios
-  const { useAllExercises, useFavExercises } = useExercises();
+  const { useAllExercises } = useExercises();
   const exercises = useAllExercises({ token, filter });
 
   // invocar hook de navegacion entre vistas

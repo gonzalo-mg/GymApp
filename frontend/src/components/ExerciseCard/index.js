@@ -28,33 +28,35 @@ export const ExerciseCard = ({ exercise, onClickCard }) => {
   const { handleClickFav, checkFavStatus } = useFavs();
 
   // f estado para modificar css boton fav
-  const [favClass, setFavClass] = useState(() =>
-    checkFavStatus({ token, exercise })
-  );
 
-  // efecto para setear estado de favClass al montar componente y ante cambios
+  // // inicializado a valor segun backend
+  const [favClass, setFavClass] = useState("favClass0");
+
+  // efecto para setear estado inicial de favClass y ante cambios de estado; con callback pq el seteo inicial depende de f asincrona
   useEffect(() => {
-    checkFavStatus({ token, exercise });
-  }, [favClass]);
+    checkFavStatus({ token, exercise }).then((data) => setFavClass(data));
+  }, [token, favClass, exercise]);
 
   // GESTION LIKES
   const { handleClickLike, checkLikedStatus, checkLikeCount } = useLikes();
 
   // f estado para modificar css boton like
-  const [likeClass, setLikeClass] = useState(() =>
-    checkLikedStatus({ token, exercise })
-  );
+  const [likeClass, setLikeClass] = useState("likeClass0");
 
   // f estado para likeCount; iniciado a lo q devuelve backend
-  const [likeCount, setLikeCount] = useState(() => {
-    checkLikeCount({ token, idExercise });
-  });
+  const [likeCount, setLikeCount] = useState("likeCount0");
 
-  // efecto para setear estado de likeClass y likeCount al montar componente y ante cambios
+  // efecto para setear estado inicial de favClass y ante cambios de estado; con callback pq el seteo inicial depende de f asincrona
+  useEffect(() => {
+    checkLikedStatus({ token, exercise }).then((data) => setLikeClass(data));
+    checkLikeCount({ token, exercise, idExercise }).then((lc) => setLikeCount(lc));
+  }, [token, likeClass, exercise]);
+
+  /*   // efecto para setear estado de likeClass y likeCount al montar componente y ante cambios
   useEffect(() => {
     checkLikedStatus({ token, exercise });
     checkLikeCount({ token, idExercise, setLikeCount });
-  }, [likeClass]);
+  }, [likeClass]); */
 
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage } = useViewNavigation();
@@ -64,13 +66,13 @@ export const ExerciseCard = ({ exercise, onClickCard }) => {
 
   // funciones callback auxiliares por asincronia useState
   const clickFav = async (e) => {
-      e.preventDefault();
-      setFavClass(await handleClickFav({ e, token, idExercise }));
+    e.preventDefault();
+    setFavClass(await handleClickFav({ e, token, idExercise }));
   };
   const clickLike = async (e) => {
     e.preventDefault();
     setLikeClass(await handleClickLike({ e, token, idExercise }));
-  }
+  };
 
   return (
     <article className="ExerciseCard" onClickCapture={onClickCard}>
@@ -102,11 +104,13 @@ export const ExerciseCard = ({ exercise, onClickCard }) => {
       {currentUser.role === "worker" ? (
         <div className="workerButtons">
           <button
+            id="fav"
             className={`ButtonMiniFav ${favClass}`}
             type="button"
-            onClickCapture={(e)=>clickFav(e)}
+            onClickCapture={(e) => clickFav(e)}
           ></button>
           <button
+            id="like"
             className={`ButtonMiniLike ${likeClass}`}
             type="button"
             onClickCapture={(e) => clickLike(e)}

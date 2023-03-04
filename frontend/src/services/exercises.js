@@ -124,7 +124,10 @@ export const toggleLikeService = async ({ token, idExercise, data = null }) => {
         headers: { Authorization: token },
       }
     );
+    console.log(`toggleLikeService-response ${response}`)
+    console.log(response)
   //devolver objeto stateLike (1 ó 0)
+  console.log(`toggleLikeService - response.data.updatedLike.stateLike: ${response.data.updatedLike.stateLike}`)
     if (response.data.updatedLike.stateLike === 0) {
       //alert(`toggleLikeService - Like quitado`)
       return response.data.updatedLike.stateLike;
@@ -149,7 +152,7 @@ export const getExerciseLikesCountService = async ({token, idExercise}) => {
     });
     const { data } = response;
     const { data: likeCount } = data;
-
+    console.log(`getExerciseLikesCountService - likeCount: ${likeCount}`)
     // devolver num
     return likeCount;
   } catch (e) {

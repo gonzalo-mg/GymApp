@@ -24,36 +24,6 @@ export const ExerciseDetailPage = () => {
   const { useSingleExercises } = useExercises();
   const exercise = useSingleExercises({ token, idExercise });
 
-/*   // GESTION FAVS
-
-  // hook favs
-  const { handleClickFav, checkFavStatus } = useFavs();
-
-  // f estado para modificar css boton fav
-  const [favClass, setFavClass] = useState(() => checkFavStatus(exercise));
-
-  // efecto para setear estado de favClass al montar componente y ante cambios
-  useEffect(() => {
-    checkFavStatus(exercise);
-  }, [favClass]);
-
-  // GESTION LIKES
-  const { handleClickLike, checkLikedStatus, checkLikeCount } = useLikes();
-
-  // f estado para modificar css boton like
-  const [likeClass, setLikeClass] = useState(() => checkLikedStatus(exercise));
-
-  // f estado para likeCount; iniciado a lo q devuelve backend
-  const [likeCount, setLikeCount] = useState(() => {
-    checkLikeCount({ token, idExercise });
-  });
-
-  // efecto para setear estado de likeClass y likeCount al montar componente y ante cambios
-  useEffect(() => {
-    checkLikedStatus(exercise);
-    checkLikeCount({ token, idExercise });
-  }, [likeClass]);
- */
   // invocar hook de navegacion entre ejercicios
   const { toExercisesPage, toAnonUserPage } = useViewNavigation();
 

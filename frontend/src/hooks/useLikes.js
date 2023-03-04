@@ -22,31 +22,31 @@ export const useLikes = () => {
     console.log(`filtered length: ${filtered.length}`);
     if (filtered.length === 1) {
       console.log(`checkLikedStatus isLike`);
-      return ("isLike");
+      return "isLike";
     } else {
       console.log(`checkLikedStatus notLike`);
-      return("notLike");
+      return "notLike";
     }
   };
 
-  // f aux para gestionar click en like
-  const handleClickLike = async ({ e, token, idExercise, setLikeClass }) => {
+  // f para gestionar click en like q devuelve el nuevo estado de like
+  const handleClickLike = async ({ e, token, idExercise }) => {
     e.stopPropagation();
     // post a backend
     const indicator = await toggleLikeService({ token, idExercise });
     //console.log(`indicator ${indicator}`)
     // cambiar css segun accion
-    if(indicator){
+    if (indicator) {
       return "isLike";
-    } else {return "notLike"}
+    } else {
+      return "notLike";
+    }
   };
 
-  // f para recuperar num total de likes de un ejercicio y setear acorde
+  // f para recuperar num total de likes de un ejercicio
   const checkLikeCount = async ({
     token,
     idExercise,
-    setLikeCount,
-    likeCount,
   }) => {
     console.log(`checkLikeCount-llamada con id ${idExercise}`);
     const recoveredLikeCount = await getExerciseLikesCountService({
@@ -54,8 +54,7 @@ export const useLikes = () => {
       idExercise,
     });
     console.log(`checkLikeCount-recoveredLikeCount: ${recoveredLikeCount}`);
-    setLikeCount(recoveredLikeCount);
-    console.log(`checkLikeCount-likeCount setTo: ${likeCount}`);
+    return(recoveredLikeCount);
   };
 
   return { handleClickLike, checkLikedStatus, checkLikeCount };
