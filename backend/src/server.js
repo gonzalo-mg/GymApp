@@ -18,7 +18,8 @@ const {
   loginUser,
   registerUser,
   getUserData,
-  deleteUser
+  deleteUser,
+  getAllUsers
 } = require("./controllers/users");
 
 // de exercices
@@ -79,9 +80,7 @@ app.get("/favorites", validateAuth, getUserFavs);
 app.get("/likes", validateAuth, getUserLikes);
 
 
-
-
-/* ENDPOINTS exercises admin */
+/* ENDPOINTS admin */
 
 app.post("/newExercise", validateAuth, checkAdmin, postNewExercise);
 
@@ -90,6 +89,8 @@ app.put("/exercises/:idExercise", validateAuth, checkAdmin, putEditExercise);
 app.delete("/exercises/:idExercise", validateAuth, checkAdmin, deleteExercise);
 
 app.delete("/users/:idUser", validateAuth, checkAdmin, deleteUser);
+
+app.get("/users", validateAuth, checkAdmin, getAllUsers);
 
 /* MIDDLEWARES ERRORES */
 
