@@ -9,7 +9,6 @@ async function checkAdmin(req, res, next) {
     // comprobar su role en bbdd
     // // seleccionar usuario de la bbdd (user contiene id, email, password (encriptada) y role)
     const user = await selectUserById(idUser);
-    console.log(user)
     // si no es admin lanzar error
     if (user.role !== "admin") {
       createError(
@@ -19,7 +18,6 @@ async function checkAdmin(req, res, next) {
     };
 
     // si es admin continuar al siguiente middleware
-    console.log("checkAdmin ok")
     next();
   } catch (error) {
     next(error);

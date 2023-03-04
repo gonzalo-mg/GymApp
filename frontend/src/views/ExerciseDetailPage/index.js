@@ -20,22 +20,24 @@ export const ExerciseDetailPage = () => {
   // recuperar del param el id del exercise
   const { idExercise } = useParams();
 
-  //usar hook recuperar ejercicios
-  const { useSingleExercises } = useExercises();
-  const exercise = useSingleExercises({ token, idExercise });
-
-  // invocar hook de navegacion entre ejercicios
-  const { toExercisesPage, toFavExercisesPage, toAnonUserPage } =
-    useViewNavigation();
-
   // f estado para determinar si desplegar form edicion
   const [editForm, setEditForm] = useState(false);
+  // f estado para traqear ediciones
+  const [editChange, setEditChange] = useState(false);
+
+  //usar hook recuperar ejercicios
+  const { useSingleExercises } = useExercises();
+  const exercise = useSingleExercises({ token, idExercise, editChange });
 
   // f aux para manejar cambio estado con boton
   const handleOpenEditForm = (e) => {
     e.stopPropagation();
     setEditForm(!editForm);
   };
+
+  // invocar hook de navegacion entre ejercicios
+  const { toExercisesPage, toFavExercisesPage, toAnonUserPage } =
+    useViewNavigation();
 
   // devolver tarjeta usuario, texto indicativo, tarjeta del ejercicio y botones;
   // // si usuario invalido volver a vista login
@@ -68,7 +70,7 @@ export const ExerciseDetailPage = () => {
 
         {currentUser.role === "admin" && editForm === true ? (
           <article className="EditForm">
-            <FormExercise token={token} makeEdit={"ok"}></FormExercise>
+            <FormExercise token={token} makeEdit={"ok"} idExercise={idExercise} editChange={editChange} setEditChange={setEditChange}></FormExercise>
           </article>
         ) : null}
       </div>

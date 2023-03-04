@@ -200,6 +200,7 @@ export const postNewExerciseService = async ({
 /* f para editar ejercicio en server */
 export const putEditExerciseService = async ({
   token,
+  idExercise,
   name,
   typology,
   description,
@@ -214,13 +215,13 @@ export const putEditExerciseService = async ({
     formData.append("muscles", muscles);
     formData.append("picture", picture);
 
-    await axios.post(`${serverRoot}/newExercise`, formData, {
+    await axios.put(`${serverRoot}/exercises/${idExercise}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: token,
       },
     });
-    return alert(`postNewExerciseService - Editado ejercicio: ${name}.`);
+    return alert(`putEditExerciseService - Editado ejercicio: ${name}.`);
   } catch (e) {
     console.error(e.message);
     console.log(e.response.data);

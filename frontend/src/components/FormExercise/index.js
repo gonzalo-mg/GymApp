@@ -8,10 +8,19 @@ import {
 
 import { ButtonGeneric } from "../ButtonGeneric";
 
-export const FormExercise = ({token, makeNew, makeEdit}) => {
-  console.log(`FormExercise makeNew:${makeNew}, makeEdit:${makeEdit}`);
+export const FormExercise = ({
+  token,
+  idExercise,
+  makeNew,
+  makeEdit,
+  editForm,
+  setEditForm,
+}) => {
+  console.log(
+    `FormExercise makeNew:${makeNew}, makeEdit:${makeEdit}, idExercise:${idExercise}`
+  );
   // f para elegir q servicio llamar segun se quiera crear/editar
-  const doSubmit = ({ e, makeNew, makeEdit }) => {
+  const doSubmit = ({ e, makeNew, makeEdit, idExercise }) => {
     console.log(`doSubmit llamado`);
     console.log(`doSubmit makeNew:${makeNew}`);
     console.log(`doSubmit makeEdit:${makeEdit}`);
@@ -29,24 +38,29 @@ export const FormExercise = ({token, makeNew, makeEdit}) => {
       console.log(`doSubmit makeEdit`);
       putEditExerciseService({
         token,
+        idExercise,
         name: e.target.name.value,
         typology: e.target.typology.value,
         muscles: e.target.muscles.value,
         description: e.target.desc.value,
         picture: e.target.pic.files[0],
       });
+      setEditForm(!editForm);
     }
   };
 
-  const handleSubmit = async ({e, makeNew, makeEdit}) => {
+  const handleSubmit = async ({ e, makeNew, makeEdit, idExercise }) => {
     e.preventDefault();
-    await doSubmit({e, makeNew, makeEdit});
+    await doSubmit({ e, makeNew, makeEdit, idExercise });
   };
 
   return (
     <fieldset className="fieldset">
       <legend>Complete el formulario con todos los datos del ejercicio.</legend>
-      <form id="ExerciseForm" onSubmit={(e) => handleSubmit({e, makeNew, makeEdit})}>
+      <form
+        id="ExerciseForm"
+        onSubmit={(e) => handleSubmit({ e, makeNew, makeEdit, idExercise })}
+      >
         <ul>
           <li>
             <label htmlfor="name">Nombre del ejercicio: </label>

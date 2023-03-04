@@ -148,13 +148,13 @@ export const useExercises = () => {
   };
 
   // RECUPERAR todos los LIKED
-  const useSingleExercises = ({ token, idExercise }) => {
+  const useSingleExercises = ({ token, idExercise, editChange }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
     const [exercise, setExercise] = useState([]);
 
     // efecto obtener "exercises" del servidor
     // // funcion: getData; llamar al server y actualizar estado de "exercises"; al estar dentro de useEffect hay q hacerlo con un callback por ser asincrono
-    // // variables de escucha: []; cada vez q se arrance el elemento o cambie el filtro o los propios ejercios
+    // // variables de escucha: []; cada vez q se arrance el elemento o edite ejercio
     useEffect(() => {
       const getData = async () => {
         const recoveredExercise = await getExerciseByIdService({
@@ -164,7 +164,7 @@ export const useExercises = () => {
         setExercise(recoveredExercise);
       };
       getData();
-    }, []);
+    }, [editChange]);
     return exercise;
   };
 

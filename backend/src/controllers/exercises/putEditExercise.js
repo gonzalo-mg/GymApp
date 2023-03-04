@@ -49,7 +49,7 @@ async function putEditExercise(req, res, next) {
     const pictureName = await processImage(picture.data, "exercises", 1000);
 
     // insertar exercise en la bbdd (llamar repositorio)
-    await editExercise({ name, description, typology, muscles, pictureName });
+    await editExercise({ name, description, typology, muscles, pictureName, idExercise });
 
     // enviar respuesta
     res.status(201).send({
