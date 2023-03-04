@@ -6,38 +6,71 @@ import "./index.css";
 
 import PropTypes from "prop-types";
 
-import { useContext} from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import {
-  deleteExerciseService,
-} from "../../services/exercises";
+import { deleteExerciseService } from "../../services/exercises";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { useLocation } from "react-router-dom";
+import { useFavs } from "../../hooks/useFavs";
+import { useLikes } from "../../hooks/useLikes";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
-export const ExerciseCard = ({
-  idExercise,
-  name,
-  description,
-  typology,
-  muscles,
-  picture,
-  onClickCard,
-  onClickFav,
-  classNameFav,
-  onClickLike,
-  classNameLike,
-  likeCount,
-}) => {
+export const ExerciseCard = ({ exercise, onClickCard }) => {
+  // desestructurar objeto exercise
+  const { idExercise, name, description, typology, muscles, picture } =
+    exercise;
+
   // recuperar usuario activo del contexto
   const { token, currentUser } = useContext(AuthContext);
+
+  // GESTION FAVS
+  const { handleClickFav, checkFavStatus } = useFavs();
+
+  // f estado para modificar css boton fav
+  const [favClass, setFavClass] = useState(() =>
+    checkFavStatus({ token, exercise })
+  );
+
+  // efecto para setear estado de favClass al montar componente y ante cambios
+  useEffect(() => {
+    checkFavStatus({ token, exercise });
+  }, [favClass]);
+
+  // GESTION LIKES
+  const { handleClickLike, checkLikedStatus, checkLikeCount } = useLikes();
+
+  // f estado para modificar css boton like
+  const [likeClass, setLikeClass] = useState(() =>
+    checkLikedStatus({ token, exercise })
+  );
+
+  // f estado para likeCount; iniciado a lo q devuelve backend
+  const [likeCount, setLikeCount] = useState(() => {
+    checkLikeCount({ token, idExercise });
+  });
+
+  // efecto para setear estado de likeClass y likeCount al montar componente y ante cambios
+  useEffect(() => {
+    checkLikedStatus({ token, exercise });
+    checkLikeCount({ token, idExercise, setLikeCount });
+  }, [likeClass]);
 
   // invocar hook de navegacion entre vistas
   const { toExercisesPage, toExerciseDetailPage } = useViewNavigation();
 
   // localizar ruta
   const location = useLocation();
+
+  // funciones callback auxiliares por asincronia useState
+  const clickFav = async (e) => {
+      e.preventDefault();
+      setFavClass(await handleClickFav({ e, token, idExercise }));
+  };
+  const clickLike = async (e) => {
+    e.preventDefault();
+    setLikeClass(await handleClickLike({ e, token, idExercise }));
+  }
 
   return (
     <article className="ExerciseCard" onClickCapture={onClickCard}>
@@ -69,15 +102,17 @@ export const ExerciseCard = ({
       {currentUser.role === "worker" ? (
         <div className="workerButtons">
           <button
-            className={classNameFav}
+            className={`ButtonMiniFav ${favClass}`}
             type="button"
-            onClickCapture={onClickFav}
+            onClickCapture={(e)=>clickFav(e)}
           ></button>
           <button
-            className={classNameLike}
+            className={`ButtonMiniLike ${likeClass}`}
             type="button"
-            onClickCapture={onClickLike}
-          >{likeCount}</button>
+            onClickCapture={(e) => clickLike(e)}
+          >
+            {likeCount}
+          </button>
         </div>
       ) : undefined}
 

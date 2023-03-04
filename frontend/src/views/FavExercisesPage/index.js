@@ -47,17 +47,15 @@ export const FavExercisesPage = () => {
           }
         ></TextBanner>
 
-        {exercises.map((ex) => {
+        {exercises.map((exercise) => {
           return (
             <ExerciseCard
-              key={ex.idExercise}
-              idExercise={ex.idExercise}
-              name={ex.name}
-              picture={ex.picture}
+              key={exercise.idExercise}
+              exercise={exercise}
               onClickCard={(e) => {
                 e.stopPropagation();
                 console.log(`ExercisesPage - onClickCard`);
-                toExerciseDetailPage(ex.idExercise);
+                toExerciseDetailPage(exercise.idExercise);
               }}
             ></ExerciseCard>
           );

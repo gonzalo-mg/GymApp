@@ -24,7 +24,7 @@ export const ExerciseDetailPage = () => {
   const { useSingleExercises } = useExercises();
   const exercise = useSingleExercises({ token, idExercise });
 
-  // GESTION FAVS
+/*   // GESTION FAVS
 
   // hook favs
   const { handleClickFav, checkFavStatus } = useFavs();
@@ -53,7 +53,7 @@ export const ExerciseDetailPage = () => {
     checkLikedStatus(exercise);
     checkLikeCount({ token, idExercise });
   }, [likeClass]);
-
+ */
   // invocar hook de navegacion entre ejercicios
   const { toExercisesPage, toAnonUserPage } = useViewNavigation();
 
@@ -73,21 +73,7 @@ export const ExerciseDetailPage = () => {
 
         <ExerciseCard
           key={exercise.idExercise}
-          idExercise={exercise.idExercise}
-          name={exercise.name}
-          description={exercise.description}
-          typology={exercise.typology}
-          muscles={exercise.muscles}
-          picture={exercise.picture}
-          onClickFav={(e) =>
-            handleClickFav({ e, token, idExercise, setFavClass })
-          }
-          classNameFav={`ButtonMiniFav ${favClass}`}
-          onClickLike={(e) =>
-            handleClickLike({ e, token, idExercise, setLikeClass })
-          }
-          classNameLike={`ButtonMiniLike ${likeClass}`}
-          likeCount={likeCount}
+          exercise={exercise}
         ></ExerciseCard>
       </article>
     </>

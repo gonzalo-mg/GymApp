@@ -17,7 +17,7 @@ export const ExercisesPage = () => {
   // cargar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
 
-  // f estado para setear los filtros a usar para mostrar exercises
+  // f estado de "exercises"; para setear los filtros a usar para mostrar exercises
   const [filter, setFilter] = useState();
 
   //usar hook recuperar ejercicios
@@ -25,7 +25,7 @@ export const ExercisesPage = () => {
   const exercises = useAllExercises({ token, filter });
 
   // invocar hook de navegacion entre vistas
-  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
+  const { toExerciseDetailPage, toAnonUserPage } =
     useViewNavigation();
 
   // devolver una card por cada exercise del server
@@ -52,24 +52,22 @@ export const ExercisesPage = () => {
               ></input>
             </li>
           </ul>
-          <ButtonGeneric
-            type="button"
-            text="Borrar filtro"
-            onClickFunction={() => setFilter("")}
-          ></ButtonGeneric>
+
+          {filter === "" ? null : (
+            <ButtonGeneric
+              type="button"
+              text="Borrar filtro"
+              onClickFunction={() => setFilter("")}
+            ></ButtonGeneric>
+          )}
         </form>
 
         {exercises.map((exercise) => {
           return (
             <ExerciseCard
               key={exercise.idExercise}
-              idExercise={exercise.idExercise}
-              name={exercise.name}
-              picture={exercise.picture}
-              onClickCard={(e) => {
-                e.stopPropagation();
-                toExerciseDetailPage(exercise.idExercise);
-              }}
+              exercise={exercise}
+              onClickCard={() => toExerciseDetailPage(exercise.idExercise)}
             ></ExerciseCard>
           );
         })}

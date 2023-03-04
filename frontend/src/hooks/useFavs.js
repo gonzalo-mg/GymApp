@@ -24,21 +24,25 @@ export const useFavs = () => {
     // setear estado segun resultados de filtro
     if (filtered.length === 1) {
       console.log(`checkFavStatus isFav`);
-      setFavClass("isFav");
+      return "isFav";
     } else {
       console.log(`checkFavStatus notFav`);
-      setFavClass("notFav");
+      return "notFav";
     }
   };
 
   // f aux para gestionar click en boton fav
-  const handleClickFav = async ({ e, token, idExercise, setFavClass }) => {
+  const handleClickFav = async ({ e, token, idExercise }) => {
     e.stopPropagation();
     // post a backend
     const indicator = await toggleFavService({ token, idExercise });
     //console.log(`indicator ${indicator}`)
     // cambiar css segun indica backend
-    indicator ? setFavClass("isFav") : setFavClass("notFav");
+    if (indicator) {
+      return "isFav";
+    } else {
+      return "notFav";
+    }
   };
 
   return { handleClickFav, checkFavStatus };

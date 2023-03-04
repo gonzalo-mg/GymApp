@@ -8,7 +8,7 @@ import {
 
 export const useLikes = () => {
   // f para comprobar si el ej tiene like
-  const checkLikedStatus = async ({ token, exercise, setLikeClass }) => {
+  const checkLikedStatus = async ({ token, exercise }) => {
     const currentLiked = await getLikedExercisesService(token);
     console.log(`checkLikedStatus - llamando con exercise: ${exercise}`);
     console.log(exercise);
@@ -22,10 +22,10 @@ export const useLikes = () => {
     console.log(`filtered length: ${filtered.length}`);
     if (filtered.length === 1) {
       console.log(`checkLikedStatus isLike`);
-      setLikeClass("isLike");
+      return ("isLike");
     } else {
       console.log(`checkLikedStatus notLike`);
-      setLikeClass("notLike");
+      return("notLike");
     }
   };
 
@@ -36,7 +36,9 @@ export const useLikes = () => {
     const indicator = await toggleLikeService({ token, idExercise });
     //console.log(`indicator ${indicator}`)
     // cambiar css segun accion
-    indicator ? setLikeClass("isLike") : setLikeClass("notLike");
+    if(indicator){
+      return "isLike";
+    } else {return "notLike"}
   };
 
   // f para recuperar num total de likes de un ejercicio y setear acorde
