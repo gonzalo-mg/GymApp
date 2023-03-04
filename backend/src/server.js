@@ -92,6 +92,8 @@ app.delete("/users/:idUser", validateAuth, checkAdmin, deleteUser);
 
 app.get("/users", validateAuth, checkAdmin, getAllUsers);
 
+app.post("/newUser", validateAuth, checkAdmin, registerUser);
+
 /* MIDDLEWARES ERRORES */
 
 // error 404

@@ -9,6 +9,8 @@ import { useState, useContext } from "react";
 
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 
+import { postNewUserService } from "../../services/user";
+
 import { AuthContext } from "../../contexts/AuthContext";
 import { NavBar } from "../../components/NavBar";
 
@@ -22,7 +24,7 @@ export const UserManagement = () => {
   // recuperar f de login del contexto para cambiar estado del token
   const { token, currentUser } = useContext(AuthContext);
 
-  /* f de gestion formulario de login q recibe email y password */
+  /* f de gestion formulario de nuevo registro q recibe email y password */
   const handleForm = async (e) => {
     console.log(`handleForm llamado`);
     try {
@@ -33,7 +35,7 @@ export const UserManagement = () => {
       }
 
       // llamar a server con datos
-      const newUser = await postNewUserService({ email, password });
+      await postNewUserService({ email, password });
     } catch (error) {
       console.error(error);
     }
@@ -46,9 +48,9 @@ export const UserManagement = () => {
       <UserCard></UserCard>
       <NavBar onClickAll={() => toExercisesPage()}></NavBar>
 
-        <article className="oldUser">
-            <p>recuperar email usuario y poner boton de borrar</p>
-        </article>
+      <article className="oldUser">
+        <p>recuperar email usuario y poner boton de borrar</p>
+      </article>
 
       <article className="newUser">
         <fieldset>

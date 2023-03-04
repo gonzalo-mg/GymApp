@@ -19,7 +19,6 @@ export const postLoginService = async ({ email, password }) => {
     );
 
     // devolver token como string
-    console.log(`postLoginService - token devuelto: ${data.data.data.userToken}`)
     return data.data.data.userToken;
   } catch (e) {
     // en caso de error emitir alerta con los mensajes q devuleva el servidor
@@ -35,24 +34,61 @@ export const postLoginService = async ({ email, password }) => {
   }
 };
 
-/* f llamada a get a /currentUser con el token almacenado para recuperar/validar datos/token del usuario;
-devulve los datos del usuario como un objeto tipo:
-  {
-    "status": "ok - user data recovered",
-    "data": {
-        "idUser": 3,
-        "email": "worker2@mail.com",
-        "password": "$2b$10$3Mp9sN4vuCsObRYArwuuoeKvXDAVliY8Ly4SoQCPj9rdyZ2WV4JYG",
-        "role": "worker",
-        "created": "2023-03-01T18:19:18.000Z"
-    }
-  }
-*/
+/* f recuperar datos usuario activo*/
 export const getCurrentUserDataService = async (token) => {
-  // llamada con token en header
-  const response = await axios.get(`${serverRoot}/currentUser`, {
-    headers: { "Authorization": token },
-  });
+  try {
+    // llamada con token en header
+    const response = await axios.get(`${serverRoot}/currentUser`, {
+      headers: { Authorization: token },
+    });
 
-  return response.data;
+    return response.data;
+  } catch (e) {
+    console.error(e);
+  }
 };
+
+/* f recuperar todos los usarios de la bbdd */
+export const getAllUsersService = async (token) => {
+  try {
+    const response = await axios.get(`${serverRoot}/users`, {
+      headers: { Authorization: token },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/* f borrar usuario de la base de datos con su idUser */
+export const deleteUserByIdService = async ({ token, idUser }) => {
+  try {
+    const response = await axios.delete(`${serverRoot}/users/${idUser}`, {
+      headers: { Authorization: token },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/* f crear nuevo usuario */
+export const postNewUserService = async ({token, email, password}) => {
+  try {
+    const data = await axios.post(
+      `${serverRoot}/users`,
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: { Authorization: token },
+      }
+    );
+
+    // devolver respuesta
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
