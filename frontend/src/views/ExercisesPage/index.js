@@ -12,6 +12,7 @@ import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
+import { NavBar } from "../../components/NavBar/index";
 
 export const ExercisesPage = () => {
   // cargar contexto autenticacion
@@ -24,9 +25,10 @@ export const ExercisesPage = () => {
   const { useAllExercises, useFavExercises } = useExercises();
   const exercises = useAllExercises({ token, filter });
 
+  let favChange = true;
+
   // invocar hook de navegacion entre vistas
-  const { toExerciseDetailPage, toAnonUserPage } =
-    useViewNavigation();
+  const { toAnonUserPage, toExercisesPage, toExerciseDetailPage, toFavExercisesPage, toNewExercisePage } = useViewNavigation();
 
   // devolver una card por cada exercise del server
   return !currentUser ? (
@@ -34,6 +36,9 @@ export const ExercisesPage = () => {
   ) : (
     <>
       <UserCard></UserCard>
+
+      <NavBar></NavBar>
+
       <article className="exercisesList">
         <form
           id="filters"
@@ -67,7 +72,10 @@ export const ExercisesPage = () => {
             <ExerciseCard
               key={exercise.idExercise}
               exercise={exercise}
-              onClickCard={() => toExerciseDetailPage(exercise.idExercise)}
+              onClickPic={(e) => {
+                e.preventDefault();
+                toExerciseDetailPage(exercise.idExercise);
+              }}
             ></ExerciseCard>
           );
         })}

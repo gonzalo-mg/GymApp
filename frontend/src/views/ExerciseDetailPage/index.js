@@ -4,13 +4,12 @@ import "./index.css";
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
+import { NavBar } from "../../components/NavBar";
 
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { useParams } from "react-router-dom";
 import { useExercises } from "../../hooks/useExercises";
-import { useFavs } from "../../hooks/useFavs";
-import { useLikes } from "../../hooks/useLikes";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export const ExerciseDetailPage = () => {
@@ -36,6 +35,7 @@ export const ExerciseDetailPage = () => {
   ) : (
     <>
       <UserCard></UserCard>
+      <NavBar></NavBar>
       <article className="ExerciseDetail">
         <TextBanner text={"Vista de Detalles"}></TextBanner>
 

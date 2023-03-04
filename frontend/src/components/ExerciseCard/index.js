@@ -16,7 +16,7 @@ import { useLikes } from "../../hooks/useLikes";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
-export const ExerciseCard = ({ exercise, onClickCard }) => {
+export const ExerciseCard = ({ exercise, onClickPic }) => {
   // desestructurar objeto exercise
   const { idExercise, name, description, typology, muscles, picture } =
     exercise;
@@ -49,7 +49,9 @@ export const ExerciseCard = ({ exercise, onClickCard }) => {
   // efecto para setear estado inicial de likeClass y likeCount y ante cambios de estados; con callback pq el seteo inicial depende de f asincronas
   useEffect(() => {
     checkLikedStatus({ token, exercise }).then((data) => setLikeClass(data));
-    checkLikeCount({ token, exercise, idExercise }).then((lc) => setLikeCount(lc));
+    checkLikeCount({ token, exercise, idExercise }).then((lc) =>
+      setLikeCount(lc)
+    );
   }, [token, likeClass, exercise]);
 
   // invocar hook de navegacion entre vistas
@@ -69,10 +71,14 @@ export const ExerciseCard = ({ exercise, onClickCard }) => {
   };
 
   return (
-    <article className="ExerciseCard" onClickCapture={onClickCard}>
+    <article className="ExerciseCard">
       <h2 className="name">{name}</h2>
 
-      <img src={`${serverRoot}/pics/${picture}`} alt={name}></img>
+      <img
+        src={`${serverRoot}/pics/${picture}`}
+        alt={name}
+        onClickCapture={onClickPic}
+      ></img>
 
       {typology && muscles && description ? (
         <>

@@ -52,7 +52,7 @@ export const FavExercisesPage = () => {
             <ExerciseCard
               key={exercise.idExercise}
               exercise={exercise}
-              onClickCard={(e) => {
+              onClickPic={(e) => {
                 e.stopPropagation();
                 console.log(`ExercisesPage - onClickCard`);
                 toExerciseDetailPage(exercise.idExercise);
