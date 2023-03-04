@@ -31,9 +31,11 @@ export const ExerciseDetailPage = () => {
   // f estado para determinar si desplegar form edicion
   const [editForm, setEditForm] = useState(false);
 
+  // f aux para manejar cambio estado con boton
   const handleOpenEditForm = (e) => {
-    setEditForm(!editForm)
-  }
+    e.stopPropagation();
+    setEditForm(!editForm);
+  };
 
   // devolver tarjeta usuario, texto indicativo, tarjeta del ejercicio y botones;
   // // si usuario invalido volver a vista login
@@ -44,29 +46,32 @@ export const ExerciseDetailPage = () => {
     toAnonUserPage()
   ) : (
     <>
-      <UserCard></UserCard>
-      <NavBar
-        onClickAll={() => toExercisesPage()}
-        onClickFav={() => toFavExercisesPage()}
-      ></NavBar>
-      <article className="ExerciseDetail">
-        <TextBanner text={"Vista de Detalles"}></TextBanner>
+      <div className="cards">
+        <UserCard></UserCard>
+        <NavBar
+          onClickAll={() => toExercisesPage()}
+          onClickFav={() => toFavExercisesPage()}
+        ></NavBar>
+        <TextBanner text={"Proceda con cautela."}></TextBanner>
+      </div>
+      <div className="data">
+        <article className="ExerciseDetail">
+          {!exercise ? toExercisesPage() : undefined}
 
-        {!exercise ? toExercisesPage() : undefined}
-
-        <ExerciseCard
-          key={exercise.idExercise}
-          exercise={exercise}
-          printDetails={true}
-          openEditForm={(e)=>handleOpenEditForm(e)}
-        ></ExerciseCard>
-      </article>
-
-      {currentUser.role === "admin" && editForm === true ? (
-        <article className="EditForm">
-          <FormExercise token={token} makeEdit={true}></FormExercise>
+          <ExerciseCard
+            key={exercise.idExercise}
+            exercise={exercise}
+            printDetails={true}
+            openEditForm={(e) => handleOpenEditForm(e)}
+          ></ExerciseCard>
         </article>
-      ) : null}
+
+        {currentUser.role === "admin" && editForm === true ? (
+          <article className="EditForm">
+            <FormExercise token={token} makeEdit={"ok"}></FormExercise>
+          </article>
+        ) : null}
+      </div>
     </>
   );
 };

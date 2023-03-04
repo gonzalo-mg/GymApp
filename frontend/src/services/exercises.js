@@ -187,7 +187,7 @@ export const postNewExerciseService = async ({
         Authorization: token,
       },
     });
-    return alert(`Creado ejercicio: ${name}.`);
+    return alert(`postNewExerciseService - Creado ejercicio: ${name}.`);
   } catch (e) {
     console.error(e.message);
     console.log(e.response.data);
@@ -220,7 +220,7 @@ export const putEditExerciseService = async ({
         Authorization: token,
       },
     });
-    return alert(`Editado ejercicio: ${name}.`);
+    return alert(`postNewExerciseService - Editado ejercicio: ${name}.`);
   } catch (e) {
     console.error(e.message);
     console.log(e.response.data);

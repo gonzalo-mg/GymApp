@@ -50,38 +50,12 @@ export const ExercisesPage = () => {
     toAnonUserPage()
   ) : (
     <>
-      <UserCard></UserCard>
-      <NavBar
-        onClickAll={() => setView("viewAll")}
-        onClickFav={() => setView("viewFav")}
-      ></NavBar>
-
-      <article className="exercisesList">
-        <form
-          id="filters"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <ul>
-            <li>
-              <input
-                id="filterName"
-                name="name"
-                placeholder="Busca por nombre, tipología o músculo"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value.toLowerCase())}
-              ></input>
-            </li>
-          </ul>
-
-          <ButtonGeneric
-            type="button"
-            text="Borrar filtro"
-            onClickFunction={() => setFilter("")}
-          ></ButtonGeneric>
-        </form>
-
+      <div className="cards">
+        <UserCard></UserCard>
+        <NavBar
+          onClickAll={() => setView("viewAll")}
+          onClickFav={() => setView("viewFav")}
+        ></NavBar>
         <TextBanner
           text={
             view === "viewFav"
@@ -95,32 +69,60 @@ export const ExercisesPage = () => {
               : "Viendo todos los ejercicios"
           }
         ></TextBanner>
+      </div>
+      <div className="data">
+        <article className="exercisesList">
+          <form
+            id="filters"
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <ul>
+              <li>
+                <input
+                  id="filterName"
+                  name="name"
+                  placeholder="Busca por nombre, tipología o músculo"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value.toLowerCase())}
+                ></input>
+              </li>
+            </ul>
 
-        {view === "viewFav"
-          ? exercisesFav.map((exercise) => {
-              return (
-                <ExerciseCard
-                  key={exercise.idExercise}
-                  exercise={exercise}
-                  onClickPic={() => toExerciseDetailPage(exercise.idExercise)}
-                ></ExerciseCard>
-              );
-            })
-          : exercisesAll.map((exercise) => {
-              return (
-                <ExerciseCard
-                  key={exercise.idExercise}
-                  exercise={exercise}
-                  onClickPic={() =>
-                    currentUser.role !== "admin"
-                      ? toExerciseDetailPage(exercise.idExercise)
-                      : null
-                  }
-                  printDetails={currentUser.role === "admin" ? true : false}
-                ></ExerciseCard>
-              );
-            })}
-      </article>
+            <ButtonGeneric
+              type="button"
+              text="Borrar filtro"
+              onClickFunction={() => setFilter("")}
+            ></ButtonGeneric>
+          </form>
+
+          {view === "viewFav"
+            ? exercisesFav.map((exercise) => {
+                return (
+                  <ExerciseCard
+                    key={exercise.idExercise}
+                    exercise={exercise}
+                    onClickPic={() => toExerciseDetailPage(exercise.idExercise)}
+                  ></ExerciseCard>
+                );
+              })
+            : exercisesAll.map((exercise) => {
+                return (
+                  <ExerciseCard
+                    key={exercise.idExercise}
+                    exercise={exercise}
+                    onClickPic={() =>
+                      currentUser.role !== "admin"
+                        ? toExerciseDetailPage(exercise.idExercise)
+                        : null
+                    }
+                    printDetails={currentUser.role === "admin" ? true : false}
+                  ></ExerciseCard>
+                );
+              })}
+        </article>
+      </div>
     </>
   );
 };

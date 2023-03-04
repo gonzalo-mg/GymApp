@@ -6,14 +6,17 @@ import {
   putEditExerciseService,
 } from "../../services/exercises";
 
-import { useViewNavigation } from "../../hooks/useViewNavigation";
-
 import { ButtonGeneric } from "../ButtonGeneric";
 
-export const FormExercise = ({ token, makeNew = false, makeEdit = false }) => {
+export const FormExercise = ({token, makeNew, makeEdit}) => {
+  console.log(`FormExercise makeNew:${makeNew}, makeEdit:${makeEdit}`);
   // f para elegir q servicio llamar segun se quiera crear/editar
-  const doSubmit = (e) => {
+  const doSubmit = ({ e, makeNew, makeEdit }) => {
+    console.log(`doSubmit llamado`);
+    console.log(`doSubmit makeNew:${makeNew}`);
+    console.log(`doSubmit makeEdit:${makeEdit}`);
     if (makeNew) {
+      console.log(`doSubmit makeNew`);
       postNewExerciseService({
         token,
         name: e.target.name.value,
@@ -23,6 +26,7 @@ export const FormExercise = ({ token, makeNew = false, makeEdit = false }) => {
         picture: e.target.pic.files[0],
       });
     } else if (makeEdit) {
+      console.log(`doSubmit makeEdit`);
       putEditExerciseService({
         token,
         name: e.target.name.value,
@@ -34,19 +38,15 @@ export const FormExercise = ({ token, makeNew = false, makeEdit = false }) => {
     }
   };
 
-  const { toExercisesPage } = useViewNavigation();
+  const handleSubmit = async ({e, makeNew, makeEdit}) => {
+    e.preventDefault();
+    await doSubmit({e, makeNew, makeEdit});
+  };
 
   return (
     <fieldset className="fieldset">
       <legend>Complete el formulario con todos los datos del ejercicio.</legend>
-      <form
-        id="ExerciseForm"
-        onSubmit={(e) => {
-          e.preventDefault();
-          doSubmit();
-          e.reset();
-        }}
-      >
+      <form id="ExerciseForm" onSubmit={(e) => handleSubmit({e, makeNew, makeEdit})}>
         <ul>
           <li>
             <label htmlfor="name">Nombre del ejercicio: </label>
