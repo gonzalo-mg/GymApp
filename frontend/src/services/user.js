@@ -54,26 +54,31 @@ export const getAllUsersService = async (token) => {
     const response = await axios.get(`${serverRoot}/users`, {
       headers: { Authorization: token },
     });
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error(error);
   }
 };
 
 /* f borrar usuario de la base de datos con su idUser */
-export const deleteUserByIdService = async ({ token, idUser }) => {
+export const deleteUserByIdService = async ({ token, user }) => {
   try {
+    const { idUser, email } = user;
     const response = await axios.delete(`${serverRoot}/users/${idUser}`, {
       headers: { Authorization: token },
     });
+    alert(`deleteUserByIdService - Usuario ${email} eliminado.`);
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error(e);
+    alert(
+      `deleteUserByIdService - ${e.response.data.status}: ${e.response.data.message}`
+    );
   }
 };
 
 /* f crear nuevo usuario */
-export const postNewUserService = async ({token, email, password}) => {
+export const postNewUserService = async ({ token, email, password }) => {
   try {
     const data = await axios.post(
       `${serverRoot}/users`,
@@ -87,8 +92,10 @@ export const postNewUserService = async ({token, email, password}) => {
     );
 
     // devolver respuesta
+    alert(`postNewUserService - Usuario ${email} creado.`);
     return data;
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error(e);
+    alert(`postNewUserService - ${e.response.data}: ${e.response.message}`);
   }
-}
+};

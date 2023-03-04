@@ -5,24 +5,47 @@ import "./index.css";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { UserCard } from "../../components/UserCard";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 
-import { postNewUserService } from "../../services/user";
+import {
+  deleteUserByIdService,
+  getAllUsersService,
+  postNewUserService,
+} from "../../services/user";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { NavBar } from "../../components/NavBar";
+import { UserMagCard } from "../../components/UserMagCard";
 
-export const UserManagement = () => {
-  const { toAnonUserPage, toExercisesPage } = useViewNavigation;
+export const UserManagementPage = () => {
+  // recuperar contexto autenticacion
+  const { token, currentUser } = useContext(AuthContext);
+
+  // invocar hook de navegacion entre ejercicios
+  const { toExercisesPage, toAnonUserPage } = useViewNavigation();
+
+  // recuperar usuarios de server
+  const [users, setUsers] = useState([]);
+  const [userChange, setUserChange] = useState(true);
+
+  // efecto refrescar usuarios; solo workers; el admin no se borra
+  useEffect(() => {
+    const getData = async () => {
+      const recoveredUsers = await getAllUsersService(token);
+      const workers = recoveredUsers.filter((u) => u.role !== "admin");
+      console.log(recoveredUsers);
+      console.log(workers);
+      setUsers(workers);
+    };
+    getData();
+  }, [token, userChange]);
+
   // def estado para recuperar del formulario y enviar al contexto de auth
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
-  // recuperar f de login del contexto para cambiar estado del token
-  const { token, currentUser } = useContext(AuthContext);
 
   /* f de gestion formulario de nuevo registro q recibe email y password */
   const handleForm = async (e) => {
@@ -49,7 +72,13 @@ export const UserManagement = () => {
       <NavBar onClickAll={() => toExercisesPage()}></NavBar>
 
       <article className="oldUser">
-        <p>recuperar email usuario y poner boton de borrar</p>
+        <ul>
+          {users.map((user) => {
+            return (
+              <UserMagCard user={user}></UserMagCard>
+            );
+          })}
+        </ul>
       </article>
 
       <article className="newUser">
@@ -78,7 +107,7 @@ export const UserManagement = () => {
 
             <label for="pass">Repita la contraseña: </label>
             <input
-              type="password2"
+              type="password"
               id="pass2"
               name="password2"
               placeholder="Repita la nueva contraseña"

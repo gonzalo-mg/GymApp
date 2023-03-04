@@ -8,8 +8,6 @@ import "./index.css";
 import PropTypes from "prop-types";
 
 export const ButtonDelete = ({ className2, onClickFunction }) => {
-
-
   return (
     <button
       type={"button"}

@@ -9,11 +9,13 @@ import { AnonUserPage } from "./views/AnonUserPage";
 import { ExercisesPage } from "./views/ExercisesPage";
 import { ExerciseDetailPage } from "./views/ExerciseDetailPage";
 import { NewExercisePage } from "./views/NewExercisePage";
+import { UserManagementPage } from "./views/UserManagementPage";
 
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
 import { AuthContextProvider } from "./contexts/AuthContext.js";
+
 
 export function App() {
   const router = createBrowserRouter([
@@ -33,6 +35,10 @@ export function App() {
       path: "/newExercise",
       element: <NewExercisePage></NewExercisePage>,
     },
+    {
+      path: "/users",
+      element: <UserManagementPage></UserManagementPage>
+    }
   ]);
 
   return (

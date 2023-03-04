@@ -14,7 +14,7 @@ export const useViewNavigation = () => {
 
   // f navegar a lista de exercises
   const toExercisesPage = () => {
-    return navigate(`/exercises`);
+    navigate(`/exercises`);
   };
 
   // f navegar a detalle del exercise
@@ -40,11 +40,17 @@ export const useViewNavigation = () => {
     });
   };
 
+  // f navegar a UsersManagementPage
+  const toUsersManagementPage = () => {
+    navigate("/users");
+  };
+
   return {
     toExercisesPage,
     toExerciseDetailPage,
     toAnonUserPage,
     toNewExercisePage,
     toFavExercisesPage,
+    toUsersManagementPage,
   };
 };
