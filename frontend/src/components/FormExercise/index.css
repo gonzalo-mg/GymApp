@@ -1,0 +1,24 @@
+.fieldset {
+    border: 0;
+}
+
+#ExerciseForm ul {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#ExerciseForm li {
+    padding: .25rem;
+}
+
+#ExerciseForm input {
+    width: 15rem;
+}
+
+#ExerciseForm textarea {
+    background-color: aqua;
+    
+}

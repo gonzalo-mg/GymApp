@@ -6,11 +6,12 @@ import { TextBanner } from "../../components/TextBanner";
 import { UserCard } from "../../components/UserCard";
 import { NavBar } from "../../components/NavBar";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { useParams } from "react-router-dom";
 import { useExercises } from "../../hooks/useExercises";
 import { AuthContext } from "../../contexts/AuthContext";
+import { FormExercise } from "../../components/FormExercise";
 
 export const ExerciseDetailPage = () => {
   // recuperar contexto autenticacion
@@ -24,11 +25,20 @@ export const ExerciseDetailPage = () => {
   const exercise = useSingleExercises({ token, idExercise });
 
   // invocar hook de navegacion entre ejercicios
-  const { toExercisesPage, toAnonUserPage } = useViewNavigation();
+  const { toExercisesPage, toFavExercisesPage, toAnonUserPage } =
+    useViewNavigation();
+
+  // f estado para determinar si desplegar form edicion
+  const [editForm, setEditForm] = useState(false);
+
+  const handleOpenEditForm = (e) => {
+    setEditForm(!editForm)
+  }
 
   // devolver tarjeta usuario, texto indicativo, tarjeta del ejercicio y botones;
   // // si usuario invalido volver a vista login
   // // si no existe ejercicio volver a lista ejercicios general
+  // // si admin y pulsa boton Editar deplegar formulario
 
   return !currentUser ? (
     toAnonUserPage()
@@ -37,7 +47,7 @@ export const ExerciseDetailPage = () => {
       <UserCard></UserCard>
       <NavBar
         onClickAll={() => toExercisesPage()}
-        onClickFav={() => toExercisesPage()}
+        onClickFav={() => toFavExercisesPage()}
       ></NavBar>
       <article className="ExerciseDetail">
         <TextBanner text={"Vista de Detalles"}></TextBanner>
@@ -48,8 +58,15 @@ export const ExerciseDetailPage = () => {
           key={exercise.idExercise}
           exercise={exercise}
           printDetails={true}
+          openEditForm={(e)=>handleOpenEditForm(e)}
         ></ExerciseCard>
       </article>
+
+      {currentUser.role === "admin" && editForm === true ? (
+        <article className="EditForm">
+          <FormExercise token={token} makeEdit={true}></FormExercise>
+        </article>
+      ) : null}
     </>
   );
 };

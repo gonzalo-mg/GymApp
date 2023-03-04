@@ -16,7 +16,7 @@ import { useLikes } from "../../hooks/useLikes";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
-export const ExerciseCard = ({ exercise, onClickPic, printDetails=false }) => {
+export const ExerciseCard = ({ exercise, onClickPic, printDetails=false, openEditForm=null }) => {
   // desestructurar objeto exercise
   const { idExercise, name, description, typology, muscles, picture } =
     exercise;
@@ -125,8 +125,8 @@ export const ExerciseCard = ({ exercise, onClickPic, printDetails=false }) => {
           {location.pathname !== "/exercises" ? (
             <>
               <ButtonGeneric
-                text={"Editar"}
-                onClickFunction={"WIP"}
+                text={"Edición"}
+                onClickFunction={openEditForm}
               ></ButtonGeneric>
               <ButtonDelete
                 onClickFunction={(e) => {
@@ -159,4 +159,5 @@ ExerciseCard.propTypes = {
   exercise: PropTypes.object.isRequired,
   onClickPic: PropTypes.func,
   printDetails: PropTypes.bool,
+  openEditForm: PropTypes.func
 };

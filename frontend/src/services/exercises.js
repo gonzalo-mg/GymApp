@@ -197,6 +197,39 @@ export const postNewExerciseService = async ({
   }
 };
 
+/* f para editar ejercicio en server */
+export const putEditExerciseService = async ({
+  token,
+  name,
+  typology,
+  description,
+  muscles,
+  picture,
+}) => {
+  try {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("typology", typology);
+    formData.append("description", description);
+    formData.append("muscles", muscles);
+    formData.append("picture", picture);
+
+    await axios.post(`${serverRoot}/newExercise`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: token,
+      },
+    });
+    return alert(`Editado ejercicio: ${name}.`);
+  } catch (e) {
+    console.error(e.message);
+    console.log(e.response.data);
+    return alert(
+      `putEditExerciseService - ${e.response.data.status}: ${e.response.data.message}`
+    );
+  }
+};
+
 /* f para borrar ejercicio de la bbdd */
 export const deleteExerciseService = async ({ token, idExercise }) => {
   try {

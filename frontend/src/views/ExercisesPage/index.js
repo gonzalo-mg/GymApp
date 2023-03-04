@@ -2,7 +2,7 @@
 
 import "./index.css";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { useExercises } from "../../hooks/useExercises";
 import { useLocation } from "react-router-dom";
@@ -29,21 +29,15 @@ export const ExercisesPage = () => {
 
   // f estado para setaer "vista" lo q cambia entre mostrar ejercios todos o favs
   // // si se llega desde otra pag indicando q se quieren ver los fav setear view; desde la vista ExerciseDetail con boton de fav
-  const wantedView = useLocation().wantedView
-  const [view, setView] = useState(wantedView||"viewAll");
+  const wantedView = useLocation().state;
+  console.log(`wantedView: ${wantedView}`);
+  const [view, setView] = useState(wantedView || "viewAll");
 
   // efecto actualiza estado view
   //useEffect();
 
   // invocar hook de navegacion entre vistas
-  const {
-    toAnonUserPage,
-    toExercisesPage,
-    toExerciseDetailPage,
-    toNewExercisePage,
-  } = useViewNavigation();
-
-
+  const { toAnonUserPage, toExerciseDetailPage } = useViewNavigation();
 
   /* 
     - si se pierde sesion ir a vista de login
@@ -117,7 +111,11 @@ export const ExercisesPage = () => {
                 <ExerciseCard
                   key={exercise.idExercise}
                   exercise={exercise}
-                  onClickPic={() => currentUser.role !== "admin" ? toExerciseDetailPage(exercise.idExercise) : null}
+                  onClickPic={() =>
+                    currentUser.role !== "admin"
+                      ? toExerciseDetailPage(exercise.idExercise)
+                      : null
+                  }
                   printDetails={currentUser.role === "admin" ? true : false}
                 ></ExerciseCard>
               );

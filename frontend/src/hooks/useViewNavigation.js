@@ -10,7 +10,7 @@ export const useViewNavigation = () => {
   // f estados para activar al llegar a la nueva pag
   // eslint-disable-next-line
   const [filter, setFilter] = useState("");
-  const [view, setView]=useState("");
+  const [view, setView] = useState("");
 
   // f navegar a lista de exercises
   const toExercisesPage = () => {
@@ -24,21 +24,27 @@ export const useViewNavigation = () => {
 
   // f navegar a AnonUserPage
   const toAnonUserPage = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   // f navegar a NewExercisePage
   const toNewExercisePage = () => {
-    navigate('/newExercise')
-  }
+    navigate("/newExercise");
+  };
 
   // f navegar a toFavExercisesPage
   // // incrustar propiedad para setear estado inicial para mostrar favs al llegar a /exercises
   const toFavExercisesPage = () => {
-    navigate('/exercises',{
-      wantedView: "viewFav"
-    })
-  }
-  
-  return {toExercisesPage, toExerciseDetailPage, toAnonUserPage, toNewExercisePage, toFavExercisesPage}
+    navigate("/exercises", {
+      state: "viewFav",
+    });
+  };
+
+  return {
+    toExercisesPage,
+    toExerciseDetailPage,
+    toAnonUserPage,
+    toNewExercisePage,
+    toFavExercisesPage,
+  };
 };
