@@ -117,7 +117,8 @@ export const ExercisesPage = () => {
                 <ExerciseCard
                   key={exercise.idExercise}
                   exercise={exercise}
-                  onClickPic={() => toExerciseDetailPage(exercise.idExercise)}
+                  onClickPic={() => currentUser.role !== "admin" ? toExerciseDetailPage(exercise.idExercise) : null}
+                  printDetails={currentUser.role === "admin" ? true : false}
                 ></ExerciseCard>
               );
             })}

@@ -33,6 +33,7 @@ export const useViewNavigation = () => {
   }
 
   // f navegar a toFavExercisesPage
+  // // incrustar propiedad para setear estado inicial para mostrar favs al llegar a /exercises
   const toFavExercisesPage = () => {
     navigate('/exercises',{
       wantedView: "viewFav"

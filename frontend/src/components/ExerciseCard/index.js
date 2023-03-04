@@ -143,7 +143,7 @@ export const ExerciseCard = ({ exercise, onClickPic, printDetails=false }) => {
               onClickFunction={(e) => {
                 e.stopPropagation();
                 alert(
-                  `Recuerde que dichas acciones no se pueden deshacer. Proceda con cautela.`
+                  `El borrado o edición de datos afectan a la Base de Datos. Proceda con cautela.`
                 );
                 toExerciseDetailPage(idExercise);
               }}
