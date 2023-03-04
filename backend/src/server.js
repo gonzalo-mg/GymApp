@@ -17,7 +17,8 @@ app.use(fileUpload());
 const { 
   loginUser,
   registerUser,
-  getUserData
+  getUserData,
+  deleteUser
 } = require("./controllers/users");
 
 // de exercices
@@ -84,11 +85,11 @@ app.get("/likes", validateAuth, getUserLikes);
 
 app.post("/newExercise", validateAuth, checkAdmin, postNewExercise);
 
-
 app.put("/exercises/:idExercise", validateAuth, checkAdmin, putEditExercise);
 
-
 app.delete("/exercises/:idExercise", validateAuth, checkAdmin, deleteExercise);
+
+app.delete("/users/:idUser", validateAuth, checkAdmin, deleteUser);
 
 /* MIDDLEWARES ERRORES */
 
