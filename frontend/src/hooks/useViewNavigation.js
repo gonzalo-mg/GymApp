@@ -14,29 +14,29 @@ export const useViewNavigation = () => {
 
   // f navegar a lista de exercises
   const toExercisesPage = () => {
-    setFilter("");
     return navigate(`/exercises`);
   };
 
   // f navegar a detalle del exercise
   const toExerciseDetailPage = (id) => {
-    return navigate(`/exercises/${id}`);
+    navigate(`/exercises/${id}`);
   };
 
   // f navegar a AnonUserPage
   const toAnonUserPage = () => {
-    return navigate('/')
+    navigate('/')
   }
 
   // f navegar a NewExercisePage
   const toNewExercisePage = () => {
-    return navigate('/newExercise')
+    navigate('/newExercise')
   }
 
   // f navegar a toFavExercisesPage
   const toFavExercisesPage = () => {
-    setView("viewFav")
-    return navigate('/exercises')
+    navigate('/exercises',{
+      wantedView: "viewFav"
+    })
   }
   
   return {toExercisesPage, toExerciseDetailPage, toAnonUserPage, toNewExercisePage, toFavExercisesPage}

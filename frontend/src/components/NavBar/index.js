@@ -9,13 +9,17 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import { useViewNavigation } from "../../hooks/useViewNavigation";
+import { useLocation, Link } from "react-router-dom";
 
-export const NavBar = () => {
+export const NavBar = ({ onClickAll, onClickFav }) => {
   // recuperar usuario activo del contexto
   const { currentUser } = useContext(AuthContext);
 
   // hook navegacion
-  const { toExercisesPage, toFavExercisesPage, toNewExercisePage } = useViewNavigation();
+  const { toExercisesPage, toFavExercisesPage, toNewExercisePage } =
+    useViewNavigation();
+
+  const { pathname } = useLocation();
 
   // devolver botones segun rol usuario
   return (
@@ -23,15 +27,13 @@ export const NavBar = () => {
       <ButtonGeneric
         type="button"
         text="Ver Todos"
-        onClickFunction={() => toExercisesPage()}
+        onClickFunction={onClickAll}
       ></ButtonGeneric>
       {currentUser.role === "worker" ? (
         <ButtonGeneric
           type="button"
-          text="Favoritos"
-          onClickFunction={() => {
-            toFavExercisesPage();
-          }}
+          text="Ver Favoritos"
+          onClickFunction={onClickFav}
         ></ButtonGeneric>
       ) : (
         <>

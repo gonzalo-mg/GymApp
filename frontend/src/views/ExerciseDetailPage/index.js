@@ -8,7 +8,7 @@ import { NavBar } from "../../components/NavBar";
 
 import { useContext } from "react";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
-import { useParams } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useExercises } from "../../hooks/useExercises";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -24,7 +24,9 @@ export const ExerciseDetailPage = () => {
   const exercise = useSingleExercises({ token, idExercise });
 
   // invocar hook de navegacion entre ejercicios
-  const { toExercisesPage, toAnonUserPage } = useViewNavigation();
+  const { toExercisesPage, toAnonUserPage, toNewExercisePage } =
+    useViewNavigation();
+    
 
   // devolver tarjeta usuario, texto indicativo, tarjeta del ejercicio y botones;
   // // si usuario invalido volver a vista login
@@ -35,7 +37,10 @@ export const ExerciseDetailPage = () => {
   ) : (
     <>
       <UserCard></UserCard>
-      <NavBar></NavBar>
+      <NavBar
+        onClickAll={() => toExercisesPage()}
+        onClickFav={() => toExercisesPage()}
+      ></NavBar>
       <article className="ExerciseDetail">
         <TextBanner text={"Vista de Detalles"}></TextBanner>
 

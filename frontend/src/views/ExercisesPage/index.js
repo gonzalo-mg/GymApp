@@ -4,9 +4,10 @@ import "./index.css";
 
 import { useState, useEffect, useContext } from "react";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
-import { AuthContext } from "../../contexts/AuthContext";
-
 import { useExercises } from "../../hooks/useExercises";
+import { useLocation } from "react-router-dom";
+
+import { AuthContext } from "../../contexts/AuthContext";
 
 import { ExerciseCard } from "../../components/ExerciseCard";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
@@ -27,13 +28,22 @@ export const ExercisesPage = () => {
   const exercisesFav = useFavExercises({ token, filter });
 
   // f estado para setaer "vista" lo q cambia entre mostrar ejercios todos o favs
-  const [view, setView] = useState("viewAll");
+  // // si se llega desde otra pag indicando q se quieren ver los fav setear view; desde la vista ExerciseDetail con boton de fav
+  const wantedView = useLocation().wantedView
+  const [view, setView] = useState(wantedView||"viewAll");
 
   // efecto actualiza estado view
   //useEffect();
 
   // invocar hook de navegacion entre vistas
-  const { toExerciseDetailPage, toAnonUserPage } = useViewNavigation();
+  const {
+    toAnonUserPage,
+    toExercisesPage,
+    toExerciseDetailPage,
+    toNewExercisePage,
+  } = useViewNavigation();
+
+
 
   /* 
     - si se pierde sesion ir a vista de login
@@ -47,7 +57,11 @@ export const ExercisesPage = () => {
   ) : (
     <>
       <UserCard></UserCard>
-      <NavBar></NavBar>
+      <NavBar
+        onClickAll={() => setView("viewAll")}
+        onClickFav={() => setView("viewFav")}
+      ></NavBar>
+
       <article className="exercisesList">
         <form
           id="filters"
@@ -77,7 +91,7 @@ export const ExercisesPage = () => {
         <TextBanner
           text={
             view === "viewFav"
-              ? exercisesFav.length() === 0
+              ? exercisesFav.length === 0
                 ? "No tienes favoritos"
                 : filter
                 ? "Viendo tus favoritos filtrados"
