@@ -148,7 +148,7 @@ export const useExercises = () => {
   };
 
   // RECUPERAR todos los LIKED
-  const useSingleExercises = ({ token, idExercise, editChange }) => {
+  const useSingleExercises = ({ token, idExercise, editForm }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
     const [exercise, setExercise] = useState([]);
 
@@ -164,7 +164,7 @@ export const useExercises = () => {
         setExercise(recoveredExercise);
       };
       getData();
-    }, [editChange]);
+    }, [editForm]);
     return exercise;
   };
 

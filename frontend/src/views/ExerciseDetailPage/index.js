@@ -22,12 +22,10 @@ export const ExerciseDetailPage = () => {
 
   // f estado para determinar si desplegar form edicion
   const [editForm, setEditForm] = useState(false);
-  // f estado para traqear ediciones
-  const [editChange, setEditChange] = useState(false);
 
   //usar hook recuperar ejercicios
   const { useSingleExercises } = useExercises();
-  const exercise = useSingleExercises({ token, idExercise, editChange });
+  const exercise = useSingleExercises({ token, idExercise, editForm });
 
   // f aux para manejar cambio estado con boton
   const handleOpenEditForm = (e) => {
@@ -70,7 +68,7 @@ export const ExerciseDetailPage = () => {
 
         {currentUser.role === "admin" && editForm === true ? (
           <article className="EditForm">
-            <FormExercise token={token} makeEdit={"ok"} idExercise={idExercise} editChange={editChange} setEditChange={setEditChange}></FormExercise>
+            <FormExercise token={token} makeEdit={"ok"} idExercise={idExercise} editForm={editForm} setEditForm={setEditForm}></FormExercise>
           </article>
         ) : null}
       </div>

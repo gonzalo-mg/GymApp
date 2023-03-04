@@ -49,9 +49,10 @@ export const FormExercise = ({
     }
   };
 
-  const handleSubmit = async ({ e, makeNew, makeEdit, idExercise }) => {
+  const handleSubmit = async ({ e, makeNew, makeEdit, idExercise, editForm, setEditForm }) => {
     e.preventDefault();
     await doSubmit({ e, makeNew, makeEdit, idExercise });
+    setEditForm(!editForm);
   };
 
   return (
@@ -59,7 +60,7 @@ export const FormExercise = ({
       <legend>Complete el formulario con todos los datos del ejercicio.</legend>
       <form
         id="ExerciseForm"
-        onSubmit={(e) => handleSubmit({ e, makeNew, makeEdit, idExercise })}
+        onSubmit={(e) => handleSubmit({ e, makeNew, makeEdit, idExercise, editForm, setEditForm })}
       >
         <ul>
           <li>
