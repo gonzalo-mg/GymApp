@@ -12,8 +12,9 @@
     transition-duration: 0.5s;
 }
 
-.ExerciseCard > .name {
+.ExerciseCard h2, h3, h4 {
     text-align: center;
+    padding: 0.5rem;
 }
 
 .ExerciseCard > img {
@@ -40,4 +41,13 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+.ExerciseCard > .detailsSection {
+    background-color: var(--background3);
+    
+    margin: 1rem;
+    padding: 0.5rem 2rem;
+}
+
+
 

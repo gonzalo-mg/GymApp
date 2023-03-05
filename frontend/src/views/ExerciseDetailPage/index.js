@@ -56,8 +56,6 @@ export const ExerciseDetailPage = () => {
           <TextBanner title={"Edición de datos"}></TextBanner>
         ) : undefined}
       </div>
-      <div className="divCards">
-        <article className="ExerciseDetail">
           {!exercise ? toExercisesPage() : undefined}
 
           <ExerciseCard
@@ -67,7 +65,7 @@ export const ExerciseDetailPage = () => {
             openEditForm={(e) => handleOpenEditForm(e)}
             clickablePic={false}
           ></ExerciseCard>
-        </article>
+
 
         {currentUser.role === "admin" && editForm === true ? (
           <article className="EditForm">
@@ -80,7 +78,6 @@ export const ExerciseDetailPage = () => {
             ></FormExercise>
           </article>
         ) : null}
-      </div>
     </>
   );
 };

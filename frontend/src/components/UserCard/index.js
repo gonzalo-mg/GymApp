@@ -16,7 +16,7 @@ export const UserCard = () => {
     <article className="UserCard">
       <p className="user">
         {currentUser
-          ? `Logeado como: ${currentUser?.email}`
+          ? `Usuario: ${currentUser?.email}`
           : "Sesión no iniciada"}
       </p>
       <ButtonGeneric

@@ -36,36 +36,36 @@ export const ExercisesPage = () => {
   const { toAnonUserPage, toExerciseDetailPage } = useViewNavigation();
 
   // f para texto condicional segun q este viendo
-  const printTextBanner = ({filter, view}) => {
-    const avisoImagen = "Pincha la imagen para ver la descripción."
+  const printTextBanner = ({ filter, view }) => {
+    const avisoImagen = "Pincha la imagen para ver sus detalles.";
     // si en favoritos
-    if(view === "viewFav") {
+    if (view === "viewFav") {
       // y si no hay favs ni filtro aplicaco
       if (exercisesFav.length === 0 && !filter) {
         return "No tienes favoritos";
-        // sino y si no hay favs q pasen un filtrp  
+        // sino y si no hay favs q pasen un filtrp
       } else if (exercisesFav.length === 0 && filter) {
-        return `Ninguno de tus favoritos se ajusta al filtrado por <<${filter}>>`
+        return `Ninguno de tus favoritos se ajusta al filtrado por <<${filter}>>`;
         // sino y si hay favs q pasan el filtro
       } else if (exercisesFav.length !== 0 && filter) {
-        return `Estos son tus favoritos filtrados por <<${filter}>>. ${avisoImagen}`
+        return `Estos son tus favoritos filtrados por <<${filter}>>. ${avisoImagen}`;
       } else {
-        return `Estos son todos tus favoritos. ${avisoImagen}`
+        return `Estos son todos tus favoritos. ${avisoImagen}`;
       }
       // sino y si en todos
-    } else if (view === "viewAll"){
+    } else if (view === "viewAll") {
       // y hay filtro
       if (filter) {
-        return `Viendo todos los ejercicios filtrados por <<${filter}>>. ${avisoImagen}`
+        return `Viendo todos los ejercicios filtrados por <<${filter}>>. ${avisoImagen}`;
         // sino y si no hay filtro
       } else if (!filter) {
-        return `Viendo todos los ejercicios. ${avisoImagen}`
+        return `Viendo todos los ejercicios. ${avisoImagen}`;
       }
       // en otro caso ups!
     } else {
-      return "Parece que algo va mal. Consulta con el administrador."
+      return "Parece que algo va mal. Consulta con el administrador.";
     }
-  }
+  };
 
   /* 
     - si se pierde sesion ir a vista de login
@@ -84,39 +84,34 @@ export const ExercisesPage = () => {
           onClickAll={() => setView("viewAll")}
           onClickFav={() => setView("viewFav")}
         ></NavBar>
-        <TextBanner
-          text={
-            printTextBanner({view, filter})
-          }
-        ></TextBanner>
+        <TextBanner text={printTextBanner({ view, filter })}></TextBanner>
       </div>
       <div className="divCards">
+        <form
+          id="filters"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <ul>
+            <li>
+              <input
+                id="filterName"
+                name="name"
+                placeholder="Busca por nombre, tipología o músculo"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value.toLowerCase())}
+              ></input>
+            </li>
+          </ul>
+
+          <ButtonGeneric
+            type="button"
+            text="Borrar filtro"
+            onClickFunction={() => setFilter("")}
+          ></ButtonGeneric>
+        </form>
         <article className="articleExercisesList">
-          <form
-            id="filters"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <ul>
-              <li>
-                <input
-                  id="filterName"
-                  name="name"
-                  placeholder="Busca por nombre, tipología o músculo"
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value.toLowerCase())}
-                ></input>
-              </li>
-            </ul>
-
-            <ButtonGeneric
-              type="button"
-              text="Borrar filtro"
-              onClickFunction={() => setFilter("")}
-            ></ButtonGeneric>
-          </form>
-
           {view === "viewFav"
             ? exercisesFav.map((exercise) => {
                 return (

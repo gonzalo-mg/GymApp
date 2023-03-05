@@ -1,0 +1,14 @@
+.TextBanner {
+    background-color: var(--background3);
+    border: 1px solid var(--elementDetails);
+
+    padding: 0.5rem;
+
+    font-size: small;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}

@@ -22,7 +22,7 @@ export const NavBar = ({ onClickAll, onClickFav }) => {
     <nav className="NavBar">
       <ButtonGeneric
         type="button"
-        text="Ver Todos"
+        text={currentUser.role === "admin" ? "Ver Ejercicios" : "Ver Todos"}
         onClickFunction={onClickAll}
       ></ButtonGeneric>
       {currentUser.role === "worker" ? (
@@ -40,7 +40,7 @@ export const NavBar = ({ onClickAll, onClickFav }) => {
           ></ButtonGeneric>
           <ButtonGeneric
             className="ButtonGeneric"
-            text="Usuarios"
+            text="Gestionar Usuarios"
             onClickFunction={() => toUsersManagementPage()}
           ></ButtonGeneric>
         </>

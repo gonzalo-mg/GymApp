@@ -1,0 +1,11 @@
+.NavBar {
+    background-color: var(--background1);
+    border: 1px solid var(--elementDetails);
+
+    padding: 0.5rem 0.15rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

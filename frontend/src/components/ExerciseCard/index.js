@@ -89,6 +89,7 @@ export const ExerciseCard = ({
 
       {printDetails ? (
         <section className="detailsSection">
+          <h3>Detalles</h3>
           <ul>
             <li>
               <strong>Tipología:</strong> {typology}
@@ -96,10 +97,9 @@ export const ExerciseCard = ({
             <li>
               <strong>Músculos:</strong> {muscles}
             </li>
-            <li>
-              <strong>Descripción:</strong> {description}
-            </li>
           </ul>
+          <h4>Descripción</h4>
+          <p>{description}</p>
         </section>
       ) : undefined}
 
