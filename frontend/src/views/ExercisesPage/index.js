@@ -78,7 +78,7 @@ export const ExercisesPage = () => {
     toAnonUserPage()
   ) : (
     <>
-      <div className="cards">
+      <div className="divNav">
         <UserCard></UserCard>
         <NavBar
           onClickAll={() => setView("viewAll")}
@@ -90,8 +90,8 @@ export const ExercisesPage = () => {
           }
         ></TextBanner>
       </div>
-      <div className="data">
-        <article className="exercisesList">
+      <div className="divCards">
+        <article className="articleExercisesList">
           <form
             id="filters"
             onSubmit={(e) => {

@@ -75,8 +75,10 @@ export const UserManagementPage = () => {
     toAnonUserPage()
   ) : (
     <>
-      <UserCard></UserCard>
-      <NavBar onClickAll={() => toExercisesPage()}></NavBar>
+      <div className="divNav">
+        <UserCard></UserCard>
+        <NavBar onClickAll={() => toExercisesPage()}></NavBar>
+      </div>
 
       <h1>Gestión de usuarios</h1>
       <article className="oldUser">

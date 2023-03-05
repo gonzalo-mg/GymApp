@@ -1,8 +1,8 @@
 header {
-    background-color: var(--color1);
-    color: var(--color2);
-
-    min-width: 100vw;
+    /* colores invertidos para destacar */
+    background-color: var(--elementDetails);
+    color: var(--elementBackground);
+    border: 2px solid var(--elementText);
 
     text-align: center;
 }

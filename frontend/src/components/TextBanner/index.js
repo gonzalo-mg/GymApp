@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 
 export const TextBanner = ({title, text}) => {
     return (
-        <>
+        <div className='TextBanner'>
         <h1>{title}</h1>
         <p>{text}</p>
-        </>
+        </div>
     )
 }
 

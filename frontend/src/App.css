@@ -1,11 +1,17 @@
+* {
+  /* iniciar todos los elementos a 0 */
+    padding: 0;
+    margin:0;
+    /* calcular limites incluyendo pad y mar */
+    box-sizing: border-box;
 
-body{
-    min-height: 100vh;
-    
-    min-width: 100vw;
+    /* evitar scrolls horizontales */
+    max-width: 100vw;
+  }
 
-}
-
-main {
-    height: 100%;
+#root{
+  /* apilar vericalmente header-main-footer */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

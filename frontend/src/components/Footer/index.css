@@ -1,12 +1,15 @@
 footer {
-    background-color: var(--color1);
-    color: var(--color2);
-    
-    padding: 0.1rem;
+    /* colores invertidos para destacar */
+    background-color: var(--elementDetails);
+    color: var(--elementBackground);
+    border: 2px solid var(--elementText);
 
-    width: 100vw;
+    min-height: 1rem;
 
-    font-size: x-small;
+    font-size: small;
 
     text-align: end;
+
+    /* mantener abajo */
+    margin-top: auto;
 }

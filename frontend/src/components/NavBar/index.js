@@ -19,7 +19,7 @@ export const NavBar = ({ onClickAll, onClickFav }) => {
 
   // devolver botones segun rol usuario
   return (
-    <nav className="buttons">
+    <nav className="NavBar">
       <ButtonGeneric
         type="button"
         text="Ver Todos"

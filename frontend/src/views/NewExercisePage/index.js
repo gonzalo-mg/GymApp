@@ -3,7 +3,6 @@
 import { UserCard } from "../../components/UserCard";
 import "./index.css";
 
-
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
@@ -16,15 +15,16 @@ export const NewExercisePage = () => {
   // recuperar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
   // invocar hook de navegacion entre vistas
-  const { toExercisesPage, toAnonUserPage } =
-    useViewNavigation();
+  const { toExercisesPage, toAnonUserPage } = useViewNavigation();
 
   return !currentUser ? (
     toAnonUserPage()
   ) : (
     <>
-      <UserCard></UserCard>
-      <NavBar onClickAll={() => toExercisesPage()}></NavBar>
+      <div className="divNav">
+        <UserCard></UserCard>
+        <NavBar onClickAll={() => toExercisesPage()}></NavBar>
+      </div>
       <h1>Crear nuevo ejercicio</h1>
       <FormExercise token={token} makeNew={true}></FormExercise>
     </>

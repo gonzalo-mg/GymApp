@@ -1,7 +1,8 @@
 /* COMPONENETE ExerciseCard: tarjeta de cada ejercicio */
-
-import { ButtonGeneric } from "../ButtonGeneric";
 import "./index.css";
+import { ButtonGeneric } from "../ButtonGeneric";
+import { ButtonMini } from "../ButtonMini";
+
 
 import PropTypes from "prop-types";
 
@@ -87,7 +88,7 @@ export const ExerciseCard = ({
       ></img>
 
       {printDetails ? (
-        <section className="details">
+        <section className="detailsSection">
           <ul>
             <li>
               <strong>Tipología:</strong> {typology}
@@ -141,6 +142,7 @@ export const ExerciseCard = ({
           ) : (
             <ButtonGeneric
               text={"Editar o Borrar"}
+              className2={"delete"}
               onClickFunction={(e) => {
                 e.stopPropagation();
                 alert(

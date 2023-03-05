@@ -1,18 +1,18 @@
 :root{
-    --color1: mediumpurple;
-    --color2: purple;
-    --color3: indigo;
+    /* elementos principales */
+    --elementBackground: mediumpurple;
+    --elementText: purple;
+    --elementDetails: indigo;
 
-    --Background1: ivory;
-    --Background2: lightgrey;
+    /* fondos genericos para areas grandes */
+    --background1: plum;
+    --background2: thistle;
 
-    --CardBackground: lavender;
-
-    --ButtonGenericBackground: mediumpurple;
-    --ButtonGenericBorderColor: indigo;
-    --ButtonGenericColor: indigo;
-
-    --ButtonMiniBackground: ivory;
-    --ButtonMiniBorderColor: indigo;
-    --ButtonMiniColor: indigo;
+    /* colores especiales */
+    --hoverColor: 	powderblue;
+    --warningColor: orange;
+    --dangerColor: red;
+    --buttonEmptyColor: ivory;
+    --favColor: gold;
+    --likeColor:hotpink;
 }

@@ -46,7 +46,7 @@ export const ExerciseDetailPage = () => {
     toAnonUserPage()
   ) : (
     <>
-      <div className="cards">
+      <div className="divNavs">
         <UserCard></UserCard>
         <NavBar
           onClickAll={() => toExercisesPage()}
@@ -56,7 +56,7 @@ export const ExerciseDetailPage = () => {
           <TextBanner title={"Edición de datos"}></TextBanner>
         ) : undefined}
       </div>
-      <div className="data">
+      <div className="divCards">
         <article className="ExerciseDetail">
           {!exercise ? toExercisesPage() : undefined}
 

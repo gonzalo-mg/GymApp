@@ -1,114 +1,43 @@
 .ExerciseCard {
-    background-color: var(--CardBackground);
-
-    border: 2px solid var(--color3);
+    background-color: var(--background1);
+    color: var(--elementText);
+    border: 2px solid var(--elementDetails);
 
     min-height: 100%;
-
     min-width: 100%;
+}
 
-    padding: 1%;
-
+.ExerciseCard:hover{
+    background-color: var(--background2);
+    transition-duration: 0.5s;
 }
 
 .ExerciseCard > .name {
     text-align: center;
-    color: var(--color1);
-}
-
-.ExerciseCard .list ul {
-    list-style: none;
 }
 
 .ExerciseCard > img {
-    width: 25%;
-    height: 25%;
+    width: 10rem;
+    height: 10rem;
 
+    border: 2px solid var(--elementDetails);
+
+    /* centrar */
     display: block;
-    margin: 2% auto 2% auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ExerciseCard > img.clickable {
-
     cursor: pointer;
 }
 
-.ExerciseCard .description {
-    margin: 1%;
-    padding: 1%;
-}
+.ExerciseCard > .workerButtons, .adminButtons {
+    padding: 0.5rem;
 
-.ExerciseCard  .workerButtons {
     display: flex;
 
     align-items: center;
     justify-content: space-evenly;
-
 }
 
-.ExerciseCard  .adminButtons {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-evenly;
-
-}
-
-.ButtonMiniFav {
-    height: 2rem;
-    width: 2rem;
-
-    background-image: url(/public/fav-icon.png);
-    
-    border-radius: 100px;
-
-    border-color: var(--ButtonMiniBorderColor);
-    background-color: var(--ButtonMiniBackground);
-
-    background-size: cover;
-
-    font-weight: bolder;
-    color: var(--ButtonMiniColor);
-
-    cursor: pointer;
-
-    transition-duration: 0.4s;
-}
-
-.ButtonMiniFav.isFav {
-    background-color: blue;
-}
-
-.ButtonMiniFav:hover{
-    background-color: var(--color1)
-}
-
-.ButtonMiniLike {
-    height: 2rem;
-    width: 2rem;
-
-    background-image: url(/public/like-icon.svg);
-    
-    border-radius: 100px;
-
-    border-color: var(--ButtonMiniBorderColor);
-    background-color: var(--ButtonMiniBackground);
-
-    background-size: cover;
-
-    font-weight: bolder;
-    font-size: 1rem;
-    color: var(--ButtonMiniColor);
-
-    cursor: pointer;
-
-    transition-duration: 0.4s;
-}
-
-.ButtonMiniLike.isLike {
-    background-color: pink;
-}
-
-.ButtonMiniLike:hover{
-    background-color: var(--color1)
-}
