@@ -92,11 +92,13 @@ export const UserManagementPage = () => {
                   <li>Rol:{user.role}</li>
                   <li>Fecha creación:{user.created}</li>
                 </ul>
-                <ButtonDelete
+                <ButtonGeneric
+                  text="BORRAR"
+                  className2="delete"
                   onClickFunction={(e) => {
                     handleDelete({ e, token, user });
                   }}
-                ></ButtonDelete>
+                ></ButtonGeneric>
               </article>
             );
           })}

@@ -11,7 +11,7 @@ export const ButtonDelete = ({ className2, onClickFunction }) => {
   return (
     <button
       type={"button"}
-      className={`ButtonDelete ${className2}`}
+      className={`ButtonGeneric ButtonDelete ${className2}`}
       onClick={onClickFunction}
     >
       {"BORAR"}

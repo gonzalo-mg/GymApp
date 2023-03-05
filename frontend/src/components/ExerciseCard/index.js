@@ -130,14 +130,16 @@ export const ExerciseCard = ({
                 text={"Edición"}
                 onClickFunction={openEditForm}
               ></ButtonGeneric>
-              <ButtonDelete
+              <ButtonGeneric
+                text={"BORRAR"}
+                className2={"delete"}
                 onClickFunction={(e) => {
                   e.stopPropagation();
                   deleteExerciseService({ token, idExercise });
                   alert(`Ejercicio ${name} borrado.`);
                   toExercisesPage();
                 }}
-              ></ButtonDelete>
+              ></ButtonGeneric>
             </>
           ) : (
             <ButtonGeneric
