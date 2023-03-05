@@ -11,13 +11,14 @@ import PropTypes from "prop-types";
 
 export const ButtonMini = ({
   type = "button",
-  className2,
+  classNameType,
+  classNameStatus,
   text,
   onClickFunction,
 }) => {
   return (
     <button
-      className={`ButtonMini ${className2}`}
+      className={`ButtonMini ${classNameType} ${classNameStatus}`}
       type={type}
       onClick={onClickFunction}
     >
@@ -29,6 +30,7 @@ export const ButtonMini = ({
 ButtonMini.propTypes = {
   type: PropTypes.string,
   text: PropTypes.string,
-  className2: PropTypes.string,
+  classNameType: PropTypes.string,
+  classNameStatus: PropTypes.string,
   onClickFunction: PropTypes.func,
 }

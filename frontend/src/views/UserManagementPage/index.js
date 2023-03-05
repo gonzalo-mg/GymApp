@@ -3,7 +3,6 @@
 import "./index.css";
 
 import { ButtonGeneric } from "../../components/ButtonGeneric";
-import { ButtonDelete } from "../../components/ButtonDelete";
 import { UserCard } from "../../components/UserCard";
 import { NavBar } from "../../components/NavBar";
 //import { UserMagCard } from "../../components/UserMagCard";

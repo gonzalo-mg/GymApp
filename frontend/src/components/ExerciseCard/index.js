@@ -1,7 +1,6 @@
 /* COMPONENETE ExerciseCard: tarjeta de cada ejercicio */
 
 import { ButtonGeneric } from "../ButtonGeneric";
-import { ButtonDelete } from "../ButtonDelete";
 import "./index.css";
 
 import PropTypes from "prop-types";
@@ -106,14 +105,12 @@ export const ExerciseCard = ({
       {currentUser.role === "worker" ? (
         <div className="workerButtons">
           <button
-            id="fav"
-            className={`ButtonMiniFav ${favClass}`}
+            className={`ButtonMini favType ${favClass}`}
             type="button"
             onClickCapture={(e) => clickFav(e)}
           ></button>
           <button
-            id="like"
-            className={`ButtonMiniLike ${likeClass}`}
+            className={`ButtonMini likeType ${likeClass}`}
             type="button"
             onClickCapture={(e) => clickLike(e)}
           >
