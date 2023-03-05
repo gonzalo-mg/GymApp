@@ -36,12 +36,12 @@ const toggleExerciseLike = async (req, res, next) => {
       await newLike(idExercise, idUser);
       statusCode = 201;
       // reseleccionar like de la bbdd
-    const updatedlike = await selectLikeByExerciseAndUser(idExercise, idUser);
-      res.status(statusCode).send({ status: "ok", updatedlike });
+      //const updatedLike = await selectLikeByExerciseAndUser(idExercise, idUser);
+      //res.status(statusCode).send({ status: "ok", updatedLike });
     }
 
     // si tiene estado true se quita
-    if (like.stateLike === 1) {
+    else if (like.stateLike === 1) {
       await deleteLike(idExercise, idUser);
       statusCode = 200;
     } //si no se pone
