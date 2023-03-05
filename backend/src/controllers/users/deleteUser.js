@@ -20,7 +20,7 @@ async function deleteUser(req, res, next) {
     const user = await selectUserById(idUser);
 
     // lanzar error si se solicita admin
-    if (user.rol === "admin") {
+    if (user.role === "admin") {
       createError("Admins can not be deleted", 404)
     }
 

@@ -3,7 +3,10 @@
 import "./index.css";
 
 import { ButtonGeneric } from "../../components/ButtonGeneric";
+import { ButtonDelete } from "../../components/ButtonDelete";
 import { UserCard } from "../../components/UserCard";
+import { NavBar } from "../../components/NavBar";
+import { UserMagCard } from "../../components/UserMagCard";
 
 import { useState, useContext, useEffect } from "react";
 
@@ -16,8 +19,6 @@ import {
 } from "../../services/user";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import { NavBar } from "../../components/NavBar";
-import { UserMagCard } from "../../components/UserMagCard";
 
 export const UserManagementPage = () => {
   // recuperar contexto autenticacion
@@ -64,6 +65,13 @@ export const UserManagementPage = () => {
     }
   };
 
+  /* f gestionar boton delete */
+  const handleDelete = async ({ e, token, user }) => {
+    e.stopPropagation();
+    await deleteUserByIdService({ token, user });
+    await setUserChange(!userChange);
+  };
+
   return !currentUser ? (
     toAnonUserPage()
   ) : (
@@ -75,7 +83,19 @@ export const UserManagementPage = () => {
         <ul>
           {users.map((user) => {
             return (
-              <UserMagCard user={user}></UserMagCard>
+              <article className="UserMagCard" key={user.idUser}>
+                <ul>
+                  <li>{user.email}</li>
+                  <li>id:{user.idUser}</li>
+                  <li>Rol:{user.role}</li>
+                  <li>Fecha creación:{user.created}</li>
+                </ul>
+                <ButtonDelete
+                  onClickFunction={(e) => {
+                    handleDelete({ e, token, user });
+                  }}
+                ></ButtonDelete>
+              </article>
             );
           })}
         </ul>
