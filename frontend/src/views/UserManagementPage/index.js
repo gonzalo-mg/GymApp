@@ -6,7 +6,7 @@ import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { ButtonDelete } from "../../components/ButtonDelete";
 import { UserCard } from "../../components/UserCard";
 import { NavBar } from "../../components/NavBar";
-import { UserMagCard } from "../../components/UserMagCard";
+//import { UserMagCard } from "../../components/UserMagCard";
 
 import { useState, useContext, useEffect } from "react";
 
@@ -79,7 +79,9 @@ export const UserManagementPage = () => {
       <UserCard></UserCard>
       <NavBar onClickAll={() => toExercisesPage()}></NavBar>
 
+      <h1>Gestión de usuarios</h1>
       <article className="oldUser">
+        <h2>Usuarios activos</h2>
         <ul>
           {users.map((user) => {
             return (
@@ -102,6 +104,7 @@ export const UserManagementPage = () => {
       </article>
 
       <article className="newUser">
+        <h2>Crear nuevo usuario</h2>
         <fieldset>
           <legend>Introduzca credenciales del nuevo usuario.</legend>
           <form onSubmit={(e) => handleForm(e)}>

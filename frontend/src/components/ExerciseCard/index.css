@@ -9,8 +9,6 @@
 
     padding: 1%;
 
-    cursor: pointer;
-
 }
 
 .ExerciseCard > .name {
@@ -28,6 +26,11 @@
 
     display: block;
     margin: 2% auto 2% auto;
+}
+
+.ExerciseCard > img.clickable {
+
+    cursor: pointer;
 }
 
 .ExerciseCard .description {

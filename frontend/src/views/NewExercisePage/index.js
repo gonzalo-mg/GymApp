@@ -1,10 +1,8 @@
 /* VISTA formulario para q el admin cree un nuevo exercise */
 
-import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { UserCard } from "../../components/UserCard";
 import "./index.css";
 
-import { postNewExerciseService } from "../../services/exercises";
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -18,7 +16,7 @@ export const NewExercisePage = () => {
   // recuperar contexto autenticacion
   const { token, currentUser } = useContext(AuthContext);
   // invocar hook de navegacion entre vistas
-  const { toExercisesPage, toExerciseDetailPage, toAnonUserPage } =
+  const { toExercisesPage, toAnonUserPage } =
     useViewNavigation();
 
   return !currentUser ? (
@@ -27,6 +25,7 @@ export const NewExercisePage = () => {
     <>
       <UserCard></UserCard>
       <NavBar onClickAll={() => toExercisesPage()}></NavBar>
+      <h1>Crear nuevo ejercicio</h1>
       <FormExercise token={token} makeNew={true}></FormExercise>
     </>
   );

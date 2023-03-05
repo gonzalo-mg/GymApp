@@ -23,7 +23,7 @@ export const ExercisesPage = () => {
   const [filter, setFilter] = useState();
 
   // f estado para setaer "vista" lo q cambia entre mostrar ejercios todos o favs
-  // // si se llega desde otra pag indicando q se quieren ver los fav setear view; desde la vista ExerciseDetail con boton de fav
+  // // si se llega desde otra pag indicando q se quieren ver los fav setear view con wantedView (enviado con useViewNavigation desde la vista ExerciseDetail con boton de fav)
   const wantedView = useLocation().state;
   const [view, setView] = useState(wantedView || "viewAll");
 
@@ -35,7 +35,9 @@ export const ExercisesPage = () => {
   // invocar hook de navegacion entre vistas
   const { toAnonUserPage, toExerciseDetailPage } = useViewNavigation();
 
+  // f para texto condicional segun q este viendo
   const printTextBanner = ({filter, view}) => {
+    const avisoImagen = "Pincha la imagen para ver la descripción."
     // si en favoritos
     if(view === "viewFav") {
       // y si no hay favs ni filtro aplicaco
@@ -43,21 +45,21 @@ export const ExercisesPage = () => {
         return "No tienes favoritos";
         // sino y si no hay favs q pasen un filtrp  
       } else if (exercisesFav.length === 0 && filter) {
-        return "Ninguno de tus favoritos se ajusta al filtrado"
+        return `Ninguno de tus favoritos se ajusta al filtrado por <<${filter}>>`
         // sino y si hay favs q pasan el filtro
       } else if (exercisesFav.length !== 0 && filter) {
-        return "Estos son tus favoritos filtrados. Haz click en la imagen para ver detalles."
+        return `Estos son tus favoritos filtrados por <<${filter}>>. ${avisoImagen}`
       } else {
-        return "Estos son todos tus favoritos. Haz click en la imagen para ver detalles."
+        return `Estos son todos tus favoritos. ${avisoImagen}`
       }
       // sino y si en todos
     } else if (view === "viewAll"){
       // y hay filtro
       if (filter) {
-        return "Viendo todos los ejercicios filtrados."
+        return `Viendo todos los ejercicios filtrados por <<${filter}>>. ${avisoImagen}`
         // sino y si no hay filtro
       } else if (!filter) {
-        return "Viendo todos los ejercicios."
+        return `Viendo todos los ejercicios. ${avisoImagen}`
       }
       // en otro caso ups!
     } else {
@@ -70,7 +72,7 @@ export const ExercisesPage = () => {
     - devolver:
     -- card d usuario
     -- barra navegacion
-    -- una card por cada ejercicio del server; el estado de view cambia entre mostrar todos o solo los fav del usuario
+    -- una card por cada ejercicio del server
    */
   return !currentUser ? (
     toAnonUserPage()

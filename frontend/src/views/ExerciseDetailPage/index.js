@@ -53,7 +53,7 @@ export const ExerciseDetailPage = () => {
           onClickFav={() => toFavExercisesPage()}
         ></NavBar>
         {currentUser.role === "admin" ? (
-          <TextBanner text={"Vista de detalles."}></TextBanner>
+          <TextBanner title={"Edición de datos"}></TextBanner>
         ) : undefined}
       </div>
       <div className="data">
@@ -65,6 +65,7 @@ export const ExerciseDetailPage = () => {
             exercise={exercise}
             printDetails={true}
             openEditForm={(e) => handleOpenEditForm(e)}
+            clickablePic={false}
           ></ExerciseCard>
         </article>
 

@@ -16,7 +16,13 @@ import { useLikes } from "../../hooks/useLikes";
 
 const serverRoot = process.env.REACT_APP_BACKEND_URL;
 
-export const ExerciseCard = ({ exercise, onClickPic, printDetails=false, openEditForm=null }) => {
+export const ExerciseCard = ({
+  exercise,
+  onClickPic,
+  clickablePic = "clickable",
+  printDetails = false,
+  openEditForm = null,
+}) => {
   // desestructurar objeto exercise
   const { idExercise, name, description, typology, muscles, picture } =
     exercise;
@@ -77,29 +83,25 @@ export const ExerciseCard = ({ exercise, onClickPic, printDetails=false, openEdi
       <img
         src={`${serverRoot}/pics/${picture}`}
         alt={name}
+        className={clickablePic}
         onClickCapture={onClickPic}
       ></img>
 
       {printDetails ? (
-        <>
-          <section className="list">
-            <ul>
-              <li>
-                <strong>Tipología:</strong> {typology}
-              </li>
-              <li>
-                <strong>Músculos:</strong> {muscles}
-              </li>
-            </ul>
-          </section>
-          <section className="description">
-            <strong>Descripción: </strong>
-            {description}
-          </section>
-        </>
-      ) : (
-        <></>
-      )}
+        <section className="details">
+          <ul>
+            <li>
+              <strong>Tipología:</strong> {typology}
+            </li>
+            <li>
+              <strong>Músculos:</strong> {muscles}
+            </li>
+            <li>
+              <strong>Descripción:</strong> {description}
+            </li>
+          </ul>
+        </section>
+      ) : undefined}
 
       {currentUser.role === "worker" ? (
         <div className="workerButtons">
@@ -158,6 +160,7 @@ export const ExerciseCard = ({ exercise, onClickPic, printDetails=false, openEdi
 ExerciseCard.propTypes = {
   exercise: PropTypes.object.isRequired,
   onClickPic: PropTypes.func,
+  clickablePic: PropTypes.string,
   printDetails: PropTypes.bool,
-  openEditForm: PropTypes.func
+  openEditForm: PropTypes.func,
 };
