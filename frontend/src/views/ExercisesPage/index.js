@@ -22,19 +22,15 @@ export const ExercisesPage = () => {
   // f estado de "exercises"; para setear los filtros a usar para mostrar exercises
   const [filter, setFilter] = useState();
 
-  //usar hook recuperar ejercicios
-  const { useAllExercises, useFavExercises } = useExercises();
-  const exercisesAll = useAllExercises({ token, filter });
-  const exercisesFav = useFavExercises({ token, filter });
-
   // f estado para setaer "vista" lo q cambia entre mostrar ejercios todos o favs
   // // si se llega desde otra pag indicando q se quieren ver los fav setear view; desde la vista ExerciseDetail con boton de fav
   const wantedView = useLocation().state;
-  console.log(`wantedView: ${wantedView}`);
   const [view, setView] = useState(wantedView || "viewAll");
 
-  // efecto actualiza estado view
-  //useEffect();
+  //usar hook recuperar ejercicios
+  const { useAllExercises, useFavExercises } = useExercises();
+  const exercisesAll = useAllExercises({ token, filter, view });
+  const exercisesFav = useFavExercises({ token, filter, view });
 
   // invocar hook de navegacion entre vistas
   const { toAnonUserPage, toExerciseDetailPage } = useViewNavigation();
@@ -59,7 +55,7 @@ export const ExercisesPage = () => {
         <TextBanner
           text={
             view === "viewFav"
-              ? exercisesFav.length === 0
+              ? exercisesFav.length === 0 && !filter
                 ? "No tienes favoritos"
                 : filter
                 ? "Viendo tus favoritos filtrados"

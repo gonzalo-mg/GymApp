@@ -11,7 +11,7 @@ import {
 export const useExercises = () => {
   
   // RECUPERAR todos ejercicios
-  const useAllExercises = ({ token, filter = undefined }) => {
+  const useAllExercises = ({ token, filter = undefined, view }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
     const [exercises, setExercises] = useState([]);
 
@@ -49,7 +49,7 @@ export const useExercises = () => {
         }
       };
       getData();
-    }, [filter]);
+    }, [filter, view]);
     return exercises;
   };
 
@@ -58,6 +58,7 @@ export const useExercises = () => {
   const useFavExercises = ({
     token,
     filter = undefined,
+    view
   }) => {
     
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
@@ -96,7 +97,7 @@ export const useExercises = () => {
         }
       };
       getData();
-    }, [filter]);
+    }, [filter, view]);
     return exercises;
   };
 
