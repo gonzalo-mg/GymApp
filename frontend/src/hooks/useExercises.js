@@ -58,7 +58,8 @@ export const useExercises = () => {
   const useFavExercises = ({
     token,
     filter = undefined,
-    view
+    view,
+    favClass
   }) => {
     
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
@@ -97,7 +98,7 @@ export const useExercises = () => {
         }
       };
       getData();
-    }, [filter, view]);
+    }, [filter, view, favClass]);
     return exercises;
   };
 
