@@ -2,16 +2,18 @@
 import "./index.css";
 import PropTypes from "prop-types";
 
-export const TextBanner = ({ title, text }) => {
+export const TextBanner = ({ title, subtitle, text }) => {
   return (
     <div className="TextBanner">
-      <h1>{title}</h1>
-      <p>{text}</p>
+      {title ? <h2>{title}</h2> : null}
+      {subtitle ? <h4>{subtitle}</h4> : null}
+      {text ? <p>{text}</p> : null }
     </div>
   );
 };
 
 TextBanner.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   title: PropTypes.string,
+  subtitle: PropTypes.string,
 };

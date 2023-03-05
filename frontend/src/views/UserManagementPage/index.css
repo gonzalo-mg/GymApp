@@ -1,0 +1,32 @@
+.UserMagCard {
+    background-color: var(--background2);
+    color: var(--elementText);
+    border: 2px solid var(--elementDetails);
+
+    min-height: 100%;
+    min-width: 100%;
+
+    padding: 1.5rem 3rem 0.25rem;
+}
+
+.UserMagCard > ul {
+    list-style: square;
+}
+
+.UserMagCard > ul > li {
+    padding: 0.25rem;
+}
+
+.UserMagCard > ul > li:first-child {
+    list-style: none;
+    text-align: center;
+    font-weight: bold;
+}
+.UserMagCard > button {
+    margin: 1rem;
+
+    /* centrar */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -4,11 +4,17 @@
 
     padding: 0.5rem;
 
-    font-size: small;
-
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.TextBanner > h2 {
+    text-align: center;
+}
+
+.TextBanner > p {
+    font-size: small;
 }

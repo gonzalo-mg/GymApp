@@ -5,6 +5,7 @@ import "./index.css";
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { UserCard } from "../../components/UserCard";
 import { NavBar } from "../../components/NavBar";
+import {TextBanner} from "../../components/TextBanner"
 //import { UserMagCard } from "../../components/UserMagCard";
 
 import { useState, useContext, useEffect } from "react";
@@ -80,75 +81,73 @@ export const UserManagementPage = () => {
         <NavBar onClickAll={() => toExercisesPage()}></NavBar>
       </div>
 
-      <h1>Gestión de usuarios</h1>
-      <article className="oldUser">
-        <h2>Usuarios activos</h2>
-        <ul>
-          {users.map((user) => {
-            return (
-              <article className="UserMagCard" key={user.idUser}>
-                <ul>
-                  <li>{user.email}</li>
-                  <li>id:{user.idUser}</li>
-                  <li>Rol:{user.role}</li>
-                  <li>Fecha creación:{user.created}</li>
-                </ul>
-                <ButtonGeneric
-                  text="BORRAR"
-                  className2="delete"
-                  onClickFunction={(e) => {
-                    handleDelete({ e, token, user });
-                  }}
-                ></ButtonGeneric>
-              </article>
-            );
-          })}
-        </ul>
-      </article>
+        <TextBanner title="Gestión de Usuarios"></TextBanner>
+        <article className="articleGesUsariosActivos">
+        <TextBanner subtitle="Usuarios Activos"></TextBanner>
+          <ul>
+            {users.map((user) => {
+              return (
+                <article className="UserMagCard" key={user.idUser}>
+                  <ul>
+                    <li>{user.email}</li>
+                    <li>id:{user.idUser}</li>
+                    <li>Rol:{user.role}</li>
+                    <li>Fecha creación:{user.created}</li>
+                  </ul>
+                  <ButtonGeneric
+                    text="BORRAR"
+                    className2="delete"
+                    onClickFunction={(e) => {
+                      handleDelete({ e, token, user });
+                    }}
+                  ></ButtonGeneric>
+                </article>
+              );
+            })}
+          </ul>
+        </article>
 
-      <article className="newUser">
-        <h2>Crear nuevo usuario</h2>
-        <fieldset>
-          <legend>Introduzca credenciales del nuevo usuario.</legend>
-          <form onSubmit={(e) => handleForm(e)}>
-            <label htmlfor="email">Correo: </label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Introduzca nuevo correo"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            ></input>
+        <TextBanner subtitle="Nuevo Usuario"></TextBanner>
+          <fieldset>
+            <legend>Introduzca credenciales del nuevo usuario.</legend>
+            <form onSubmit={(e) => handleForm(e)}>
+              <label htmlfor="email">Correo: </label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Introduzca nuevo correo"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
 
-            <label for="pass">Contraseña: </label>
-            <input
-              type="password"
-              id="pass"
-              name="password"
-              placeholder="Introduzca nueva contraseña"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            ></input>
+              <label for="pass">Contraseña: </label>
+              <input
+                type="password"
+                id="pass"
+                name="password"
+                placeholder="Introduzca nueva contraseña"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
 
-            <label for="pass">Repita la contraseña: </label>
-            <input
-              type="password"
-              id="pass2"
-              name="password2"
-              placeholder="Repita la nueva contraseña"
-              required
-              onChange={(e) => setPassword2(e.target.value)}
-            ></input>
+              <label for="pass">Repita la contraseña: </label>
+              <input
+                type="password"
+                id="pass2"
+                name="password2"
+                placeholder="Repita la nueva contraseña"
+                required
+                onChange={(e) => setPassword2(e.target.value)}
+              ></input>
 
-            <ButtonGeneric
-              type="submit"
-              text="Enviar"
-              className="sendButton"
-            ></ButtonGeneric>
-          </form>
-        </fieldset>
-      </article>
+              <ButtonGeneric
+                type="submit"
+                text="Enviar"
+                className="sendButton"
+              ></ButtonGeneric>
+            </form>
+          </fieldset>
     </>
   );
 };

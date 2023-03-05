@@ -18,9 +18,9 @@ const { token } = useContext(AuthContext);
     <article className="UserMagCard">
       <ul>
         <li>{email}</li>
-        <li>id:{idUser}</li>
-        <li>Rol:{role}</li>
-        <li>Fecha creación:{created}</li>
+        <li>id: {idUser}</li>
+        <li>Rol: {role}</li>
+        <li>Fecha creación: {created}</li>
       </ul>
       <ButtonDelete onClickFunction={(e)=>{
         e.stopPropagation();
