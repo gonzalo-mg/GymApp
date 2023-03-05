@@ -7,16 +7,17 @@ const serverRoot = process.env.REACT_APP_BACKEND_URL;
 /* f para recuperar todos los ejercicios del server */
 export const getExercisesService = async (token) => {
   try {
+    // solicitar todos los ejercicios
     const response = await axios.get(`${serverRoot}/exercises`, {
       headers: { Authorization: token },
     });
 
+    console.log(response);
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
     const { data } = response;
     const { data: serverData } = data;
     const { exercises } = serverData;
 
-    // devolver array de objetos tipo ejercicio
     return exercises;
   } catch (e) {
     console.error(e);
@@ -124,10 +125,12 @@ export const toggleLikeService = async ({ token, idExercise, data = null }) => {
         headers: { Authorization: token },
       }
     );
-    console.log(`toggleLikeService-response ${response}`)
-    console.log(response)
-  //devolver objeto stateLike (1 ó 0)
-  console.log(`toggleLikeService - response.data.updatedLike.stateLike: ${response.data.updatedLike.stateLike}`)
+    console.log(`toggleLikeService-response ${response}`);
+    console.log(response);
+    //devolver objeto stateLike (1 ó 0)
+    console.log(
+      `toggleLikeService - response.data.updatedLike.stateLike: ${response.data.updatedLike.stateLike}`
+    );
     if (response.data.updatedLike.stateLike === 0) {
       //alert(`toggleLikeService - Like quitado`)
       return response.data.updatedLike.stateLike;
@@ -145,14 +148,17 @@ export const toggleLikeService = async ({ token, idExercise, data = null }) => {
 };
 
 /* f para recuperar cuenta de likes de un ejercicio sabiendo su idExercise */
-export const getExerciseLikesCountService = async ({token, idExercise}) => {
+export const getExerciseLikesCountService = async ({ token, idExercise }) => {
   try {
-    const response = await axios.get(`${serverRoot}/exercises/${idExercise}/like/count`, {
-      headers: { Authorization: token },
-    });
+    const response = await axios.get(
+      `${serverRoot}/exercises/${idExercise}/like/count`,
+      {
+        headers: { Authorization: token },
+      }
+    );
     const { data } = response;
     const { data: likeCount } = data;
-    console.log(`getExerciseLikesCountService - likeCount: ${likeCount}`)
+    console.log(`getExerciseLikesCountService - likeCount: ${likeCount}`);
     // devolver num
     return likeCount;
   } catch (e) {

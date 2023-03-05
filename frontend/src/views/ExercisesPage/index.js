@@ -35,6 +35,36 @@ export const ExercisesPage = () => {
   // invocar hook de navegacion entre vistas
   const { toAnonUserPage, toExerciseDetailPage } = useViewNavigation();
 
+  const printTextBanner = ({filter, view}) => {
+    // si en favoritos
+    if(view === "viewFav") {
+      // y si no hay favs ni filtro aplicaco
+      if (exercisesFav.length === 0 && !filter) {
+        return "No tienes favoritos";
+        // sino y si no hay favs q pasen un filtrp  
+      } else if (exercisesFav.length === 0 && filter) {
+        return "Ninguno de tus favoritos se ajusta al filtrado"
+        // sino y si hay favs q pasan el filtro
+      } else if (exercisesFav.length !== 0 && filter) {
+        return "Estos son tus favoritos filtrados. Haz click en la imagen para ver detalles."
+      } else {
+        return "Estos son todos tus favoritos. Haz click en la imagen para ver detalles."
+      }
+      // sino y si en todos
+    } else if (view === "viewAll"){
+      // y hay filtro
+      if (filter) {
+        return "Viendo todos los ejercicios filtrados."
+        // sino y si no hay filtro
+      } else if (!filter) {
+        return "Viendo todos los ejercicios."
+      }
+      // en otro caso ups!
+    } else {
+      return "Parece que algo va mal. Consulta con el administrador."
+    }
+  }
+
   /* 
     - si se pierde sesion ir a vista de login
     - devolver:
@@ -54,15 +84,7 @@ export const ExercisesPage = () => {
         ></NavBar>
         <TextBanner
           text={
-            view === "viewFav"
-              ? exercisesFav.length === 0 && !filter
-                ? "No tienes favoritos"
-                : filter
-                ? "Viendo tus favoritos filtrados"
-                : "Viendo tus favoritos"
-              : filter
-              ? "Viendo ejericios filtrados"
-              : "Viendo todos los ejercicios"
+            printTextBanner({view, filter})
           }
         ></TextBanner>
       </div>

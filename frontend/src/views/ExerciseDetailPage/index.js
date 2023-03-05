@@ -52,7 +52,9 @@ export const ExerciseDetailPage = () => {
           onClickAll={() => toExercisesPage()}
           onClickFav={() => toFavExercisesPage()}
         ></NavBar>
-        <TextBanner text={"Proceda con cautela."}></TextBanner>
+        {currentUser.role === "admin" ? (
+          <TextBanner text={"Vista de detalles."}></TextBanner>
+        ) : undefined}
       </div>
       <div className="data">
         <article className="ExerciseDetail">
@@ -68,7 +70,13 @@ export const ExerciseDetailPage = () => {
 
         {currentUser.role === "admin" && editForm === true ? (
           <article className="EditForm">
-            <FormExercise token={token} makeEdit={"ok"} idExercise={idExercise} editForm={editForm} setEditForm={setEditForm}></FormExercise>
+            <FormExercise
+              token={token}
+              makeEdit={"ok"}
+              idExercise={idExercise}
+              editForm={editForm}
+              setEditForm={setEditForm}
+            ></FormExercise>
           </article>
         ) : null}
       </div>

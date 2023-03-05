@@ -21,10 +21,120 @@
     background-color: var(--color1)
 }
 
-.ButtonMini.fav {
+.ButtonMiniFav {
+    height: 2rem;
+    width: 2rem;
+
     background-image: url(/public/fav-icon.png);
+    
+    border-radius: 100px;
+
+    border-color: var(--ButtonMiniBorderColor);
+    background-color: var(--ButtonMiniBackground);
+
+    background-size: cover;
+
+    font-weight: bolder;
+    color: var(--ButtonMiniColor);
+
+    cursor: pointer;
+
+    transition-duration: 0.4s;
 }
 
-.ButtonMini.like {
-    background-image: url(/public/like-icon.svg);
+.ButtonMiniFav.isFav {
+    background-color: yellow;
 }
+
+.ButtonMiniFav:hover{
+    background-color: var(--color1)
+}
+
+.ButtonMiniLike {
+    height: 2rem;
+    width: 2rem;
+
+    background-image: url(/public/like-icon.svg);
+    
+    border-radius: 100px;
+
+    border-color: var(--ButtonMiniBorderColor);
+    background-color: var(--ButtonMiniBackground);
+
+    background-size: cover;
+
+    font-weight: bolder;
+    font-size: 1rem;
+    color: var(--ButtonMiniColor);
+
+    cursor: pointer;
+
+    transition-duration: 0.4s;
+}
+
+.ButtonMiniLike.isLike {
+    background-color: pink;
+}
+
+.ButtonMiniLike:hover{
+    background-color: var(--color1)
+}
+
+.isFav {
+
+    /* implemento la animacion "latido" */
+    animation-name:     latido;
+    animation-duration: .7s;
+    animation-delay:    0.2s;
+  
+  }
+  
+  /* defino la animacion "latido */
+  /* dos latidos en tres etapas: escala 1- escala 1.15 - escala1.25 y retorno final a escala 1 */
+  /* 9 etapas: 0% + 8 etapas; 100/8=12,5 = 13% por etapa */
+  @keyframes latido {
+    0% {
+      transform: scale(1);
+    
+    }
+  
+    13% {
+      transform: scale(2);
+      fill: red;
+    }
+  
+    26% {
+      transform: scale(3);
+      fill: red;
+    }
+  
+    39% {
+      transform: scale(4);
+      fill: red;
+    }
+  
+    52% {
+      transform: scale(4);
+      fill: red;
+    }
+  
+    65% {
+      transform: scale(3);
+      fill: red;
+    }
+  
+    78% {
+      transform: scale(2);
+      fill: red;
+    }
+  
+    91% {
+      transform: scale(2);
+      fill: red;
+    }
+  
+    100% {
+      transform: scale(1);
+      fill: red;
+    }
+  }

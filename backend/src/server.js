@@ -65,9 +65,7 @@ app.get("/currentUser", validateAuth, getUserData)
 
 app.get("/exercises", validateAuth, getExercises);
 
-
 app.get("/exercises/:idExercise", validateAuth, getExerciseDetails);
-
 
 app.post("/exercises/:idExercise/like", validateAuth, toggleExerciseLike);
 
