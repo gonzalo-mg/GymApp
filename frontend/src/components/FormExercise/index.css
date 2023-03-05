@@ -1,24 +1,43 @@
-.fieldset {
-    border: 0;
-}
+.exerciseFieldset {
+    background-color: var(--background2);
 
-#ExerciseForm ul {
+    padding: 2rem;
+
     display: flex;
     flex-direction: column;
-    
-    justify-content: center;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-#ExerciseForm li {
+.exerciseFieldset > legend {
+    background-color: var(--background2);
+
+    padding: 1rem;
+}
+
+.exerciseFieldset li {
+    font-weight: bold;
     padding: .25rem;
+
+    list-style: none;
 }
 
-#ExerciseForm input {
+input {
+    background-color: var(--background3);
     width: 15rem;
 }
 
-#ExerciseForm textarea {
-    background-color: aqua;
-    
+textarea {
+    background-color: var(--background3);
+}
+
+#ExerciseForm {
+    display: flex;
+    flex-direction: column;
+
+    font-weight: bold;
+}
+
+#ExerciseForm label, input{
+    padding: 0.25rem;
 }

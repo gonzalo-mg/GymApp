@@ -104,7 +104,7 @@ export const ExerciseCard = ({
       ) : undefined}
 
       {currentUser.role === "worker" ? (
-        <div className="workerButtons">
+        <div className="divWorkerButtons">
           <button
             className={`ButtonMini favType ${favClass}`}
             type="button"
@@ -121,7 +121,7 @@ export const ExerciseCard = ({
       ) : undefined}
 
       {currentUser.role === "admin" ? (
-        <div className=" adminButtons">
+        <div className="divAdminButtons">
           {location.pathname !== "/exercises" ? (
             <>
               <ButtonGeneric

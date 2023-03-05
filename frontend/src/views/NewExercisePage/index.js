@@ -8,6 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { FormExercise } from "../../components/FormExercise";
 import { NavBar } from "../../components/NavBar";
+import { TextBanner } from "../../components/TextBanner";
 
 /* devolver formulario con todos los campos, y en submit enviar los valores introducidos como variables a la f postNewExercise, q ejexuta la peticion post al server */
 
@@ -25,7 +26,7 @@ export const NewExercisePage = () => {
         <UserCard></UserCard>
         <NavBar onClickAll={() => toExercisesPage()}></NavBar>
       </div>
-      <h1>Crear nuevo ejercicio</h1>
+      <TextBanner title="Crear nuevo ejercicio"></TextBanner>
       <FormExercise token={token} makeNew={true}></FormExercise>
     </>
   );

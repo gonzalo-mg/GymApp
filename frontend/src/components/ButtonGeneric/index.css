@@ -29,3 +29,12 @@
 .ButtonGeneric.delete:hover{
     background-color: var(--dangerColor)
 }
+
+.divWorkerButtons, .divAdminButtons {
+    padding: 0.5rem;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-evenly;
+}
