@@ -4,10 +4,11 @@ import "./index.css";
 
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { UserCard } from "../../components/UserCard";
+import {TextBanner} from "../../components/TextBanner"
+
 import { postLoginService } from "../../services/user";
 
 import { useState, useContext } from "react";
-
 import { useViewNavigation } from "../../hooks/useViewNavigation";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -43,31 +44,27 @@ export const AnonUserPage = () => {
     <>
       <UserCard></UserCard>
       <fieldset>
-        <legend>Introduzca sus credenciales</legend>
+        <TextBanner subtitle="Introduzca sus credenciales"></TextBanner>
         <form onSubmit={(e) => handleLogingForm(e)}>
-          <div>
-            <label htmlfor="email">Correo: </label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Introduzca su correo"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            ></input>
-          </div>
+          <label htmlfor="email">Correo: </label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Introduzca su correo"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
 
-          <div>
-            <label for="pass">Contraseña: </label>
-            <input
-              type="password"
-              id="pass"
-              name="password"
-              placeholder="Introduzca su contraseña"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            ></input>
-          </div>
+          <label for="pass">Contraseña: </label>
+          <input
+            type="password"
+            id="pass"
+            name="password"
+            placeholder="Introduzca su contraseña"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
           <ButtonGeneric
             type="submit"
             text="Enviar"

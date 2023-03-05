@@ -1,4 +1,9 @@
-.UserMagCard {
+.divUserManagementPage{
+    display: flex;
+    flex-direction: column;
+}
+
+.articleGesUsuCard{
     background-color: var(--background2);
     color: var(--elementText);
     border: 2px solid var(--elementDetails);
@@ -9,24 +14,29 @@
     padding: 1.5rem 3rem 0.25rem;
 }
 
-.UserMagCard > ul {
+.articleGesUsuCard > ul {
     list-style: square;
 }
 
-.UserMagCard > ul > li {
+.articleGesUsuCard > ul > li {
     padding: 0.25rem;
 }
 
-.UserMagCard > ul > li:first-child {
+.articleGesUsuCard > ul > li:first-child {
     list-style: none;
     text-align: center;
     font-weight: bold;
 }
-.UserMagCard > button {
+.articleGesUsuCard > button {
     margin: 1rem;
 
     /* centrar */
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.formNewUser {
+    display: flex;
+    flex-direction: column;
 }

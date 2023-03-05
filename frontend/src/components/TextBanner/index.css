@@ -1,6 +1,6 @@
 .TextBanner {
     background-color: var(--background3);
-    border: 1px solid var(--elementDetails);
+    border: 0px solid var(--elementDetails);
 
     padding: 0.5rem;
 
@@ -15,6 +15,6 @@
     text-align: center;
 }
 
-.TextBanner > p {
+.TextBanner p {
     font-size: small;
 }

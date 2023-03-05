@@ -75,7 +75,7 @@ export const UserManagementPage = () => {
   return !currentUser ? (
     toAnonUserPage()
   ) : (
-    <>
+    <div className="divUserManagementPage">
       <div className="divNav">
         <UserCard></UserCard>
         <NavBar onClickAll={() => toExercisesPage()}></NavBar>
@@ -87,7 +87,7 @@ export const UserManagementPage = () => {
         <ul>
           {users.map((user) => {
             return (
-              <article className="UserMagCard" key={user.idUser}>
+              <article className="articleGesUsuCard" key={user.idUser}>
                 <ul>
                   <li>{user.email}</li>
                   <li>id:{user.idUser}</li>
@@ -150,6 +150,6 @@ export const UserManagementPage = () => {
           </form>
         </fieldset>
       </div>
-    </>
+    </div>
   );
 };

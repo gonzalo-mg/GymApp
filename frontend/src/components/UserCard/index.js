@@ -15,17 +15,18 @@ export const UserCard = () => {
   return (
     <article className="UserCard">
       <p className="user">
-        {currentUser
-          ? `Usuario: ${currentUser?.email}`
-          : "Sesión no iniciada"}
+        {currentUser ? `Usuario: ${currentUser?.email}` : "Sesión no iniciada"}
       </p>
-      <ButtonGeneric
-        className="ButtonGeneric"
-        text="Cerrar sesión"
-        onClickFunction={(e) => {
-          e.preventDefault()
-          logout()}}
-      ></ButtonGeneric>
+      {currentUser ? (
+        <ButtonGeneric
+          className="ButtonGeneric"
+          text="Cerrar sesión"
+          onClickFunction={(e) => {
+            e.preventDefault();
+            logout();
+          }}
+        ></ButtonGeneric>
+      ) : null}
     </article>
   );
 };

@@ -92,18 +92,14 @@ export const ExercisesPage = () => {
           onSubmit={(e) => {
             e.preventDefault();
           }}
-        >
-          <ul>
-            <li>
-              <input
-                id="filterName"
-                name="name"
-                placeholder="Busca por nombre, tipología o músculo"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value.toLowerCase())}
-              ></input>
-            </li>
-          </ul>
+        > <label htmlFor="filterName">Filtrar ejercicios</label>
+          <input
+            id="filterName"
+            name="name"
+            placeholder="Busca por nombre, tipología o músculo"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value.toLowerCase())}
+          ></input>
 
           <ButtonGeneric
             type="button"

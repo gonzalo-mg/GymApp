@@ -1,4 +1,4 @@
-.exerciseFieldset {
+fieldset {
     background-color: var(--background2);
 
     padding: 2rem;
@@ -9,20 +9,7 @@
     align-items: center;
 }
 
-.exerciseFieldset > legend {
-    background-color: var(--background2);
-
-    padding: 1rem;
-}
-
-.exerciseFieldset li {
-    font-weight: bold;
-    padding: .25rem;
-
-    list-style: none;
-}
-
-input {
+fieldset input {
     background-color: var(--background3);
     width: 15rem;
 }
@@ -31,13 +18,22 @@ textarea {
     background-color: var(--background3);
 }
 
-#ExerciseForm {
+form{
     display: flex;
     flex-direction: column;
 
     font-weight: bold;
+
+    padding: 1rem;
 }
 
-#ExerciseForm label, input{
+form > label, input{
     padding: 0.25rem;
+}
+
+form > button {
+    /* centrar */
+    display: block;
+
+    margin: 1rem auto;
 }
