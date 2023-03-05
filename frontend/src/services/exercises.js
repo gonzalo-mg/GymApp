@@ -99,12 +99,12 @@ export const toggleFavService = async ({ token, idExercise, data = null }) => {
       }
     );
     //devolver objeto stateFav (1 ó 0)
-    if (response.data.fav.stateFav === 0) {
+    if (response.data.updatedFav.stateFav === 0) {
       //alert(`toggleFavService - Ejercicio eliminado de favoritos`);
-      return response.data.fav.stateFav;
+      return response.data.updatedFav.stateFav;
     } else {
-      //alert(`toggleFavService - Ejercicio ${response.data.fav.idExercise} añadido a favoritos`);
-      return response.data.fav.stateFav;
+      //alert(`toggleFavService - Ejercicio ${response.data.updatedFav.idExercise} añadido a favoritos`);
+      return response.data.updatedFav.stateFav;
     }
   } catch (e) {
     console.error(e);

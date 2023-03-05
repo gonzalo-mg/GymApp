@@ -28,21 +28,18 @@ const toggleExerciseFav = async (req, res, next) => {
     }
 
     // seleccionar fav de la bbdd
-    let fav = await selectFavByExerciseAndUser(idExercise, idUser);
+    const fav = await selectFavByExerciseAndUser(idExercise, idUser);
 
     let statusCode;
-    //let updatedFav;
     //si es la primera vez q el usuario le da crearlo
     if (fav === undefined) {
       await newFav(idExercise, idUser);
       statusCode = 201;
-      // reseleccionar fav de la bbdd
-      fav = await selectFavByExerciseAndUser(idExercise, idUser);
-      res.status(statusCode).send({ status: "ok", fav });
+      //res.status(statusCode).send({ status: "ok", fav });
     }
 
     // si tiene estado true se quita
-    if (fav.stateFav === 1) {
+    else if (fav.stateFav === 1) {
       await deleteFav(idExercise, idUser);
       statusCode = 200;
     } //si no se pone
@@ -52,9 +49,9 @@ const toggleExerciseFav = async (req, res, next) => {
     }
 
     // reseleccionar fav de la bbdd
-    fav = await selectFavByExerciseAndUser(idExercise, idUser);
+    const updatedFav = await selectFavByExerciseAndUser(idExercise, idUser);
 
-    res.status(statusCode).send({ status: "ok", fav });
+    res.status(statusCode).send({ status: "ok", updatedFav });
   } catch (error) {
     next(error);
   }
