@@ -1,9 +1,32 @@
 # GymApp
 
 ## Frontend
++ Usuarios activos:
+
+administrator@mail.com
+
+worker1@mail.com
+
+worker2@mail.com
+
+Todos con contraseña: 1234567890
 
 ## Backend
 + BASE DE DATOS
+
++ SCRIPTS DISPONIBLES
+
+- initDb
+
+Reinicia la BBDD.
+
+- populateDb
+
+Introduce algunos datos en todas las tablas.
+
++ VARIABLES PRIVADAS .env
+
+Se incluye el archivo "envPlantilla" a modo de plantilla para rellenar el .env con los datos pertinentes.
 
 - Tablas
 
@@ -45,19 +68,6 @@
         ◦ true: ha dado fav.
     • created: timestamp del momento de creacion del registro.
 
-+ SCRIPTS DISPONIBLES
-
-- initDb
-
-Reinicia la BBDD.
-
-- populateDb
-
-Introduce algunos datos en todas las tablas.
-
-+ VARIABLES PRIVADAS .env
-
-Se incluye el archivo "envPlantilla" a modo de plantilla para rellenar el .env con los datos pertinentes.
 
 + ENDPOINTS
 
