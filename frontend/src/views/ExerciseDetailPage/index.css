@@ -1,0 +1,18 @@
+@media screen and (min-width: 481px) {
+    .ExerciseDetailPage.ExerciseCard {
+        width: 16em;
+        height: 16rem;
+        margin: 1rem;
+    }
+
+    .ExerciseDetailPage .ExerciseCard > img {
+        width: 14rem;
+        height: 14rem;
+  }
+
+  .ExerciseDetailPage .divEdit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

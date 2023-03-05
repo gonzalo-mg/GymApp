@@ -84,9 +84,10 @@ export const ExercisesPage = () => {
           onClickAll={() => setView("viewAll")}
           onClickFav={() => setView("viewFav")}
         ></NavBar>
-        <TextBanner text={printTextBanner({ view, filter })}></TextBanner>
+        
       </div>
       <div className="divCards">
+      <TextBanner text={printTextBanner({ view, filter })}></TextBanner>
         <form
           id="filters"
           onSubmit={(e) => {
@@ -128,7 +129,6 @@ export const ExercisesPage = () => {
                         ? toExerciseDetailPage(exercise.idExercise)
                         : null
                     }
-                    printDetails={currentUser.role === "admin" ? true : false}
                   ></ExerciseCard>
                 );
               })}

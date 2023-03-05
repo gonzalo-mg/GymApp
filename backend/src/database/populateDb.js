@@ -27,7 +27,7 @@ async function populateDb() {
             ("Correr", "Es como caminar, pero en rápido.", "Sin equipo.", "Piernas", "correr.jpeg"),
             ("Nadar", "Te tiras al agua y braceas y le das a las piernas, así como si tuevieras el baile de San Vito.", "Piscina", "Todo", "nadar.jpeg"),
             ("Pesas", "Como ponerse a sachar, pero a lo tonto.", "Peso auxiliar", "Brazos", "pesas.jpeg"),
-            ("Levantamiento de birra", "Sacar una cerveza bien fresquita de la nevera, ponerla en una jarra, e iniciar repeticiones de levantamieto con el brazo.", "Peso auxiliar", "Brazo", "birra.jpeg"),
+            ("Curl de birra", "Sacar una cerveza bien fresquita de la nevera, ponerla en una jarra, e iniciar repeticiones de levantamieto con el brazo.", "Peso auxiliar", "Brazo", "birra.jpeg"),
             ("Escribir código", "Aporrea las teclas, y reza para que salga algo coherente.", "Peso auxiliar", "Dedos", "codigo.jpeg"),
             ("La siesta", "Túmbate sobre una superficie blandita, tápate con una mantita y cierra los ojos. Pro-tip: cuenta ovejitas.", "Peso propio", "Todo", "siesta.jpeg"),
             ("Curling", "Sí ho, la petanca esa rara de los nórdicos, que van con escobas sobre el hielo.", "Peso auxiliar", "Brazos", "curling.jpeg")

@@ -1,0 +1,48 @@
+@media screen and (min-width: 481px) {
+    .articleExercisesList{
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .articleExercisesList .ExerciseCard {
+        width: 18em;
+        height: 18rem;
+        margin: 1rem;
+    }
+
+    .articleExercisesList .ExerciseCard > img {
+        width: 11rem;
+        height: 11rem;
+  }
+
+  .divNav {
+
+    border: 1px solid var(--elementDetails);
+
+    display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+  }
+
+  .divNav button{
+    margin: 0rem 1rem;
+  }
+
+  .divCards > form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .divCards > form > input {
+    height: 2rem;
+    width: 75%;
+  }
+
+}

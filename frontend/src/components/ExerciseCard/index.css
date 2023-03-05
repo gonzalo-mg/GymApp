@@ -2,9 +2,6 @@
     background-color: var(--background1);
     color: var(--elementText);
     border: 2px solid var(--elementDetails);
-
-    min-height: 100%;
-    min-width: 100%;
 }
 
 .ExerciseCard:hover{
@@ -40,6 +37,3 @@
     margin: 1rem;
     padding: 0.5rem 2rem;
 }
-
-
-

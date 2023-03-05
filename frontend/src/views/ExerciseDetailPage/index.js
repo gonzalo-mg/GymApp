@@ -45,27 +45,27 @@ export const ExerciseDetailPage = () => {
   return !currentUser ? (
     toAnonUserPage()
   ) : (
-    <>
-      <div className="divNavs">
+    <div className="ExerciseDetailPage">
+      <div className="divNav">
         <UserCard></UserCard>
         <NavBar
           onClickAll={() => toExercisesPage()}
           onClickFav={() => toFavExercisesPage()}
         ></NavBar>
-        {currentUser.role === "admin" ? (
-          <TextBanner title={"Edición de datos"}></TextBanner>
-        ) : undefined}
       </div>
-          {!exercise ? toExercisesPage() : undefined}
+      {currentUser.role === "admin" ? (
+        <TextBanner title={"Edición de datos"}></TextBanner>
+      ) : undefined}
+      {!exercise ? toExercisesPage() : undefined}
 
-          <ExerciseCard
-            key={exercise.idExercise}
-            exercise={exercise}
-            printDetails={true}
-            openEditForm={(e) => handleOpenEditForm(e)}
-            clickablePic={false}
-          ></ExerciseCard>
-
+      <div className="divEdit">
+        <ExerciseCard
+          key={exercise.idExercise}
+          exercise={exercise}
+          printDetails={true}
+          openEditForm={(e) => handleOpenEditForm(e)}
+          clickablePic={false}
+        ></ExerciseCard>
 
         {currentUser.role === "admin" && editForm === true ? (
           <article className="EditForm">
@@ -78,6 +78,7 @@ export const ExerciseDetailPage = () => {
             ></FormExercise>
           </article>
         ) : null}
-    </>
+      </div>
+    </div>
   );
 };
