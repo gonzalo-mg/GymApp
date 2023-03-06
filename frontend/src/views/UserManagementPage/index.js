@@ -31,35 +31,37 @@ export const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
   const [userChange, setUserChange] = useState(true);
 
-  // efecto refrescar usuarios; solo workers; el admin no se borra
-  useEffect(() => {
-    const getData = async () => {
-      const recoveredUsers = await getAllUsersService(token);
-      const workers = recoveredUsers.filter((u) => u.role !== "admin");
-      console.log(recoveredUsers);
-      console.log(workers);
-      setUsers(workers);
-    };
-    getData();
-  }, [token, userChange]);
-
   // def estado para recuperar del formulario y enviar al contexto de auth
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
+  // efecto refrescar usuarios; solo workers; el admin no se borra
+  useEffect(() => {
+    const getData = async () => {
+      const recoveredUsers = await getAllUsersService(token);
+      const workers = recoveredUsers.filter((u) => u.role !== "admin");
+      setUsers(workers);
+    };
+    getData();
+  }, [token, userChange, email]);
+
   /* f de gestion formulario de nuevo registro q recibe email y password */
   const handleForm = async (e) => {
-    console.log(`handleForm llamado`);
     try {
       e.preventDefault();
       if (password !== password2) {
         alert`Las contraseñas no coinciden`;
         return null;
       }
-
       // llamar a server con datos
-      await postNewUserService({ email, password });
+      await postNewUserService({ token, email, password });
+
+      // resetear estados
+      setEmail("");
+      setPassword("");
+      setPassword2("");
+
     } catch (error) {
       console.error(error);
     }
@@ -84,7 +86,7 @@ export const UserManagementPage = () => {
       <div className="divUsersManagementPageUser">
         <article className="articleGesUsariosActivos">
           <TextBanner subtitle="Usuarios Activos"></TextBanner>
-          <ul>
+          <ul className="activeUsersList">
             {users.map((user) => {
               return (
                 <article className="articleGesUsuCard" key={user.idUser}>

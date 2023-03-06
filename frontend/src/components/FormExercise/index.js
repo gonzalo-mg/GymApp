@@ -17,16 +17,9 @@ export const FormExercise = ({
   editForm,
   setEditForm,
 }) => {
-  console.log(
-    `FormExercise makeNew:${makeNew}, makeEdit:${makeEdit}, idExercise:${idExercise}`
-  );
   // f para elegir q servicio llamar segun se quiera crear/editar
   const doSubmit = ({ e, makeNew, makeEdit, idExercise }) => {
-    console.log(`doSubmit llamado`);
-    console.log(`doSubmit makeNew:${makeNew}`);
-    console.log(`doSubmit makeEdit:${makeEdit}`);
     if (makeNew) {
-      console.log(`doSubmit makeNew`);
       postNewExerciseService({
         token,
         name: e.target.name.value,
@@ -36,7 +29,6 @@ export const FormExercise = ({
         picture: e.target.pic.files[0],
       });
     } else if (makeEdit) {
-      console.log(`doSubmit makeEdit`);
       putEditExerciseService({
         token,
         idExercise,

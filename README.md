@@ -1,5 +1,7 @@
 # GymApp
 
+Backend y Frontend en este repositorio.
+
 ## Frontend
 + Usuarios activos:
 
@@ -16,13 +18,17 @@ Todos con contraseña: 1234567890
 
 + SCRIPTS DISPONIBLES
 
-- initDb
+- npm run initDb
 
 Reinicia la BBDD.
 
-- populateDb
+- npm run populateDb
 
 Introduce algunos datos en todas las tablas.
+
+- npm run dev
+
+Arranca.
 
 + VARIABLES PRIVADAS .env
 

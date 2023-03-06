@@ -4,7 +4,7 @@ import "./index.css";
 
 import { ButtonGeneric } from "../../components/ButtonGeneric";
 import { UserCard } from "../../components/UserCard";
-import {TextBanner} from "../../components/TextBanner"
+import { TextBanner } from "../../components/TextBanner";
 
 import { postLoginService } from "../../services/user";
 
@@ -29,7 +29,6 @@ export const AnonUserPage = () => {
 
       // llamar a server con datos del login y recibir token
       const newToken = await postLoginService({ email, password });
-      console.log(`handleLogingForm -  newToken ${newToken}`);
       //modificar estado
       login(newToken);
     } catch (error) {

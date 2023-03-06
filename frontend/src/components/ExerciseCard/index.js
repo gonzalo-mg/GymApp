@@ -3,7 +3,6 @@ import "./index.css";
 import { ButtonGeneric } from "../ButtonGeneric";
 import { ButtonMini } from "../ButtonMini";
 
-
 import PropTypes from "prop-types";
 
 import { useContext, useState, useEffect } from "react";
@@ -159,9 +158,9 @@ export const ExerciseCard = ({
 };
 
 ExerciseCard.propTypes = {
-  exercise: PropTypes.object.isRequired,
+  exercise: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   onClickPic: PropTypes.func,
-  clickablePic: PropTypes.string,
+  clickablePic: PropTypes.bool,
   printDetails: PropTypes.bool,
   openEditForm: PropTypes.func,
 };

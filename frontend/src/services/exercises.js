@@ -12,7 +12,6 @@ export const getExercisesService = async (token) => {
       headers: { Authorization: token },
     });
 
-    console.log(response);
     // desestructurar respuesta ; axios incluye varias anidaciones de objetos, por defecto uno llamada "data"; el backend tmb devuelve un {data};
     const { data } = response;
     const { data: serverData } = data;
@@ -100,13 +99,7 @@ export const toggleFavService = async ({ token, idExercise, data = null }) => {
       }
     );
     //devolver objeto stateFav (1 ó 0)
-    if (response.data.updatedFav.stateFav === 0) {
-      //alert(`toggleFavService - Ejercicio eliminado de favoritos`);
-      return response.data.updatedFav.stateFav;
-    } else {
-      //alert(`toggleFavService - Ejercicio ${response.data.updatedFav.idExercise} añadido a favoritos`);
-      return response.data.updatedFav.stateFav;
-    }
+    return response.data.updatedFav.stateFav;
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
@@ -125,19 +118,8 @@ export const toggleLikeService = async ({ token, idExercise, data = null }) => {
         headers: { Authorization: token },
       }
     );
-    console.log(`toggleLikeService-response ${response}`);
-    console.log(response);
     //devolver objeto stateLike (1 ó 0)
-    console.log(
-      `toggleLikeService - response.data.updatedLike.stateLike: ${response.data.updatedLike.stateLike}`
-    );
-    if (response.data.updatedLike.stateLike === 0) {
-      //alert(`toggleLikeService - Like quitado`)
-      return response.data.updatedLike.stateLike;
-    } else {
-      //alert(`toggleLikeService - Like dado`)
-      return response.data.updatedLike.stateLike;
-    }
+    return response.data.updatedLike.stateLike;
   } catch (e) {
     console.error(e);
     console.log(e.response.data);
@@ -158,7 +140,6 @@ export const getExerciseLikesCountService = async ({ token, idExercise }) => {
     );
     const { data } = response;
     const { data: likeCount } = data;
-    console.log(`getExerciseLikesCountService - likeCount: ${likeCount}`);
     // devolver num
     return likeCount;
   } catch (e) {

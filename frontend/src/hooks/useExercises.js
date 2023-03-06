@@ -9,7 +9,6 @@ import {
 } from "../services/exercises";
 
 export const useExercises = () => {
-  
   // RECUPERAR todos ejercicios
   const useAllExercises = ({ token, filter = undefined, view }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
@@ -44,7 +43,6 @@ export const useExercises = () => {
           );
 
           // setear exercises al resultado del filtro
-          console.log(`useGetExercises - if filter`);
           setExercises(filteredExercises);
         }
       };
@@ -53,15 +51,8 @@ export const useExercises = () => {
     return exercises;
   };
 
-  
   // RECUPERAR todos los FAVS
-  const useFavExercises = ({
-    token,
-    filter = undefined,
-    view,
-    favClass
-  }) => {
-    
+  const useFavExercises = ({ token, filter = undefined, view, favClass }) => {
     // f estado de "exercises"; para setear los exercises recuperados y a mostrar
     const [exercises, setExercises] = useState([]);
 
@@ -71,7 +62,7 @@ export const useExercises = () => {
     useEffect(() => {
       const getData = async () => {
         const recoveredExercises = await getFavExercisesService(token);
-          setExercises(recoveredExercises);
+        setExercises(recoveredExercises);
         // si existe filtro aplicarlo a los recuperados
         if (filter) {
           // f para filtrar exercises; devolver cq exercise q contenga (en su nombre/tipologia/musculo) lo escrito por el usuario en el formulario
@@ -93,7 +84,6 @@ export const useExercises = () => {
           );
 
           // setear exercises al resultado del filtro
-          console.log(`useGetExercises - if filter`);
           setExercises(filteredExercises);
         }
       };
@@ -140,7 +130,6 @@ export const useExercises = () => {
           );
 
           // setear exercises al resultado del filtro
-          console.log(`useGetExercises - if filter`);
           setExercises(filteredExercises);
         }
       };

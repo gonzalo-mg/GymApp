@@ -81,7 +81,7 @@ export const deleteUserByIdService = async ({ token, user }) => {
 export const postNewUserService = async ({ token, email, password }) => {
   try {
     const data = await axios.post(
-      `${serverRoot}/users`,
+      `${serverRoot}/newUser`,
       {
         email: email,
         password: password,
@@ -90,7 +90,6 @@ export const postNewUserService = async ({ token, email, password }) => {
         headers: { Authorization: token },
       }
     );
-
     // devolver respuesta
     alert(`postNewUserService - Usuario ${email} creado.`);
     return data;
